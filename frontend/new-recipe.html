@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajouter une nouvelle recette</title>
+    </head>
+
+    <body>
+        <h2>Nouvelle recette</h2>
+        <form>
+            <label for="title">Nom de la recette :</label><br>
+            <input type="text" id="title" name="title" required placeholder="Tarte aux pommes" title="Choisis un nom court et descriptif"><br><br>
+ 
+            <label for="description">Description du plat :</label><br>
+            <textarea id="description" name="description" required rows="5" cols="50" placeholder="Une déciliceuse recette d'été"></textarea><br><br>
+
+            <label for="ingredients">Ingrédients (séparés par une virgule) :</label><br>
+            <textarea id="ingredients" name="ingredients" required rows="10" cols="50" placeholder="5 tomates, 3 gros oignons, 500g de farine, 15ml d'huile d'olive"></textarea><br><br>
+
+            <label for="steps">Étapes (retour à la ligne pour entre chaque étape) :</label><br>
+            <textarea id="steps" name="steps" required rows="10" cols="50" placeholder="Émincer les oignons&#10;Les faire revenir dans une casserolle&#10;Ajouter la farine et les tomates coupées en dés"></textarea><br><br>
+
+            <fieldset>
+                <legend>Type de régime</legend>
+                <input type="radio" id="vegan" name="diet-type" value="vegan" required>
+                <label for="vegan">Vegan</label><br>
+                <input type="radio" id="vegetarian" name="diet-type" value="vegetarian" required>
+                <label for="vegetarian">Végétarien</label><br><br>
+            </fieldset><br>
+
+            <fieldset>
+                <legend>Temps</legend>
+                <input type="radio" id="short" name="time" value="short" required>
+                <label for="short">Express (moins de 15 minutes)</label>
+                <input type="radio" id="moderate" name="time" value="moderate" required>
+                <label for="moderate">Raisonnable (moins d'une heure)</label>
+                <input type="radio" id="long" name="time" value="long" required>
+                <label for="long">Long (plus d'une heure)</label>
+            </fieldset><br>
+            
+            <fieldset>
+                <legend>Difficulté</legend>
+                <input type="radio" id="easy" name="difficulty" value="easy" required>
+                <label for="easy">Facile</label>
+                <input type="radio" id="medium" name="difficulty" value="medium" required>
+                <label for="medium">Moyen</label>
+                <input type="radio" id="difficult" name="difficulty" value="difficult" required>
+                <label for="difficult">Difficile</label>
+            </fieldset><br>
+
+            <label for="img">Image (webp, png, jpg) :</label><br>
+            <input type="file" id="img" name="img" required accept="image/webp, image/png, image/jpeg"><br><br>
+
+            <button type="submit">Ajouter la recette</button>
+            <button type="reset">Effacer</button>
+        </form>
+
+    </body>
+</html>
