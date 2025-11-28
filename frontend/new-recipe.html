@@ -27,7 +27,7 @@
                 <label for="vegan">Vegan</label><br>
                 <input type="radio" id="vegetarian" name="diet-type" value="vegetarian" required>
                 <label for="vegetarian">Végétarien</label><br><br>
-            </fieldset>
+            </fieldset><br>
 
             <fieldset>
                 <legend>Temps</legend>
@@ -37,7 +37,7 @@
                 <label for="moderate">Raisonnable (moins d'une heure)</label>
                 <input type="radio" id="long" name="time" value="long" required>
                 <label for="long">Long (plus d'une heure)</label>
-            </fieldset>
+            </fieldset><br>
             
             <fieldset>
                 <legend>Difficulté</legend>
@@ -47,7 +47,10 @@
                 <label for="medium">Moyen</label>
                 <input type="radio" id="difficult" name="difficulty" value="difficult" required>
                 <label for="difficult">Difficile</label>
-            </fieldset>
+            </fieldset><br>
+
+            <label for="img">Image (webp, png, jpg) :</label><br>
+            <input type="file" id="img" name="img" required accept="image/webp, image/png, image/jpeg"><br><br>
 
             <button type="submit">Ajouter la recette</button>
             <button type="reset">Effacer</button>
