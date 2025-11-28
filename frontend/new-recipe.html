@@ -26,6 +26,26 @@
                 <label for="vegetarian">Végétarien</label><br><br>
             </fieldset>
 
+            <fieldset>
+                <legend>Temps</legend>
+                <input type="radio" id="short" name="time" value="short" required>
+                <label for="short">Express (moins de 15 minutes)</label>
+                <input type="radio" id="moderate" name="time" value="moderate" required>
+                <label for="moderate">Raisonnable (moins d'une heure)</label>
+                <input type="radio" id="long" name="time" value="long" required>
+                <label for="long">Long (plus d'une heure)</label>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Difficulté</legend>
+                <input type="radio" id="easy" name="difficulty" value="easy" required>
+                <label for="easy">Facile</label>
+                <input type="radio" id="medium" name="difficulty" value="medium" required>
+                <label for="medium">Moyen</label>
+                <input type="radio" id="difficult" name="difficulty" value="difficult" required>
+                <label for="difficult">Difficile</label>
+            </fieldset>
+
             <button type="submit">Ajouter la recette</button>
             <button type="reset">Effacer</button>
         </form>
