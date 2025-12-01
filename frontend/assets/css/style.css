@@ -12,6 +12,17 @@ h3 {
     font-family: "Roboto Slab";
 }
 
+html {
+    background: linear-gradient(to bottom right, #fdccab65, #c07f5465);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+body {
+    margin: 1.5em;
+    padding: 1em;
+}
+
 .recipes-container {
     display: flex;
     flex-wrap: wrap;
@@ -21,7 +32,7 @@ h3 {
 
 .recipe-card {
     border: 2px solid #d3d3d3;
-    background-color: #f6f6f6;
+    background-color: #fdccabc0;
     width: 30em;
     height: 25em;
     border-radius: 5px;
