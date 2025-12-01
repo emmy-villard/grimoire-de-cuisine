@@ -1,12 +1,15 @@
 p,
 li {
     color:blue;
+    font-family: "Open Sans";
+    font-size: 15px;
 }
 
 h1,
-h2 {
+h2,
+h3 {
     color:#3a3a3a;
-    text-align: center;
+    font-family: "Roboto Slab";
 }
 
 .recipes-container {
@@ -35,4 +38,8 @@ h2 {
 
 .highlight {
     color:hotpink
+}
+
+.center {
+    text-align: center;
 }
