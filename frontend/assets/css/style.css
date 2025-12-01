@@ -5,6 +5,15 @@ li {
     font-size: 15px;
 }
 
+::selection {
+    background-color: #5397d6;
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 h1,
 h2,
 h3 {
@@ -49,6 +58,10 @@ body {
 
 .highlight {
     color:hotpink
+}
+
+.highlight::selection {
+    background-color: hotpink;
 }
 
 .center {
