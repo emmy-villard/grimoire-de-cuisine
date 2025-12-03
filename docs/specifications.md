@@ -1,4 +1,4 @@
-# Cahier des charges – Carnet de recettes
+# Cahier des charges – Grimoire de cuisine
 
 ## 1. Caractéristiques essentielles
 - Application web “Carnet de recettes / Meal planner light”.
