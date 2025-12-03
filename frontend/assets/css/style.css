@@ -32,7 +32,7 @@ body {
     padding: 1em;
 }
 
-.recipes-container {
+#recipes-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
