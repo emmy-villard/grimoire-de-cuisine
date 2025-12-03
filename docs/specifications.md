@@ -44,8 +44,10 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - description courte,
   - temps de préparation,
   - difficulté,
-  - instructions.
-- Afficher la **liste des recettes** sous forme de cartes (titre, temps, difficulté).
+  - ingrédients,
+  - instructions,
+  - image (upload **ou** lien direct).
+- Afficher la **liste des recettes** sous forme de cartes (titre, temps, difficulté, image si disponible).
 - Afficher le **détail d’une recette** (tous les champs).
 - Modifier une recette existante.
 - Supprimer une recette.
@@ -60,9 +62,22 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - `PUT /recipes/:id` – modifier,
   - `DELETE /recipes/:id` – supprimer.
 - Validation minimale :
-  - tous champs obligatoires,
+  - tous champs obligatoires (sauf image),
   - difficulté dans une liste de valeurs autorisées,
   - gestion d’erreurs simples (id/slug inexistant, données invalides, descriptions trop longues).
+
+#### Gestion des images
+
+- Lors de la création ou de la modification d’une recette, l’utilisateur peut :
+  - soit **téléverser un fichier image**,
+  - soit fournir une **URL d’image** existante.
+- Si un fichier est téléversé :
+  - le backend enregistre le fichier dans un dossier dédié (ex. `uploads/recipes/`),
+  - une URL interne du type `/uploads/recipes/nom_de_fichier.jpg` est générée
+    et stockée comme `image_url` en base.
+- Si une URL externe est fournie :
+  - elle est stockée telle quelle dans `image_url`.
+- Le frontend affiche l’image si `image_url` est renseigné, sinon aucune image n’est montrée.
 
 ### 3.3. Base de données (PostgreSQL)
 
@@ -74,4 +89,6 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - `time_minutes`,
   - `difficulty`,
   - `instructions`,
+  - `ingredients`,
+  - `image_url`,
   - `last_update`.
