@@ -1,23 +1,90 @@
 [
     {
         "id": 1,
-        "title": "Recette de la Soupe à l'oignon",
-        "description": "Une délicieuse soupe traditionnelle française à base d'oignons caramélisés, de bouillon de bœuf, de pain grillé et de fromage râpé.",
+        "title": "Chakchouka aux pois chiches",
+        "description": "Ragoût savoureux de tomates et poivrons relevé d'épices, enrichi de pois chiches pour un plat complet.",
+        "slug": "chakchouka-aux-pois-chiches",
         "ingredients": [
-            "Oignons",
-            "Bouillon de bœuf",
-            "Pain",
-            "Fromage râpé"
+            "2 oignons",
+            "2 gousses d'ail",
+            "1 poivron rouge",
+            "1 poivron jaune",
+            "4 tomates mûres (ou 1 boîte de tomates concassées)",
+            "200 g de pois chiches cuits",
+            "2 cuillères à soupe d'huile d'olive",
+            "1 cuillère à café de paprika",
+            "1/2 cuillère à café de cumin",
+            "Sel et poivre",
+            "Persil frais"
         ],
         "instructions": [
-            "Faire caraméliser les oignons.",
-            "Ajouter le bouillon de bœuf et laisser mijoter.",
-            "Verser la soupe dans des bols, ajouter du pain grillé et du fromage râpé.",
-            "Passer sous le gril jusqu'à ce que le fromage soit fondu et doré."
+            "Émincer les oignons et l'ail, couper les poivrons en lanières.",
+            "Faire revenir l'oignon et l'ail dans l'huile d'olive jusqu'à ce qu'ils soient translucides.",
+            "Ajouter les poivrons et cuire 5–7 minutes.",
+            "Ajouter les tomates, le paprika, le cumin, saler et poivrer. Laisser mijoter 10–15 minutes.",
+            "Incorporer les pois chiches et laisser réchauffer 5 minutes.",
+            "Servir garni de persil, accompagné de pain ou de semoule."
         ],
         "prepTime": 15,
-        "cookTime": 45,
+        "cookTime": 25,
+        "difficulty": "facile",
         "servings": 4,
+        "kcal_per_serving": 320,
+        "image_url": "assets/img/chakchouka-pois-chiches.jpg",
+        "last_update": "2025-12-08T10:30:00Z"
+    },
+    {
+        "id": 2,
+        "title": "Pâte à pizza maison",
+        "description": "Une pâte souple et croustillante, facile à réaliser à la main ou en machine.",
+        "slug": "pate-a-pizza-maison",
+        "ingredients": [
+            "500 g de farine",
+            "300 ml d'eau tiède",
+            "10 g de sel",
+            "7 g de levure sèche de boulanger",
+            "2 cuillères à soupe d'huile d'olive"
+        ],
+        "instructions": [
+            "Délayer la levure dans l'eau tiède et laisser reposer 5 minutes.",
+            "Mélanger la farine et le sel dans un grand saladier.",
+            "Ajouter l'eau + levure et l'huile, puis pétrir 8–10 minutes jusqu'à obtenir une pâte lisse.",
+            "Laisser pousser la pâte couverte 1 à 2 heures jusqu'à doublement de volume.",
+            "Former les boules, étaler et garnir selon vos envies, puis cuire 10–12 minutes à four très chaud (250°C)."
+        ],
+        "prepTime": 20,
+        "cookTime": 12,
+        "difficulty": "moyen",
+        "servings": 4,
+        "kcal_per_serving": 450,
+        "image_url": "assets/img/pate-a-pizza.jpg",
+        "last_update": "2025-12-08T10:30:00Z"
+    },
+    {
+        "id": 3,
+        "title": "Pâte à crêpes",
+        "description": "Recette classique de pâte à crêpes légère, adaptée pour sucré ou salé.",
+        "slug": "pate-a-crepes",
+        "ingredients": [
+            "250 g de farine",
+            "3 œufs",
+            "500 ml de lait",
+            "1 pincée de sel",
+            "2 cuillères à soupe d'huile ou de beurre fondu"
+        ],
+        "instructions": [
+            "Mélanger la farine et le sel dans un saladier.",
+            "Ajouter les œufs puis le lait progressivement en fouettant pour éviter les grumeaux.",
+            "Ajouter l'huile ou le beurre fondu, laisser reposer 30 minutes si possible.",
+            "Cuire les crêpes dans une poêle légèrement huilée, 1–2 minutes par face.",
+            "Garnir selon votre goût (sucre, confiture, chocolat, fromage, jambon...)."
+        ],
+        "prepTime": 10,
+        "cookTime": 20,
+        "difficulty": "facile",
+        "servings": 6,
+        "kcal_per_serving": 180,
+        "image_url": "assets/img/pate-a-crepes.jpg",
         "last_update": "2025-12-08T10:30:00Z"
     }
 ]
