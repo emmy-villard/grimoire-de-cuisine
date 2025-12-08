@@ -1,3 +1,6 @@
+let newRecipeForm = document.getElementById("new-recipe");
+newRecipeForm.addEventListener("submit", createRecipe);
+
 function createRecipe(event) {
     event.preventDefault();
     const recipeTitle = document.getElementById("new-title");
