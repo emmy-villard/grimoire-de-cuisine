@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Recette de la Soupe à l'oignon",
+        "description": "Une délicieuse soupe traditionnelle française à base d'oignons caramélisés, de bouillon de bœuf, de pain grillé et de fromage râpé.",
+        "ingredients": [
+            "Oignons",
+            "Bouillon de bœuf",
+            "Pain",
+            "Fromage râpé"
+        ],
+        "instructions": [
+            "Faire caraméliser les oignons.",
+            "Ajouter le bouillon de bœuf et laisser mijoter.",
+            "Verser la soupe dans des bols, ajouter du pain grillé et du fromage râpé.",
+            "Passer sous le gril jusqu'à ce que le fromage soit fondu et doré."
+        ],
+        "prepTime": 15,
+        "cookTime": 45,
+        "servings": 4,
+        "last_update": "2025-12-08T10:30:00Z"
+    }
+]
