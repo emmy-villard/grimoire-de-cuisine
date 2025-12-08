@@ -25,7 +25,7 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
 
 - `edit-recipe.html`  
   - Page d’**édition** générique.  
-  - Reçoit un `id` ou un `url_key` dans l’URL (`?id=...` / `?url_key=...`),  
+  - Reçoit un `url_key` dans l’URL (`?url_key=...`),
     charge la recette via l’API, pré-remplit le formulaire, puis envoie un `PUT /recipes/:id`.
 
 - `recipe.html`  
@@ -84,11 +84,14 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
 - Table `recipes` :
   - `id` (clé primaire),
   - `title` (maximum 50 caractères),
-  - `slug` (unique, généré à partir du titre, utilisé dans les URLs),
   - `description` (maximum 140 caractères),
-  - `time_minutes`,
+  - `slug`,
+  - `prepTime`,
+  - `cookTime`,
   - `difficulty`,
-  - `instructions`,
-  - `ingredients`,
+  - `servings`,
+  - `kcal_per_serving`,
+  - `instructions`, (tableau)
+  - `ingredients`, (tableau)
   - `image_url`,
   - `last_update`.
