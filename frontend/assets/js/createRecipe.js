@@ -8,8 +8,14 @@ function createRecipe(event) {
     const recipeIngredients = document.getElementById("new-ingredients");
     const recipeInstructions = document.getElementById("new-instructions");
     const recipeDietType = document.getElementById("new-diet-type");
-    const recipeTime = document.getElementById("new-time");
+    const recipePrepTime = document.getElementById("new-prep-time");
+    const recipeCookTime = document.getElementById("new-cook-time");
     const recipeImgUrl = document.getElementById("new-image");
+    const recipeServings = document.getElementById("new-servings");
+    const recipeKcalPerServing = document.getElementById("new-kcal-per-serving");
+    const recipeDifficulty = document.querySelector('input[name="difficulty"]:checked');
+    const last_modified = new Date().toISOString();
+
     // Rest API call to create the recipe would go here
     // Need : title, description, ingredients, instructions, diet type, time, image URL
     return;
