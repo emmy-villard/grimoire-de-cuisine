@@ -25,7 +25,7 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
 
 - `edit-recipe.html`  
   - Page d’**édition** générique.  
-  - Reçoit un `id` ou un `url_key` dans l’URL (`?id=...` / `?url_key=...`),  
+  - Reçoit un `url_key` dans l’URL (`?url_key=...`),
     charge la recette via l’API, pré-remplit le formulaire, puis envoie un `PUT /recipes/:id`.
 
 - `recipe.html`  
@@ -44,8 +44,10 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - description courte,
   - temps de préparation,
   - difficulté,
-  - instructions.
-- Afficher la **liste des recettes** sous forme de cartes (titre, temps, difficulté).
+  - ingrédients,
+  - instructions,
+  - image (upload **ou** lien direct).
+- Afficher la **liste des recettes** sous forme de cartes (titre, temps, difficulté, image si disponible).
 - Afficher le **détail d’une recette** (tous les champs).
 - Modifier une recette existante.
 - Supprimer une recette.
@@ -60,18 +62,36 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - `PUT /recipes/:id` – modifier,
   - `DELETE /recipes/:id` – supprimer.
 - Validation minimale :
-  - tous champs obligatoires,
+  - tous champs obligatoires (sauf image),
   - difficulté dans une liste de valeurs autorisées,
   - gestion d’erreurs simples (id/slug inexistant, données invalides, descriptions trop longues).
+
+#### Gestion des images
+
+- Lors de la création ou de la modification d’une recette, l’utilisateur peut :
+  - soit **téléverser un fichier image**,
+  - soit fournir une **URL d’image** existante.
+- Si un fichier est téléversé :
+  - le backend enregistre le fichier dans un dossier dédié (ex. `uploads/recipes/`),
+  - une URL interne du type `/uploads/recipes/nom_de_fichier.jpg` est générée
+    et stockée comme `image_url` en base.
+- Si une URL externe est fournie :
+  - elle est stockée telle quelle dans `image_url`.
+- Le frontend affiche l’image si `image_url` est renseigné, sinon aucune image n’est montrée.
 
 ### 3.3. Base de données (PostgreSQL)
 
 - Table `recipes` :
   - `id` (clé primaire),
   - `title` (maximum 50 caractères),
-  - `slug` (unique, généré à partir du titre, utilisé dans les URLs),
   - `description` (maximum 140 caractères),
-  - `time_minutes`,
+  - `slug`,
+  - `prepTime`,
+  - `cookTime`,
   - `difficulty`,
-  - `instructions`,
+  - `servings`,
+  - `kcal_per_serving`,
+  - `instructions`, (tableau)
+  - `ingredients`, (tableau)
+  - `image_url`,
   - `last_update`.
