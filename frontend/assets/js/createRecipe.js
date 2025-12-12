@@ -35,8 +35,6 @@ async function createRecipe(event) {
         last_update: last_modified,
     });
     window.localStorage.setItem(`recipe${id}`, recipeJson);
-    const recipes = await getAllRecipes();
-    console.log(recipes);
 }
 
 function generateSlug(title) {
