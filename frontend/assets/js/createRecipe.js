@@ -1,26 +1,24 @@
-import { getNextId } from "./getAllRecipes";
-
-let newRecipeForm = document.getElementById("new-recipe");
+const newRecipeForm = document.getElementById("new-recipe");
 newRecipeForm.addEventListener("submit", createRecipe);
 
-function createRecipe(event) {
+async function createRecipe(event) {
     event.preventDefault();
-    const recipeTitle = document.getElementById("new-title");
-    const recipeDescription = document.getElementById("new-description");
-    const recipeIngredients = document.getElementById("new-ingredients");
-    const recipeInstructions = document.getElementById("new-instructions");
-    const recipeDietType = document.querySelector('input[name="diet-type"]:checked');
-    const recipePrepTime = document.getElementById("new-prep-time");
-    const recipeCookTime = document.getElementById("new-cook-time");
-    const recipeServings = document.getElementById("new-servings");
-    const recipeKcalPerServing = document.getElementById("new-kcal-per-serving");
-    const recipeDifficulty = document.querySelector('input[name="difficulty"]:checked');
+    const recipeTitle = document.getElementById("new-title").value;
+    const recipeDescription = document.getElementById("new-description").value;
+    const recipeIngredients = document.getElementById("new-ingredients").value;
+    const recipeInstructions = document.getElementById("new-instructions").value;
+    const recipeDietType = document.querySelector('input[name="diet-type"]:checked').value;
+    const recipePrepTime = document.getElementById("new-prep-time").value;
+    const recipeCookTime = document.getElementById("new-cook-time").value;
+    const recipeServings = document.getElementById("new-servings").value;
+    const recipeKcalPerServing = document.getElementById("new-kcal-per-serving").value;
+    const recipeDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
     const last_modified = new Date().toISOString();
-    const slug = generateSlug(recipeTitle.value);
-    const recipeImgUrl = document.getElementById("new-img-url");
+    const slug = generateSlug(recipeTitle);
+    const recipeImgUrl = document.getElementById("new-img-url").value;
     const recipeImg = document.getElementById("new-img");
-    const id = getNextId();
-    const recipeJson = {
+    const id = await getNextId();
+    const recipeJson = JSON.stringify({
         id: id,
         title: recipeTitle,
         description: recipeDescription ,
@@ -35,8 +33,10 @@ function createRecipe(event) {
         ingredients: recipeIngredients,
         image_url: recipeImgUrl,
         last_update: last_modified,
-    };
+    });
     window.localStorage.setItem(`recipe${id}`, recipeJson);
+    const recipes = await getAllRecipes();
+    console.log(recipes);
 }
 
 function generateSlug(title) {
