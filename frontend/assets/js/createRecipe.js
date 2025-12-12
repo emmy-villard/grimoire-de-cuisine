@@ -1,3 +1,5 @@
+import { getNextId } from "./getAllRecipes";
+
 let newRecipeForm = document.getElementById("new-recipe");
 newRecipeForm.addEventListener("submit", createRecipe);
 
@@ -17,6 +19,9 @@ function createRecipe(event) {
     const slug = generateSlug(recipeTitle.value);
     const recipeImgUrl = document.getElementById("new-img-url");
     const recipeImg = document.getElementById("new-img");
+    const recipeJson = {};
+    const id = getNextId();
+    window.localStorage.setItem("")
 
     // Rest API call to create the recipe would go here
     // Need : title, description, ingredients, instructions, diet type, time, image URL
