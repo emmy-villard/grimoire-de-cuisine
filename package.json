@@ -1,0 +1,23 @@
+{
+  "name": "grimoire-de-cuisine",
+  "version": "0.0.1",
+  "description": "Application web fullstack de gestion de recettes : frontend HTML/CSS/JS, API Node/Express, PostgreSQL et Docker.",
+  "homepage": "https://github.com/emmy-villard/grimoire-de-cuisine#readme",
+  "bugs": {
+    "url": "https://github.com/emmy-villard/grimoire-de-cuisine/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmy-villard/grimoire-de-cuisine.git"
+  },
+  "license": "MIT",
+  "author": "Emmy VILLARD",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
