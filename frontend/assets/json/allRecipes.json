@@ -25,6 +25,7 @@
             "Incorporer les pois chiches et laisser réchauffer 5 minutes.",
             "Servir garni de persil, accompagné de pain ou de semoule."
         ],
+        "diet_type": "vegan",
         "prepTime": 15,
         "cookTime": 25,
         "difficulty": "facile",
@@ -52,6 +53,7 @@
             "Laisser pousser la pâte couverte 1 à 2 heures jusqu'à doublement de volume.",
             "Former les boules, étaler et garnir selon vos envies, puis cuire 10–12 minutes à four très chaud (250°C)."
         ],
+        "diet_type": "vegan",
         "prepTime": 20,
         "cookTime": 12,
         "difficulty": "moyen",
@@ -79,6 +81,7 @@
             "Cuire les crêpes dans une poêle légèrement huilée, 1–2 minutes par face.",
             "Garnir selon votre goût (sucre, confiture, chocolat, fromage, jambon...)."
         ],
+        "diet_type": "végétarien",
         "prepTime": 10,
         "cookTime": 20,
         "difficulty": "facile",
