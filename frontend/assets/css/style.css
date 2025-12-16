@@ -64,6 +64,16 @@ body {
     color:crimson
 }
 
+.recipes_title a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.recipes_title a:hover {
+    text-decoration: underline;
+}
+
+
 .highlight {
     color:hotpink
 }
