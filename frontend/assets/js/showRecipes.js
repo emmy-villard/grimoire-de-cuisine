@@ -10,14 +10,22 @@ async function showRecipe() {
         recipeElement.classList.add("recipe-card");
         recipesContainer.appendChild(recipeElement);
 
-
         // Create element
         const recipeTitle = document.createElement("h2");
-        recipeTitle.innerText = recipe.title;
         recipeTitle.classList.add("recipes_title");
+        const recipeTitleLink = document.createElement('a')
+        recipeTitleLink.href = "recipes/"+recipe.slug;
+        recipeTitleLink.innerText = recipe.title;
+        recipeTitle.appendChild(recipeTitleLink);
+
         const recipeImg = document.createElement("img");
         recipeImg.src = recipe.image_url;
         recipeImg.alt = recipe.title;
+        const recipeImgLink = document.createElement('a');
+        recipeImgLink.href = "recipes/"+recipe.slug;
+        recipeImgLink.appendChild(recipeImg);
+
+
         const recipeDesc = document.createElement("p");
         recipeDesc.innerText = recipe.description;
         const recipeDietType = document.createElement("p");
@@ -27,7 +35,7 @@ async function showRecipe() {
 
         // Add elements to the DOM
         recipeElement.appendChild(recipeTitle);
-        recipeElement.appendChild(recipeImg);
+        recipeElement.appendChild(recipeImgLink);
         recipeElement.appendChild(recipeDesc);
         recipeElement.appendChild(recipeDietType);
         recipeElement.appendChild(recipePrepCookTime);
