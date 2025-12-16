@@ -7,6 +7,7 @@ async function showRecipe() {
         const recipe = recipes[i];
         const recipeElement = document.createElement("article");
         recipeElement.dataset.id = recipe.id;
+        recipesContainer.appendChild(recipeElement);
 
         // Create element
         const recipeImg = document.createElement("img");
