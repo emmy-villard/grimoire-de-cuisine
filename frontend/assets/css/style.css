@@ -39,6 +39,14 @@ body {
     align-items: center;
 }
 
+.recipe-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+    object-fit: cover; /* optionnel si tu gardes une hauteur fixe */
+}
+
 .recipe-card {
     border: 2px solid #88553365;
     background-color: #fdccabc0;
