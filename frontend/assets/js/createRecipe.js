@@ -21,7 +21,7 @@ async function createRecipe(event) {
     const recipeJson = JSON.stringify({
         id: id,
         title: recipeTitle,
-        description: recipeDescription ,
+        description: recipeDescription,
         slug: slug,
         prepTime: recipePrepTime,
         cookTime: recipeCookTime ,
@@ -35,6 +35,7 @@ async function createRecipe(event) {
         last_update: last_modified,
     });
     window.localStorage.setItem(`recipe${id}`, recipeJson);
+    console.log("Recipe added : " + recipeTitle);
 }
 
 function generateSlug(title) {
