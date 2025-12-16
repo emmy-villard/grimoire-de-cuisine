@@ -30,7 +30,7 @@
         "difficulty": "facile",
         "servings": 4,
         "kcal_per_serving": 320,
-        "image_url": "assets/img/chakchouka-pois-chiches.webp",
+        "image_url": "http://localhost:8000/assets/img/chakchouka.webp",
         "last_update": "2025-12-08T10:30:00Z"
     },
     {
@@ -57,7 +57,7 @@
         "difficulty": "moyen",
         "servings": 4,
         "kcal_per_serving": 450,
-        "image_url": "assets/img/pate-a-pizza.webp",
+        "image_url": "http://localhost:8000/assets/img/pizza-dough.webp",
         "last_update": "2025-12-08T10:30:00Z"
     },
     {
@@ -84,7 +84,7 @@
         "difficulty": "facile",
         "servings": 6,
         "kcal_per_serving": 180,
-        "image_url": "assets/img/pate-a-crepes.webp",
+        "image_url": "http://localhost:8000/assets/img/crepes.webp",
         "last_update": "2025-12-08T10:30:00Z"
     }
 ]
