@@ -44,20 +44,42 @@ body {
     height: auto;
     display: block;
     border-radius: 4px;
-    object-fit: cover; /* optionnel si tu gardes une hauteur fixe */
+    object-fit: cover;
 }
 
 .recipe-card {
     border: 2px solid #88553365;
     background-color: #fdccabc0;
     width: 30em;
-    height: 30em;
+    height: 32em;
     border-radius: 5px;
     padding: 15px;
     margin: 10px;
     box-shadow: 2px 2px 5px #88553365;
     text-align: center;
     align-items: center;
+}
+
+.recipe-card button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #c0392b;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.recipe-card button:hover {
+    background-color: #a02f23;
+    transform: translateY(-1px);
+}
+
+.recipe-card button:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
 }
 
 .recipes_title {
