@@ -17,21 +17,21 @@ async function showRecipe() {
         recipeTitleLink.href = "recipes/"+recipe.slug;
         recipeTitleLink.innerText = recipe.title;
         recipeTitle.appendChild(recipeTitleLink);
-
         const recipeImg = document.createElement("img");
         recipeImg.src = recipe.image_url;
         recipeImg.alt = recipe.title;
         const recipeImgLink = document.createElement('a');
         recipeImgLink.href = "recipes/"+recipe.slug;
         recipeImgLink.appendChild(recipeImg);
-
-
         const recipeDesc = document.createElement("p");
         recipeDesc.innerText = recipe.description;
         const recipeDietType = document.createElement("p");
         recipeDietType.innerText = "Régime : " + recipe.diet_type;
         const recipePrepCookTime = document.createElement("p");
         recipePrepCookTime.innerText = `Durée de préparation : ${recipe.prepTime} min // Durée de cuisson :  ${recipe.cookTime} min `;
+        const deleteButton = document.createElement("button");
+        deleteButton.dataset.id = "delete-recipe";
+        deleteButton.innerText = "Supprimer la recette";
 
         // Add elements to the DOM
         recipeElement.appendChild(recipeTitle);
@@ -39,6 +39,7 @@ async function showRecipe() {
         recipeElement.appendChild(recipeDesc);
         recipeElement.appendChild(recipeDietType);
         recipeElement.appendChild(recipePrepCookTime);
+        recipeElement.appendChild(deleteButton);
     }
 }
 
