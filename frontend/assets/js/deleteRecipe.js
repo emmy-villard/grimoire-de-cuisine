@@ -15,5 +15,5 @@ function deleteRecipe(event) {
         recipeCard.remove();
     }
 
-    console.log(`Recette supprimée : ${storageKey}`);
+    console.log(`Recipe deleted : ${storageKey}`);
 }
