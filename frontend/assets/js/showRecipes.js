@@ -30,8 +30,9 @@ async function showRecipe() {
         const recipePrepCookTime = document.createElement("p");
         recipePrepCookTime.innerText = `Durée de préparation : ${recipe.prepTime} min // Durée de cuisson :  ${recipe.cookTime} min `;
         const deleteButton = document.createElement("button");
-        deleteButton.dataset.id = "delete-recipe";
+        deleteButton.dataset.recipeId = recipe.id;
         deleteButton.innerText = "Supprimer la recette";
+        deleteButton.addEventListener("click", deleteRecipe);
 
         // Add elements to the DOM
         recipeElement.appendChild(recipeTitle);

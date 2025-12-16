@@ -1,7 +1,19 @@
-const newRecipeForm = document.getElementById("delete-recipe");
-newRecipeForm.addEventListener("submit", deleteRecipe);
+function deleteRecipe(event) {
+    const button = event.currentTarget;
+    const recipeId = button?.dataset?.recipeId;
 
-async function deleteRecipe(event) {
-    window.localStorage.removeItem(`recipe${id}`);
-    console.log("Recipe removed : " + recipeTitle);
+    if (!recipeId) {
+        console.warn("Impossible de supprimer : aucun id sur le bouton", button);
+        return;
+    }
+
+    const storageKey = `recipe${recipeId}`;
+    window.localStorage.removeItem(storageKey);
+
+    const recipeCard = button.closest(".recipe-card");
+    if (recipeCard) {
+        recipeCard.remove();
+    }
+
+    console.log(`Recette supprimée : ${storageKey}`);
 }
