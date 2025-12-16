@@ -9,61 +9,74 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+        <script src="assets/js/getAllRecipes.js" defer></script>
+        <script src="assets/js/createRecipe.js" defer></script>
+        <script src="assets/js/config.js" defer></script>
     </head>
 
     <body>
         <header>
             <nav>
-                <a href="index.html">Accueil</a>
-                <a href="recipes.html">Recettes</a>
+                <a href="index.html">Recettes</a>
                 <a href="new-recipe.html">Ajouter une recette</a>
+                <a href="edit-recipe.html">Modifier une recette</a>
             </nav>
         </header>
         <main>
             <h1>Nouvelle recette</h1>
-            <form>
-                <label for="title">Nom de la recette :</label><br>
-                <input type="text" id="title" name="title" required placeholder="Tarte aux pommes" title="Choisis un nom court et descriptif"><br><br>
+            <form id="new-recipe" action="" method="post" enctype="multipart/form-data">
+                <label for="new-title">Nom de la recette :</label><br>
+                <input type="text" id="new-title" name="title" required placeholder="Tarte aux pommes" title="Choisis un nom court et descriptif"><br><br>
     
-                <label for="description">Description du plat :</label><br>
-                <textarea id="description" name="description" required rows="5" cols="50" placeholder="Une déciliceuse recette d'été"></textarea><br><br>
+                <label for="new-description">Description du plat :</label><br>
+                <textarea id="new-description" name="description" required rows="3" cols="50" placeholder="Une déciliceuse recette d'été"></textarea><br><br>
 
-                <label for="ingredients">Ingrédients (séparés par une virgule) :</label><br>
-                <textarea id="ingredients" name="ingredients" required rows="10" cols="50" placeholder="5 tomates, 3 gros oignons, 500g de farine, 15ml d'huile d'olive"></textarea><br><br>
+                <label for="new-ingredients">Ingrédients (séparés par une virgule) :</label><br>
+                <textarea id="new-ingredients" name="ingredients" required rows="5" cols="50" placeholder="5 tomates, 3 gros oignons, 500g de farine, 15ml d'huile d'olive"></textarea><br><br>
 
-                <label for="steps">Étapes (retour à la ligne pour entre chaque étape) :</label><br>
-                <textarea id="steps" name="steps" required rows="10" cols="50" placeholder="Émincer les oignons&#10;Les faire revenir dans une casserolle&#10;Ajouter la farine et les tomates coupées en dés"></textarea><br><br>
+                <label for="new-instructions">Étapes (retour à la ligne pour entre chaque étape) :</label><br>
+                <textarea id="new-instructions" name="instructions" required rows="10" cols="50" placeholder="Émincer les oignons&#10;Les faire revenir dans une casserolle&#10;Ajouter la farine et les tomates coupées en dés"></textarea><br><br>
 
                 <fieldset>
                     <legend>Type de régime</legend>
-                    <input type="radio" id="vegan" name="diet-type" value="vegan" required>
-                    <label for="vegan">Vegan</label><br>
-                    <input type="radio" id="vegetarian" name="diet-type" value="vegetarian" required>
-                    <label for="vegetarian">Végétarien</label><br><br>
+                    <input type="radio" id="new-vegan" name="diet-type" value="vegan" required>
+                    <label for="new-vegan">Vegan</label>
+                    <input type="radio" id="new-vegetarian" name="diet-type" value="végétarien" required>
+                    <label for="new-vegetarian">Végétarien</label>
                 </fieldset><br>
 
                 <fieldset>
-                    <legend>Temps</legend>
-                    <input type="radio" id="short" name="time" value="short" required>
-                    <label for="short">Express (moins de 15 minutes)</label>
-                    <input type="radio" id="moderate" name="time" value="moderate" required>
-                    <label for="moderate">Raisonnable (moins d'une heure)</label>
-                    <input type="radio" id="long" name="time" value="long" required>
-                    <label for="long">Long (plus d'une heure)</label>
+                <label for="new-prep-time">Temps de préparation (en minutes) :</label>
+                <input type="text" id="new-prep-time" name="prep-time" required placeholder="15"><br>
+
+                <label for="new-cook-time">Temps de cuisson (en minutes) :</label>
+                <input type="text" id="new-cook-time" name="cook-time" required placeholder="45">
                 </fieldset><br>
-                
+
+                <fieldset>
+                    <label for="new-servings">Servings :</label>
+                    <input type="number" id="new-servings" name="servings" required placeholder="4"><br>
+                    <label for="new-kcal-per-serving">Kcal per serving :</label>
+                    <input type="number" id="new-kcal-per-serving" name="kcal-per-serving" required placeholder="450"><br>
+                </fieldset><br>
+
                 <fieldset>
                     <legend>Difficulté</legend>
-                    <input type="radio" id="easy" name="difficulty" value="easy" required>
-                    <label for="easy">Facile</label>
-                    <input type="radio" id="medium" name="difficulty" value="medium" required>
-                    <label for="medium">Moyen</label>
-                    <input type="radio" id="difficult" name="difficulty" value="difficult" required>
-                    <label for="difficult">Difficile</label>
+                    <input type="radio" id="new-easy" name="difficulty" value="easy" required>
+                    <label for="new-easy">Facile</label>
+                    <input type="radio" id="new-medium" name="difficulty" value="medium" required>
+                    <label for="new-medium">Moyen</label>
+                    <input type="radio" id="new-difficult" name="difficulty" value="difficult" required>
+                    <label for="new-difficult">Difficile</label>
                 </fieldset><br>
 
-                <label for="img">Image (webp, png, jpg) :</label><br>
-                <input type="file" id="img" name="img" required accept="image/webp, image/png, image/jpeg"><br><br>
+                <fieldset>
+                    <label for="new-img">Image (webp, png, jpg) :</label><br>
+                    <input type="file" id="new-img" name="img" accept="image/webp, image/png, image/jpeg"><br>
+                    <label for="new-img-url">Or image URL</label><br>
+                    <input type="text" id="new-img-url" name="img" required><br>
+                </fieldset><br>
+
 
                 <button type="submit">Ajouter la recette</button>
                 <button type="reset">Effacer</button>
