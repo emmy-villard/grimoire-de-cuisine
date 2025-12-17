@@ -1,3 +1,12 @@
-import editRecipe from "../../assets/js/editRecipe";
+import editRecipe from '../../assets/js/editRecipe.js';
 
-it('sanity', () => expect(1+1).toBe(2));
+describe('editRecipe', () => {
+	it('prevents default form submission', () => {
+		const mockEvent = { preventDefault: vi.fn() };
+
+		const result = editRecipe(mockEvent);
+
+		expect(mockEvent.preventDefault).toHaveBeenCalledOnce();
+		expect(result).toBeUndefined();
+	});
+});

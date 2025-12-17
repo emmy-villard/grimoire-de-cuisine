@@ -1,3 +1,7 @@
-import getRecipe from "../../assets/js/getRecipe";
+import getRecipe from '../../assets/js/getRecipe.js';
 
-it('sanity', () => expect(1+1).toBe(2));
+describe('getRecipe', () => {
+	it('returns undefined for now (placeholder)', async () => {
+		await expect(getRecipe(1)).resolves.toBeUndefined();
+	});
+});
