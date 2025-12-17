@@ -1,3 +1,5 @@
+import { getNextId } from './getAllRecipes.js';
+
 const newRecipeForm = document.getElementById("new-recipe");
 newRecipeForm.addEventListener("submit", createRecipe);
 
