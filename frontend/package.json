@@ -18,9 +18,13 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "vitest": "^4.0.15"
+    "@vitest/coverage-v8": "^4.0.16",
+    "jsdom": "^27.3.0",
+    "vitest": "^4.0.16"
   }
 }

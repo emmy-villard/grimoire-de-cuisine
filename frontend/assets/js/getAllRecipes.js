@@ -19,16 +19,10 @@ async function getAllRecipes(backup=true) {
     return recipes;
 }
 
-async function getNextId() {
-  const recipes = await getAllRecipes(false);
-  return recipes.length;
-}
-
 async function jsonBackupRecipes() {
     const response = await fetch("assets/json/allRecipes.json");
     const json = await response.json();
     return json;
 }
 
-export { getNextId };
 export default getAllRecipes;

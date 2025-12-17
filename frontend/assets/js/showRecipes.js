@@ -47,6 +47,4 @@ async function showRecipe() {
     }
 }
 
-showRecipe();
-
 export default showRecipe;
