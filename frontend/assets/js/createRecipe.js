@@ -1,4 +1,5 @@
-import { getNextId } from './getAllRecipes.js';
+import getNextId from './getNextId.js';
+import slugify from './slugify.js';
 
 async function createRecipe(event) {
     event.preventDefault();
@@ -13,7 +14,7 @@ async function createRecipe(event) {
     const recipeKcalPerServing = document.getElementById("new-kcal-per-serving").value;
     const recipeDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
     const last_modified = new Date().toISOString();
-    const slug = generateSlug(recipeTitle);
+    const slug = slugify(recipeTitle);
     const recipeImgUrl = document.getElementById("new-img-url").value;
     const recipeImg = document.getElementById("new-img");
     const id = await getNextId();
@@ -35,14 +36,6 @@ async function createRecipe(event) {
     });
     window.localStorage.setItem(`recipe${id}`, recipeJson);
     console.log("Recipe added : " + recipeTitle + " with id : " + id);
-}
-
-function generateSlug(title) {
-    return title
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '');
 }
 
 export default createRecipe;
