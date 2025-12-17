@@ -1,8 +1,5 @@
 import { getNextId } from './getAllRecipes.js';
 
-const newRecipeForm = document.getElementById("new-recipe");
-newRecipeForm.addEventListener("submit", createRecipe);
-
 async function createRecipe(event) {
     event.preventDefault();
     const recipeTitle = document.getElementById("new-title").value;
@@ -47,3 +44,5 @@ function generateSlug(title) {
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
 }
+
+export default createRecipe;
