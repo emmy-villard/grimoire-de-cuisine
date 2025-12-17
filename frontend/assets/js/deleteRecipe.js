@@ -17,3 +17,5 @@ function deleteRecipe(event) {
 
     console.log(`Recipe deleted : ${storageKey}`);
 }
+
+export default deleteRecipe;

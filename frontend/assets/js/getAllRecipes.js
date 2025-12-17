@@ -29,3 +29,6 @@ async function jsonBackupRecipes() {
     const json = await response.json();
     return json;
 }
+
+export { getNextId };
+export default getAllRecipes;
