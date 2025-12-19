@@ -86,6 +86,7 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - `title` (maximum 50 caractères),
   - `description` (maximum 140 caractères),
   - `slug`,
+  - `diet_type`,
   - `prepTime`,
   - `cookTime`,
   - `difficulty`,
