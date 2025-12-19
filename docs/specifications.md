@@ -25,13 +25,15 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
 
 - `edit-recipe.html`  
   - Page d’**édition** générique.  
-  - Reçoit un `url_key` dans l’URL (`?url_key=...`),
-    charge la recette via l’API, pré-remplit le formulaire, puis envoie un `PUT /recipes/:id`.
+  - Reçoit un `slug` dans l’URL (`?slug=...`),
+    charge la recette via l’API, pré-remplit le formulaire, puis envoie un `PUT /recipes/:slug`.
+  - Sans paramètre `slug`, retourne 404 côté frontend (message “Recette non trouvée” ou redirection).
 
 - `recipe.html`  
   - Page **détail d’une recette**.  
-  - Reçoit un `url_key` dans l’URL (`recipe.html?url_key=...`),  
-    appelle `GET /recipes/slug/:slug` et affiche les données.
+  - Reçoit un `slug` dans l’URL (`recipe.html?slug=...`).  
+  - Au chargement : appelle `GET /recipes/:slug` et affiche la recette.  
+  - Se rendre directement à `site.com/recipe.html` **sans paramètre `slug`** renvoie une erreur 404 côté frontend (ou une page “Recette non trouvée”).
 
 ---
 
@@ -56,15 +58,14 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
 
 - Endpoints REST :
   - `GET /recipes` – liste des recettes,
-  - `GET /recipes/:id` – une recette par id,
-  - `GET /recipes/slug/:slug` – une recette par slug (`slug` = `url_key`),
+  - `GET /recipes/:slug` – une recette par slug,
   - `POST /recipes` – créer (génère un `slug` à partir du titre),
-  - `PUT /recipes/:id` – modifier,
-  - `DELETE /recipes/:id` – supprimer.
+  - `PUT /recipes/:slug` – modifier,
+  - `DELETE /recipes/:slug` – supprimer.
 - Validation minimale :
   - tous champs obligatoires (sauf image),
   - difficulté dans une liste de valeurs autorisées,
-  - gestion d’erreurs simples (id/slug inexistant, données invalides, descriptions trop longues).
+  - gestion d’erreurs simples (slug inexistant, données invalides, descriptions trop longues).
 
 #### Gestion des images
 
