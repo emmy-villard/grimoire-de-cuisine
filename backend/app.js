@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express();
-app.use('/recipes/:id', rootHandler);
+app.use('/recipes/:id', handleRecipeById);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,7 +9,7 @@ app.use((req, res, next) => {
     next();
 });
 
-function rootHandler(req, res, next) {
+function handleRecipeById(req, res, next) {
     res.status(200);
     res.json( {message: `Requête reçue : ${req.params.id}`} );
 }
