@@ -8,8 +8,8 @@ async function showRecipeById() {
     const res = await fetch(`${api_url}/recipes/${recipeId}`, {
         method: "GET"
     });
-    console.log(res);
-    //console.log("Recipe added : " + recipeTitle + " with id : " + id);
+    const data = await res.json();
+    console.log(data);
 }
 
 export default showRecipeById;
