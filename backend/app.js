@@ -1,10 +1,10 @@
 import express from 'express';
 const app = express();
-app.use(rootHandler);
+app.use('/recipes/:slug', rootHandler);
 
 function rootHandler(req, res, next) {
     res.status(200);
-    res.json( {message: 'Requête reçue (non traîtée)'} );
+    res.json( {message: `Requête reçue : ${req.params.slug}`} );
     return;
 }
 
