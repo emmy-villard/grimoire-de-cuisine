@@ -1,3 +1,6 @@
+import deleteRecipe from './deleteRecipe.js';
+import getAllRecipes from './getAllRecipes.js';
+
 async function showRecipe() {
     const recipes = await getAllRecipes();
     console.log(recipes);
@@ -44,4 +47,4 @@ async function showRecipe() {
     }
 }
 
-showRecipe();
+export default showRecipe;
