@@ -15,6 +15,8 @@ function postRecipe(req, res, next) {
     recipeImgUrl
     (et l’ID on va le créé auto avec SQL, pas ATM)%
     */
+    res.status(200);
+    res.json( {message: `Requête reçue : postRecipe`} );
 }
 
 export default postRecipe;
