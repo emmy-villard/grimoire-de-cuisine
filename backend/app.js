@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express();
-app.use('/recipes/:id', allowAllOrigins);
+app.use('*', allowAllOrigins);
 app.get('/recipes/:id', handleGetRecipeById);
 
 function allowAllOrigins(req, res, next) {
