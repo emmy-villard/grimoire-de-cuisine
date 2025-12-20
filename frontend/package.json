@@ -1,7 +1,7 @@
 {
-  "name": "grimoire-de-cuisine",
+  "name": "frontend-grimoire-de-cuisine",
   "version": "0.0.1",
-  "description": "Application web fullstack de gestion de recettes : frontend HTML/CSS/JS, API Node/Express, PostgreSQL et Docker.",
+  "description": "Frontend d'une application web fullstack de gestion de recettes : frontend HTML/CSS/JS, API Node/Express, PostgreSQL et Docker.",
   "homepage": "https://github.com/emmy-villard/grimoire-de-cuisine#readme",
   "bugs": {
     "url": "https://github.com/emmy-villard/grimoire-de-cuisine/issues"
