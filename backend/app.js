@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express();
 app.use('/recipes/:id', allowAllOrigins);
-app.get('/recipes/:id', handleRecipeById);
+app.get('/recipes/:id', handleGetRecipeById);
 
 function allowAllOrigins(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -10,7 +10,7 @@ function allowAllOrigins(req, res, next) {
     next();
 }
 
-function handleRecipeById(req, res, next) {
+function handleGetRecipeById(req, res, next) {
     res.status(200);
     res.json( {message: `Requête reçue : ${req.params.id}`} );
 }
