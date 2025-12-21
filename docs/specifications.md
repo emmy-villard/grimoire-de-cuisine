@@ -62,7 +62,7 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - `PUT /recipes/:id` – modifier,
   - `DELETE /recipes/:id` – supprimer.
 - Validation minimale :
-  - titre obligatoire,
+  - tous champs obligatoires (sauf image),
   - difficulté dans une liste de valeurs autorisées,
   - gestion d’erreurs simples (id/slug inexistant, données invalides, descriptions trop longues).
 
