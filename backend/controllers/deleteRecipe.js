@@ -10,7 +10,7 @@ async function deleteRecipe(req, res, next) {
     if (result.rowCount === 0) {
       return res.status(404).json({ error: 'Recipe not found' });
     }
-    return res.status(204).send();
+    return res.status(204).json({ error: 'Recipe deleted' });
   } catch (err) {
     console.error('Error in deleteRecipe:', err);
     return res.status(500).json({ error: 'Database error' });
