@@ -25,45 +25,45 @@ async function postRecipe(req, res, next) {
         .json({ error: 'title and slug are required' });
     }
 
-    const insertQuery = `
-      INSERT INTO recipes (
-        title,
-        recipe_description,
-        slug,
-        diet_type,
-        prepTime,
-        cookTime,
-        difficulty,
-        servings,
-        kcal_per_serving,
-        instructions,
-        ingredients,
-        image_url,
-        last_update
-      )
-      VALUES (
-        $1, $2, $3, $4, $5,
-        $6, $7, $8, $9, $10,
-        $11, $12, $13, $14
-      )
-      RETURNING *;
-    `;
+const insertQuery = `
+  INSERT INTO recipes (
+    title,
+    recipe_description,
+    slug,
+    diet_type,
+    prepTime,
+    cookTime,
+    difficulty,
+    servings,
+    kcal_per_serving,
+    instructions,
+    ingredients,
+    image_url,
+    last_update
+  )
+  VALUES (
+    $1, $2, $3, $4, $5,
+    $6, $7, $8, $9, $10,
+    $11, $12, $13
+  )
+  RETURNING *;
+`;
 
-    const values = [
-      title,
-      recipe_description,
-      slug,
-      diet_type,
-      prepTime,
-      cookTime,
-      difficulty,
-      servings,
-      kcal_per_serving,
-      instructions,
-      ingredients,
-      image_url,
-      now,
-    ];
+const values = [
+  title,
+  recipe_description,
+  slug,
+  diet_type,
+  prepTime,
+  cookTime,
+  difficulty,
+  servings,
+  kcal_per_serving,
+  instructions,
+  ingredients,
+  image_url,
+  now,
+];
 
     const result = await query(insertQuery, values);
 
