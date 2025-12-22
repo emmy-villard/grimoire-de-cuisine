@@ -20,11 +20,15 @@
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "start": "serve . -l 8000"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.16",
     "jsdom": "^27.3.0",
     "vitest": "^4.0.16"
+  },
+  "dependencies": {
+    "serve": "^14.2.5"
   }
 }
