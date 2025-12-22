@@ -1,4 +1,3 @@
-// backend/controllers/postRecipe.js
 import { query } from '../db/index.js';
 
 async function postRecipe(req, res, next) {
@@ -6,7 +5,7 @@ async function postRecipe(req, res, next) {
     const {
       title,
       recipe_description,
-      slug,              // <-- maintenant fourni par le front
+      slug,
       diet_type,
       prepTime,
       cookTime,
