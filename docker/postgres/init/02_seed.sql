@@ -33,3 +33,6 @@ INSERT INTO recipes (
 );
 
 -- End of seed
+
+-- Ensure the SERIAL sequence is set to the current max(id) so next inserts don't conflict
+SELECT setval(pg_get_serial_sequence('recipes','id'), (SELECT COALESCE(MAX(id), 1) FROM recipes));
