@@ -1,5 +1,7 @@
+import { CONFIG } from 'config.js';
+
 function getApiUrl() {
-    return "http://localhost:3000";
+    return CONFIG.apiBaseUrl;
 }
 
 export default getApiUrl;
