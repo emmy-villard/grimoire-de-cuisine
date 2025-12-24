@@ -1,4 +1,8 @@
-import getApiUrl from "../api/getApiUrl.js";
+import { CONFIG } from '../config/config.js';
+if ( CONIFG.mode == "DEMO" ) {
+    import getRecipe from "../api/getApiUrl.js";
+}
+
 
 async function showRecipeById() {
     const params = new URLSearchParams(document.location.search);
