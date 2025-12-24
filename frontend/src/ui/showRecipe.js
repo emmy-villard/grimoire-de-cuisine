@@ -1,19 +1,20 @@
 import { CONFIG } from '../config/config.js';
-if ( CONIFG.mode == "DEMO" ) {
-    import getRecipe from "../api/getApiUrl.js";
-}
+import getRecipeLS from "../localStorage/getRecipeLS.js";
+import getRecipe from "../api/getRecipe.js";
 
 
-async function showRecipeById() {
+async function showRecipe() {
     const params = new URLSearchParams(document.location.search);
     const recipeId = params.get("id");
-    const api_url = getApiUrl();
-    console.log(recipeId);
-    const res = await fetch(`${api_url}/recipes/${recipeId}`, {
-        method: "GET"
-    });
-    const data = await res.json();
+    let recipeData = null;
+    if ( CONFIG.mode == "DEMO" ) {
+        recipeData = await getRecipeLS(recipeId);
+    } else {
+        recipeData = await getRecipe(recipeId);
+    }
     console.log(data);
 }
 
-export default showRecipeById;
+export default showRecipe;
+
+

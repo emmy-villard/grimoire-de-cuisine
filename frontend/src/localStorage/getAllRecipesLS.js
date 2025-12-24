@@ -1,4 +1,4 @@
-async function getAllRecipes(backup=true) {
+async function getAllRecipesLS(backup=true) {
     const recipes = [];
     let id = 0;
     let recipeJSON = localStorage.getItem(`recipe${id}`);
@@ -25,4 +25,4 @@ async function jsonBackupRecipes() {
     return json;
 }
 
-export default getAllRecipes;
+export default getAllRecipesLS;

@@ -1,7 +1,7 @@
 import getNextId from '../js/getNextId.js';
 import slugify from '../js/slugify.js';
 
-async function createRecipe(event) {
+async function createRecipeLS(event) {
     event.preventDefault();
     const recipeTitle = document.getElementById("new-title").value;
     const recipeDescription = document.getElementById("new-description").value;
@@ -38,4 +38,4 @@ async function createRecipe(event) {
     console.log("Recipe added : " + recipeTitle + " with id : " + id);
 }
 
-export default createRecipe;
+export default createRecipeLS;
