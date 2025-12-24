@@ -1,4 +1,4 @@
-import getApiUrl from "./getApiUrl.js";
+import getApiUrl from "../api/getApiUrl.js";
 
 async function showRecipeById() {
     const params = new URLSearchParams(document.location.search);

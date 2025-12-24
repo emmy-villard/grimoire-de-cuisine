@@ -1,5 +1,5 @@
-import getNextId from './getNextId.js';
-import slugify from './slugify.js';
+import getNextId from '../js/getNextId.js';
+import slugify from '../js/slugify.js';
 
 async function createRecipe(event) {
     event.preventDefault();

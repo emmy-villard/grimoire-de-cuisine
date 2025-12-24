@@ -1,5 +1,5 @@
-import deleteRecipe from './deleteRecipe.js';
-import getAllRecipes from './getAllRecipes.js';
+import deleteRecipe from '../localStorage/deleteRecipe.js';
+import getAllRecipes from '../localStorage/getAllRecipes.js';
 
 async function showRecipe() {
     const recipes = await getAllRecipes();

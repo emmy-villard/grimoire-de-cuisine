@@ -1,7 +1,7 @@
-import createRecipe from './createRecipe.js';
-import showRecipe from './showRecipes.js';
-import editRecipe from './editRecipe.js';
-import showRecipeById from './showRecipeById.js';
+import createRecipe from './ui/createRecipe.js';
+import showRecipe from '../js/showRecipes.js';
+import editRecipe from './ui/editRecipe.js';
+import showRecipeById from './ui/showRecipeById.js';
 
 if (window.location.pathname === '/' || window.location.pathname === "/index.html") {
     await showRecipe();
