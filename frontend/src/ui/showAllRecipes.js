@@ -1,8 +1,15 @@
-import deleteRecipe from '../localStorage/deleteRecipe.js';
-import getAllRecipes from '../localStorage/getAllRecipes.js';
+import deleteRecipe from '../localStorage/deleteRecipeLS.js';
+import getAllRecipesLS from '../localStorage/getAllRecipesLS.js';
+import getAllRecipes from '../api/getAllRecipes.js';
+import { CONFIG } from '../config/config.js';
 
 async function showRecipe() {
-    const recipes = await getAllRecipes();
+    let recipes = null;
+    if ( CONFIG.mode == "DEMO" ) {
+        recipes = await getAllRecipesLS();
+    } else {
+        recipes = await getAllRecipes();
+    }
     console.log(recipes);
     // Retrieve the DOM element that will host the recipes
     const recipesContainer = document.getElementById("recipes-container");
