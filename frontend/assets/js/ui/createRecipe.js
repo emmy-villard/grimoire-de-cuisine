@@ -1,5 +1,4 @@
 import getNextId from '../js/getNextId.js';
-import slugify from '../js/slugify.js';
 import { CONFIG } from '../config/config.js';
 
 async function createRecipe(event) {
