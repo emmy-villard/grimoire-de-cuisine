@@ -1,3 +1,5 @@
+import getApiUrl from './getApiUrl.js'
+
 async function getAllRecipes() {
     const api_url = getApiUrl();
     console.log(recipeId);
