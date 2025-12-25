@@ -43,15 +43,8 @@ Si vous préférez faire les étapes à la main :
    POSTGRES_USER=app_user
    POSTGRES_PASSWORD=password
    POSTGRES_DB=app_db
-   ```
-
-   Vous pouvez générer ce fichier automatiquement avec :
-
-   ```bash
-   cat <<EOF > .env && echo "POSTGRES_PASSWORD=$(openssl rand -base64 24)" >> .env
-   POSTGRES_USER=app_user
-   POSTGRES_DB=app_db
-   EOF
+   DATA_MODE=DEMO # 'DEMO' pour utiliser localStorage, 'API' pour consommer l'API
+   API_BASE_URL=http://localhost:3000 # URL de base de l'API backend
    ```
 
 2. Depuis la racine du projet, lancez :
