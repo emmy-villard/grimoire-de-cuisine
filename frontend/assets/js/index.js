@@ -1,11 +1,11 @@
-import createRecipe from './ui/createRecipe.js';
-import showRecipe from '../js/showRecipes.js';
+import showAllRecipes from './ui/showAllRecipes.js';
+import showRecipe from './ui/showRecipe.js';;
 import editRecipe from './ui/editRecipe.js';
-import showRecipeById from './ui/showRecipeById.js';
+import createRecipe from './ui/createRecipe.js';
 
 const { pathname } = window.location;
 if (pathname === '/' || pathname === "/index.html") {
-    await showRecipe();
+    await showAllRecipes();
 } else if (pathname === '/new-recipe.html') {
     const newRecipeForm = document.getElementById("new-recipe");
     newRecipeForm.addEventListener("submit", createRecipe);
@@ -13,5 +13,5 @@ if (pathname === '/' || pathname === "/index.html") {
     let editRecipeForm = document.getElementById("edit-recipe");
     editRecipeForm.addEventListener("submit", editRecipe);
 } else if (pathname === '/recipe.html') {
-    await showRecipeById();
+    await showRecipe();
 }
