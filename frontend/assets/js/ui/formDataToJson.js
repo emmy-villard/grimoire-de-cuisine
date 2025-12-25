@@ -1,30 +1,40 @@
 import slugify from "../slugify.js";
 
 function formDataToJson() {
-    const recipeTitle = document.getElementById("new-title").value;
-    const recipeDescription = document.getElementById("new-description").value;
-    const recipeIngredients = document.getElementById("new-ingredients").value;
-    const recipeInstructions = document.getElementById("new-instructions").value;
-    const recipeDietType = document.querySelector('input[name="diet-type"]:checked').value;
-    const recipePrepTime = document.getElementById("new-prep-time").value;
-    const recipeCookTime = document.getElementById("new-cook-time").value;
-    const recipeServings = document.getElementById("new-servings").value;
-    const recipeKcalPerServing = document.getElementById("new-kcal-per-serving").value;
-    const recipeDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
+    const getVal = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+    };
+    const getChecked = (selector) => {
+        const el = document.querySelector(selector);
+        return el ? el.value : "";
+    };
+
+    const recipeTitle = getVal("new-title");
+    const recipeDescription = getVal("new-description");
+    const recipeIngredients = getVal("new-ingredients");
+    const recipeInstructions = getVal("new-instructions");
+    const recipeDietType = getChecked('input[name="diet-type"]:checked');
+    const recipePrepTime = getVal("new-prep-time");
+    const recipeCookTime = getVal("new-cook-time");
+    const recipeServings = getVal("new-servings");
+    const recipeKcalPerServing = getVal("new-kcal-per-serving");
+    const recipeDifficulty = getChecked('input[name="difficulty"]:checked');
     const last_modified = new Date().toISOString();
-    const slug = slugify(recipeTitle);
-    const recipeImgUrl = document.getElementById("new-img-url").value;
+    const slug = slugify(recipeTitle || "");
+    const recipeImgUrl = getVal("new-img-url");
     const recipeImg = document.getElementById("new-img");
+
     const recipeJson = JSON.stringify({
         title: recipeTitle,
         description: recipeDescription,
         slug: slug,
         prepTime: recipePrepTime,
-        cookTime: recipeCookTime ,
+        cookTime: recipeCookTime,
         difficulty: recipeDifficulty,
         diet_type: recipeDietType,
         servings: recipeServings,
-        kcal_per_serving: recipeKcalPerServing ,
+        kcal_per_serving: recipeKcalPerServing,
         instructions: recipeInstructions,
         ingredients: recipeIngredients,
         image_url: recipeImgUrl,
