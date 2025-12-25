@@ -7,13 +7,13 @@ import setupRecipeEdit from './ui/setupRecipeEdit.js';
 const { pathname } = window.location;
 if (pathname === '/' || pathname === "/index.html") {
     await showAllRecipes();
-} else if (pathname === '/new-recipe.html') {
+} else if (pathname === '/new-recipe') {
     const newRecipeForm = document.getElementById("new-recipe");
     newRecipeForm.addEventListener("submit", createRecipe);
-} else if (pathname === '/edit-recipe.html') {
+} else if (pathname === '/edit-recipe') {
     let editRecipeForm = document.getElementById("edit-recipe");
     await setupRecipeEdit();
     editRecipeForm.addEventListener("submit", editRecipe);
-} else if (pathname === '/recipe.html') {
+} else if (pathname === '/recipe') {
     await showRecipe();
 }
