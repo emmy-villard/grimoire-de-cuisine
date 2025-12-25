@@ -29,17 +29,27 @@ async function showRecipe() {
         recipeTitleLink.innerText = recipe.title;
         recipeTitle.appendChild(recipeTitleLink);
         const recipeImg = document.createElement("img");
-        recipeImg.src = recipe.image_url;
+        recipeImg.src = recipe.image_url ?? '/public/assets/img/default.webp';
         recipeImg.alt = recipe.title;
         const recipeImgLink = document.createElement('a');
         recipeImgLink.href = link;
         recipeImgLink.appendChild(recipeImg);
         const recipeDesc = document.createElement("p");
-        recipeDesc.innerText = recipe.description;
+        recipeDesc.innerText = recipe.description ?? 'Pas de description';
         const recipeDietType = document.createElement("p");
         recipeDietType.innerText = "Régime : " + recipe.diet_type;
         const recipePrepCookTime = document.createElement("p");
-        recipePrepCookTime.innerText = `Durée de préparation : ${recipe.prepTime} min // Durée de cuisson :  ${recipe.cookTime} min `;
+        if (recipe.prepTime) { 
+            recipePrepCookTime.innerText +=
+            `Durée de préparation : ${recipe.prepTime} min`;
+        }
+        if (recipe.prepTime & recipe.cookTime) {
+            recipePrepCookTime.innerText += " // ";
+        }
+        if (recipe.cookTime) {
+         recipePrepCookTime.innerText +=
+         `Durée de cuisson :  ${recipe.cookTime} min `;
+        } 
         const deleteButton = document.createElement("button");
         deleteButton.dataset.recipeId = recipe.id;
         deleteButton.innerText = "Supprimer la recette";
