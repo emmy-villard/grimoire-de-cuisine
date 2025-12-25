@@ -1,18 +1,10 @@
-import { CONFIG } from '../config/config.js';
-import getRecipeLS from "./getRecipe.js";
-import getRecipe from "../api/getRecipe.js";
-
+import getRecipe from "./getRecipe.js";
 
 async function showRecipe() {
     const params = new URLSearchParams(document.location.search);
     const recipeId = params.get("id");
-    let recipeData = null;
-    if ( CONFIG.mode == "DEMO" ) {
-        recipeData = await getRecipeLS(recipeId);
-    } else {
-        recipeData = await getRecipe(recipeId);
-    }
-    console.log(data);
+    const recipeData = await getRecipe(recipeId);
+    console.log(recipeData);
 }
 
 export default showRecipe;

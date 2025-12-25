@@ -1,5 +1,5 @@
-import getAllRecipesLS from "../localStorage/getAllRecipesLS";
-import getAllRecipes from "../api/getAllRecipes";
+import getAllRecipesLS from "../localStorage/getAllRecipesLS.js";
+import getAllRecipes from "../api/getAllRecipes.js";
 import { CONFIG } from '../config/config.js';
 
 export async function getRecipe(recipeId) {

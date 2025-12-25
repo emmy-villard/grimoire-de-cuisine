@@ -1,14 +1,15 @@
-import getNextId from '../js/getNextId.js';
+import getNextId from '../localStorage/getNextIdLS.js';
 import { CONFIG } from '../config/config.js';
 
 async function editRecipe(event) {
     event.preventDefault();
     const recipeJson = formDataToJson();
     if ( CONFIG.mode == "DEMO" ) {
-        recipeJson[id] = await getNextId();
-        window.localStorage.setItem(`recipe${id}`, recipeJson);
+        const recipeId = await getNextId();
+        recipeJson[id] = recipeId;
+        window.localStorage.setItem(`recipe${recipeId}`, recipeJson);
         console.log("Recipe added in local storage : "
-            + recipeTitle + " with id : " + id);
+            + recipeTitle + " with id : " + recipeId);
     } else {
         //API Call
     }

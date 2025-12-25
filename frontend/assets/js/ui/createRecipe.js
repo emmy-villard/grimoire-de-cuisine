@@ -1,4 +1,4 @@
-import getNextId from '../js/getNextId.js';
+import getNextId from '../localStorage/getNextIdLS.js';
 import { CONFIG } from '../config/config.js';
 
 async function createRecipe(event) {
