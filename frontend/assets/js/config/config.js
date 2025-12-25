@@ -1,4 +1,12 @@
+/*
+  NOTE: This file is a local fallback for development and tests only.
+  In Docker deployments the runtime file `assets/js/config/config.js` is
+  generated/overwritten at container start by `frontend/docker-entrypoint.sh`,
+  which injects the `DATA_MODE` and `API_BASE_URL` environment variables.
+  Do not rely on this committed file in production — provide env vars to the
+  frontend service (or mount a runtime config) instead.
+*/
 export const CONFIG = {
-  mode: process.env.DATA_MODE,
-  apiBaseUrl: process.env.API_BASE_URL,
+  mode: (typeof window !== 'undefined' && window.DATA_MODE) ? window.DATA_MODE : undefined,
+  apiBaseUrl: (typeof window !== 'undefined' && window.API_BASE_URL) ? window.API_BASE_URL : undefined,
 };
