@@ -1,5 +1,5 @@
 import { CONFIG } from '../config/config.js';
-import getRecipeLS from "../localStorage/getRecipeLS.js";
+import getRecipeLS from "./getRecipe.js";
 import getRecipe from "../api/getRecipe.js";
 
 
