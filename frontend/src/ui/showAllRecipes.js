@@ -1,4 +1,5 @@
-import deleteRecipe from '../localStorage/deleteRecipeLS.js';
+import deleteRecipeLS from '../localStorage/deleteRecipeLS.js';
+import deleteRecipe from '../api/deleteRecipe.js';
 import getAllRecipesLS from '../localStorage/getAllRecipesLS.js';
 import getAllRecipes from '../api/getAllRecipes.js';
 import { CONFIG } from '../config/config.js';
@@ -53,7 +54,11 @@ async function showRecipe() {
         const deleteButton = document.createElement("button");
         deleteButton.dataset.recipeId = recipe.id;
         deleteButton.innerText = "Supprimer la recette";
-        deleteButton.addEventListener("click", deleteRecipe);
+        if ( CONFIG.mode == "DEMO" ) {
+            deleteButton.addEventListener("click", deleteRecipeLS);
+        } else {
+            deleteButton.addEventListener("click", deleteRecipe);
+        }
 
         // Add elements to the DOM
         recipeElement.appendChild(recipeTitle);
