@@ -6,6 +6,7 @@ async function getAllRecipes() {
         method: "GET"
     });
     const data = await res.json();
+    return data;
 }
 
 export default getAllRecipes;
