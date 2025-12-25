@@ -21,7 +21,7 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
-    "start": "serve public -s -l 8000"
+    "start": "serve public -l 8000"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.16",
