@@ -21,17 +21,18 @@ async function showRecipe() {
         recipesContainer.appendChild(recipeElement);
 
         // Create element
+        const link = "recipes/"+recipe.id;
         const recipeTitle = document.createElement("h2");
         recipeTitle.classList.add("recipes_title");
         const recipeTitleLink = document.createElement('a')
-        recipeTitleLink.href = "recipes/"+recipe.slug;
+        recipeTitleLink.href = link;
         recipeTitleLink.innerText = recipe.title;
         recipeTitle.appendChild(recipeTitleLink);
         const recipeImg = document.createElement("img");
         recipeImg.src = recipe.image_url;
         recipeImg.alt = recipe.title;
         const recipeImgLink = document.createElement('a');
-        recipeImgLink.href = "recipes/"+recipe.slug;
+        recipeImgLink.href = link;
         recipeImgLink.appendChild(recipeImg);
         const recipeDesc = document.createElement("p");
         recipeDesc.innerText = recipe.description;
