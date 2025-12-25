@@ -6,7 +6,7 @@ TARGET_FILE="$CONFIG_DIR/config.js"
 
 mkdir -p "$CONFIG_DIR"
 
-cat > "$TARGET_FILE" <<'JS'
+cat > "$TARGET_FILE" <<JS
 export const CONFIG = {
   mode: "${DATA_MODE}",
   apiBaseUrl: "${API_BASE_URL}"
