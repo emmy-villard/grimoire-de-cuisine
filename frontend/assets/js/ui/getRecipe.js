@@ -7,7 +7,7 @@ export async function getRecipe(recipeId) {
     if ( CONFIG.mode == "DEMO" ) {
         allRecipes = await getAllRecipesLS();
     } else { 
-        allRecipes = await getAllRecipesLS(); 
+        allRecipes = await getAllRecipes(); 
     }
     for (const recipe of allRecipes) {
         if (recipe.recipeId == recipeId) {
