@@ -18,6 +18,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    environment:
+      DATA_MODE: ${DATA_MODE}
+      API_BASE_URL: ${API_BASE_URL}
     ports:
       - "8000:8000"
     depends_on:
