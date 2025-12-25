@@ -2,6 +2,7 @@ import showAllRecipes from './ui/showAllRecipes.js';
 import showRecipe from './ui/showRecipe.js';;
 import editRecipe from './ui/editRecipe.js';
 import createRecipe from './ui/createRecipe.js';
+import setupRecipeEdit from './ui/setupRecipeEdit.js';
 
 const { pathname } = window.location;
 if (pathname === '/' || pathname === "/index.html") {
@@ -11,6 +12,7 @@ if (pathname === '/' || pathname === "/index.html") {
     newRecipeForm.addEventListener("submit", createRecipe);
 } else if (pathname === '/edit-recipe.html') {
     let editRecipeForm = document.getElementById("edit-recipe");
+    await setupRecipeEdit();
     editRecipeForm.addEventListener("submit", editRecipe);
 } else if (pathname === '/recipe.html') {
     await showRecipe();
