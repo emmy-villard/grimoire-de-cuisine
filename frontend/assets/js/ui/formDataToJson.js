@@ -1,3 +1,5 @@
+import slugify from "../slugify";
+
 function formDataToJson() {
     const recipeTitle = document.getElementById("new-title").value;
     const recipeDescription = document.getElementById("new-description").value;
