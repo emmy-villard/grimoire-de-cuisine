@@ -1,8 +1,22 @@
 import { CONFIG } from "../config/config.js";
 import saveImgLS from "../localStorage/saveImgLS.js";
-import saveImg from "../api/saveImg.js"
+import saveImg from "../api/saveImg.js";
 import slugify from "../slugify.js";
 import getNextId from "../localStorage/getNextIdLS.js";
+
+async function fileToImageElement(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = reader.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
 
 async function formDataToJson(prefix) {
     const makeId = (key) => `${prefix}-${key}`;
@@ -27,7 +41,7 @@ async function formDataToJson(prefix) {
             .map((s) => s.trim())
             .filter(Boolean);
     };
-    
+
     const recipeId = getNextId();
     const recipeTitle = getVal(makeId("title"));
     const recipeDescription = getVal(makeId("description"));
@@ -41,14 +55,17 @@ async function formDataToJson(prefix) {
     const recipeDifficulty = getChecked('input[name="difficulty"]:checked');
     const last_modified = new Date().toISOString();
     const slug = slugify(recipeTitle || "");
-    const recipeImg = getVal(makeId("img"));
+
+    const recipeImgInput = document.getElementById(makeId("img"));
+    const recipeImgFile = recipeImgInput?.files?.[0] ?? null;
     let recipeImgUrl = null;
-    if (recipeImg) {
-        if (CONFIG.mode == "DEMO") {
-            recipeImgUrl = saveImgLS(recipeImg, recipeId);
-        }
-        else {
-            recipeImgUrl = await saveImg(recipeImg);
+
+    if (recipeImgFile) {
+        if (CONFIG.mode === "DEMO") {
+            const imgElement = await fileToImageElement(recipeImgFile);
+            recipeImgUrl = saveImgLS(imgElement, recipeId);
+        } else {
+            recipeImgUrl = await saveImg(recipeImgFile);
         }
     } else {
         recipeImgUrl = getVal(makeId("img-url"));
