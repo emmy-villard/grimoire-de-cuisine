@@ -2,6 +2,7 @@ import { CONFIG } from "../config/config.js";
 import saveImgLS from "../localStorage/saveImgLS.js";
 import saveImg from "../api/saveImg.js"
 import slugify from "../slugify.js";
+import getNextId from "../localStorage/getNextIdLS.js";
 
 function formDataToJson(prefix) {
     const makeId = (key) => `${prefix}-${key}`;
@@ -26,7 +27,8 @@ function formDataToJson(prefix) {
             .map((s) => s.trim())
             .filter(Boolean);
     };
-
+    
+    const recipeId = getNextId();
     const recipeTitle = getVal(makeId("title"));
     const recipeDescription = getVal(makeId("description"));
     const recipeIngredients = getVal(makeId("ingredients"));
@@ -39,11 +41,15 @@ function formDataToJson(prefix) {
     const recipeDifficulty = getChecked('input[name="difficulty"]:checked');
     const last_modified = new Date().toISOString();
     const slug = slugify(recipeTitle || "");
-    let recipeImgUrl = null;
     const recipeImg = getVal(makeId("img"));
+    let recipeImgUrl = null;
     if (recipeImg) {
-        if (CONFIG.mode == "DEMO") {recipeImgUrl = saveImgLS(recipeImg, id);}
-        else {recipeImgUrl = saveImg(recipeImg);}
+        if (CONFIG.mode == "DEMO") {
+            recipeImgUrl = saveImgLS(recipeImg, recipeId);
+        }
+        else {
+            recipeImgUrl = saveImg(recipeImg);
+        }
     } else {
         recipeImgUrl = getVal(makeId("img-url"));
     }
@@ -64,6 +70,9 @@ function formDataToJson(prefix) {
         image_url: recipeImgUrl || null,
         last_update: last_modified,
     };
+    if (CONFIG.mode == "DEMO") {
+        recipeJson.id = recipeId;
+    }
 
     return recipeJson;
 }
