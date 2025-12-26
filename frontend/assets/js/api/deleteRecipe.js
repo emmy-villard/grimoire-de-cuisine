@@ -1,4 +1,3 @@
-import { CONFIG } from '../config/config.js';
 import getApiUrl from './getApiUrl.js'
 
 async function deleteRecipe(event) {
