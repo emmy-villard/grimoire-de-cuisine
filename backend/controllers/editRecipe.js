@@ -25,6 +25,22 @@ async function editRecipe(req, res, next) {
       image_url,
     } = req.body;
 
+    // Reject explicit null for required columns to avoid DB NOT NULL violations
+    if (title === null) {
+      return res.status(400).json({ error: 'title cannot be null' });
+    }
+    if (slug === null) {
+      return res.status(400).json({ error: 'slug cannot be null' });
+    }
+
+    // Ensure arrays are arrays when provided
+    if (instructions !== undefined && instructions !== null && !Array.isArray(instructions)) {
+      return res.status(400).json({ error: 'instructions must be an array' });
+    }
+    if (ingredients !== undefined && ingredients !== null && !Array.isArray(ingredients)) {
+      return res.status(400).json({ error: 'ingredients must be an array' });
+    }
+
     const fields = [];
     const values = [];
     let index = 1;
