@@ -46,11 +46,11 @@ async function editRecipe(req, res, next) {
       values.push(diet_type);
     }
     if (prepTime !== undefined) {
-      fields.push(`"prepTime" = $${index++}`);
+      fields.push(`prepTime = $${index++}`);
       values.push(prepTime);
     }
     if (cookTime !== undefined) {
-      fields.push(`"cookTime" = $${index++}`);
+      fields.push(`cookTime = $${index++}`);
       values.push(cookTime);
     }
     if (difficulty !== undefined) {
