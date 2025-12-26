@@ -13,7 +13,7 @@ async function createRecipe(event) {
         console.log("Recipe added in local storage : " + (recipeJson.title || '') + " with id : " + id);
     } else {
         try {
-            const res = await fetch(`${api_url}/recipes/${recipeId}`, 
+            const res = await fetch(`${api_url}/recipes`, 
                 {
                     method: 'POST',
                     headers: {
