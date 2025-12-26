@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Éditer une recette</title>
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+        <script type="module" src="assets/js/index.js" defer></script>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <a href="index.html">Recettes</a>
+                <a href="new-recipe.html">Ajouter une recette</a>
+            </nav>
+        </header>
+        <main>
+            <h1>Éditer la recette</h1>
+            <form id="edit-recipe" action="" method="post" enctype="multipart/form-data">
+                <label for="edit-title">Nom de la recette :</label><br>
+                <input type="text" id="edit-title" name="title" required placeholder="Tarte aux pommes" title="Choisis un nom court et descriptif"><br><br>
+
+                <label for="edit-description">Description du plat :</label><br>
+                <textarea id="edit-description" name="description" rows="3" cols="50" placeholder="Une déciliceuse recette d'été"></textarea><br><br>
+
+                <label for="edit-ingredients">Ingrédients (séparés par une virgule) :</label><br>
+                <textarea id="edit-ingredients" name="ingredients" rows="5" cols="50" placeholder="5 tomates, 3 gros oignons, 500g de farine, 15ml d'huile d'olive"></textarea><br><br>
+
+                <label for="edit-instructions">Étapes (retour à la ligne pour entre chaque étape) :</label><br>
+                <textarea id="edit-instructions" name="instructions" rows="10" cols="50" placeholder="Émincer les oignons&#10;Les faire revenir dans une casserolle&#10;Ajouter la farine et les tomates coupées en dés"></textarea><br><br>
+
+                <fieldset>
+                    <legend>Type de régime</legend>
+                    <input type="radio" id="edit-vegan" name="diet-type" value="vegan">
+                    <label for="edit-vegan">Vegan</label>
+                    <input type="radio" id="edit-vegetarian" name="diet-type" value="végétarien">
+                    <label for="edit-vegetarian">Végétarien</label>
+                </fieldset><br>
+
+                <fieldset>
+                <label for="edit-prep-time">Temps de préparation (en minutes) :</label>
+                <input type="text" id="edit-prep-time" name="prep-time" placeholder="15"><br>
+
+                <label for="edit-cook-time">Temps de cuisson (en minutes) :</label>
+                <input type="text" id="edit-cook-time" name="cook-time" placeholder="45">
+                </fieldset><br>
+
+                <fieldset>
+                    <label for="edit-servings">Servings :</label>
+                    <input type="number" id="edit-servings" name="servings" placeholder="4"><br>
+                    <label for="edit-kcal-per-serving">Kcal per serving :</label>
+                    <input type="number" id="edit-kcal-per-serving" name="kcal-per-serving" placeholder="450"><br>
+                </fieldset><br>
+
+                <fieldset>
+                    <legend>Difficulté</legend>
+                    <input type="radio" id="edit-easy" name="difficulty" value="easy">
+                    <label for="edit-easy">Facile</label>
+                    <input type="radio" id="edit-medium" name="difficulty" value="medium">
+                    <label for="edit-medium">Moyen</label>
+                    <input type="radio" id="edit-difficult" name="difficulty" value="difficult">
+                    <label for="edit-difficult">Difficile</label>
+                </fieldset><br>
+
+                <fieldset>
+                    <label for="edit-img">Image (webp, png, jpg) :</label><br>
+                    <input type="file" id="edit-img" name="img" accept="image/webp, image/png, image/jpeg"><br>
+                    <label for="edit-img-url">Or image URL</label><br>
+                    <input type="text" id="edit-img-url" name="img"><br>
+                </fieldset><br>
+
+
+                <button type="submit">Mettre à jour la recette</button>
+                <button type="reset">Effacer</button>
+            </form>
+        </main>
+        <footer>
+            <a href="https://www.instagram.com/">Instagram</a>
+            <a href="https://www.facebook.com/">Facebook</a>
+        </footer>
+    </body>
+</html>

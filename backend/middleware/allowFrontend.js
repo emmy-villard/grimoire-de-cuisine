@@ -1,5 +1,5 @@
-export default function allowAllOrigins(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+export default function allowFrontend(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'

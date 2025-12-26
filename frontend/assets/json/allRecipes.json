@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": 0,
         "title": "Chakchouka aux pois chiches",
         "description": "Ragoût savoureux de tomates et poivrons relevé d'épices, enrichi de pois chiches pour un plat complet.",
         "slug": "chakchouka-aux-pois-chiches",
@@ -28,14 +28,14 @@
         "diet_type": "vegan",
         "prepTime": 15,
         "cookTime": 25,
-        "difficulty": "facile",
+        "difficulty": "easy",
         "servings": 4,
         "kcal_per_serving": 320,
         "image_url": "http://localhost:8000/assets/img/chakchouka.webp",
         "last_update": "2025-12-08T10:30:00Z"
     },
     {
-        "id": 2,
+        "id": 1,
         "title": "Pâte à pizza maison",
         "description": "Une pâte souple et croustillante, facile à réaliser à la main ou en machine.",
         "slug": "pate-a-pizza-maison",
@@ -56,14 +56,14 @@
         "diet_type": "vegan",
         "prepTime": 20,
         "cookTime": 12,
-        "difficulty": "moyen",
+        "difficulty": "medium",
         "servings": 4,
         "kcal_per_serving": 450,
         "image_url": "http://localhost:8000/assets/img/pizza-dough.webp",
         "last_update": "2025-12-08T10:30:00Z"
     },
     {
-        "id": 3,
+        "id": 2,
         "title": "Pâte à crêpes",
         "description": "Recette classique de pâte à crêpes légère, adaptée pour sucré ou salé.",
         "slug": "pate-a-crepes",
@@ -84,7 +84,7 @@
         "diet_type": "végétarien",
         "prepTime": 10,
         "cookTime": 20,
-        "difficulty": "facile",
+        "difficulty": "easy",
         "servings": 6,
         "kcal_per_serving": 180,
         "image_url": "http://localhost:8000/assets/img/crepes.webp",

@@ -4,7 +4,7 @@ async function editRecipe(req, res, next) {
   try {
     const recipeId = req.params.id;
     const idAsNumber = Number(recipeId);
-    if (!recipeId || Number.isNaN(idAsNumber) || idAsNumber <= 0) {
+    if (!recipeId || Number.isNaN(idAsNumber) || idAsNumber < 0) {
       return res
         .status(400)
         .json({ error: `Recipe id must be a positive number: ${recipeId}` });
@@ -24,6 +24,22 @@ async function editRecipe(req, res, next) {
       ingredients,
       image_url,
     } = req.body;
+
+    // Reject explicit null for required columns to avoid DB NOT NULL violations
+    if (title === null) {
+      return res.status(400).json({ error: 'title cannot be null' });
+    }
+    if (slug === null) {
+      return res.status(400).json({ error: 'slug cannot be null' });
+    }
+
+    // Ensure arrays are arrays when provided
+    if (instructions !== undefined && instructions !== null && !Array.isArray(instructions)) {
+      return res.status(400).json({ error: 'instructions must be an array' });
+    }
+    if (ingredients !== undefined && ingredients !== null && !Array.isArray(ingredients)) {
+      return res.status(400).json({ error: 'ingredients must be an array' });
+    }
 
     const fields = [];
     const values = [];
@@ -46,11 +62,11 @@ async function editRecipe(req, res, next) {
       values.push(diet_type);
     }
     if (prepTime !== undefined) {
-      fields.push(`"prepTime" = $${index++}`);
+      fields.push(`prepTime = $${index++}`);
       values.push(prepTime);
     }
     if (cookTime !== undefined) {
-      fields.push(`"cookTime" = $${index++}`);
+      fields.push(`cookTime = $${index++}`);
       values.push(cookTime);
     }
     if (difficulty !== undefined) {

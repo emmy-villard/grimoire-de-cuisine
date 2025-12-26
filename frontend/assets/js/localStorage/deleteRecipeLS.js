@@ -1,4 +1,4 @@
-function deleteRecipe(event) {
+function deleteRecipeLS(event) {
     const button = event.currentTarget;
     const recipeId = button?.dataset?.recipeId;
 
@@ -18,4 +18,4 @@ function deleteRecipe(event) {
     console.log(`Recipe deleted : ${storageKey}`);
 }
 
-export default deleteRecipe;
+export default deleteRecipeLS;

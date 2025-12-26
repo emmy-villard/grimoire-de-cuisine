@@ -41,7 +41,7 @@ body {
 
 .recipe-card img {
     width: 100%;
-    height: auto;
+    aspect-ratio: 16 / 9;
     display: block;
     border-radius: 4px;
     object-fit: cover;
@@ -62,6 +62,7 @@ body {
 
 .recipe-card button {
     padding: 0.6rem 1.2rem;
+    margin: 0 0.4rem;
     border: none;
     border-radius: 4px;
     background-color: #c0392b;

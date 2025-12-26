@@ -1,13 +1,19 @@
-import createRecipe from './createRecipe.js';
-import showRecipe from './showRecipes.js';
-import editRecipe from './editRecipe.js';
+import showAllRecipes from './ui/showAllRecipes.js';
+import showRecipe from './ui/showRecipe.js';;
+import editRecipe from './ui/editRecipe.js';
+import createRecipe from './ui/createRecipe.js';
+import setupRecipeEdit from './ui/setupRecipeEdit.js';
 
-if (window.location.pathname === '/' || window.location.pathname === "/index.html") {
-    showRecipe();
-} else if (window.location.pathname === '/new-recipe.html') {
+const { pathname } = window.location;
+if (pathname === '/' || pathname === "/index.html") {
+    await showAllRecipes();
+} else if (pathname === '/new-recipe') {
     const newRecipeForm = document.getElementById("new-recipe");
     newRecipeForm.addEventListener("submit", createRecipe);
-} else if (window.location.pathname === '/edit-recipe.html') {
+} else if (pathname === '/edit-recipe') {
     let editRecipeForm = document.getElementById("edit-recipe");
+    await setupRecipeEdit();
     editRecipeForm.addEventListener("submit", editRecipe);
+} else if (pathname === '/recipe') {
+    await showRecipe();
 }
