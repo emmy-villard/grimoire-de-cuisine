@@ -42,7 +42,7 @@ function formDataToJson(prefix) {
     let recipeImgUrl = null;
     const recipeImg = getVal(makeId("img"));
     if (recipeImg) {
-        if (CONFIG.mode == "DEMO") {recipeImgUrl = saveImgLS(recipeImg);}
+        if (CONFIG.mode == "DEMO") {recipeImgUrl = saveImgLS(recipeImg, id);}
         else {recipeImgUrl = saveImg(recipeImg);}
     } else {
         recipeImgUrl = getVal(makeId("img-url"));
