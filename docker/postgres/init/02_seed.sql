@@ -11,7 +11,7 @@ INSERT INTO recipes (
  'chakchouka-aux-pois-chiches',
  ARRAY['2 oignons','2 gousses d''ail','1 poivron rouge','1 poivron jaune','4 tomates mûres (ou 1 boîte de tomates concassées)','200 g de pois chiches cuits','2 cuillères à soupe d''huile d''olive','1 cuillère à café de paprika','1/2 cuillère à café de cumin','Sel et poivre','Persil frais']::text[],
  ARRAY['Émincer les oignons et l''ail, couper les poivrons en lanières.','Faire revenir l''oignon et l''ail dans l''huile d''olive jusqu''à ce qu''ils soient translucides.','Ajouter les poivrons et cuire 5–7 minutes.','Ajouter les tomates, le paprika, le cumin, saler et poivrer. Laisser mijoter 10–15 minutes.','Incorporer les pois chiches et laisser réchauffer 5 minutes.','Servir garni de persil, accompagné de pain ou de semoule.']::text[],
- 'vegan', 15, 25, 'facile', 4, 320, 'http://localhost:8000/assets/img/chakchouka.webp', '2025-12-08T10:30:00Z'::timestamptz
+ 'vegan', 15, 25, 'easy', 4, 320, 'http://localhost:8000/assets/img/chakchouka.webp', '2025-12-08T10:30:00Z'::timestamptz
 ),
 
 (2,
@@ -20,7 +20,7 @@ INSERT INTO recipes (
  'pate-a-pizza-maison',
  ARRAY['500 g de farine','300 ml d''eau tiède','10 g de sel','7 g de levure sèche de boulanger','2 cuillères à soupe d''huile d''olive']::text[],
  ARRAY['Délayer la levure dans l''eau tiède et laisser reposer 5 minutes.','Mélanger la farine et le sel dans un grand saladier.','Ajouter l''eau + levure et l''huile, puis pétrir 8–10 minutes jusqu''à obtenir une pâte lisse.','Laisser pousser la pâte couverte 1 à 2 heures jusqu''à doublement de volume.','Former les boules, étaler et garnir selon vos envies, puis cuire 10–12 minutes à four très chaud (250°C).']::text[],
- 'vegan', 20, 12, 'moyen', 4, 450, 'http://localhost:8000/assets/img/pizza-dough.webp', '2025-12-08T10:30:00Z'::timestamptz
+ 'vegan', 20, 12, 'medium', 4, 450, 'http://localhost:8000/assets/img/pizza-dough.webp', '2025-12-08T10:30:00Z'::timestamptz
 ),
 
 (3,
@@ -29,7 +29,7 @@ INSERT INTO recipes (
  'pate-a-crepes',
  ARRAY['250 g de farine','3 œufs','500 ml de lait','1 pincée de sel','2 cuillères à soupe d''huile ou de beurre fondu']::text[],
  ARRAY['Mélanger la farine et le sel dans un saladier.','Ajouter les œufs puis le lait progressivement en fouettant pour éviter les grumeaux.','Ajouter l''huile ou le beurre fondu, laisser reposer 30 minutes si possible.','Cuire les crêpes dans une poêle légèrement huilée, 1–2 minutes par face.','Garnir selon votre goût (sucre, confiture, chocolat, fromage, jambon...).']::text[],
- 'végétarien', 10, 20, 'facile', 6, 180, 'http://localhost:8000/assets/img/crepes.webp', '2025-12-08T10:30:00Z'::timestamptz
+ 'végétarien', 10, 20, 'easy', 6, 180, 'http://localhost:8000/assets/img/crepes.webp', '2025-12-08T10:30:00Z'::timestamptz
 );
 
 -- End of seed
