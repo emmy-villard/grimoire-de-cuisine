@@ -5,7 +5,7 @@ INSERT INTO recipes (
   prepTime, cookTime, difficulty, servings, kcal_per_serving, image_url, last_update
 ) VALUES
 
-(1,
+(0,
  'Chakchouka aux pois chiches',
  'Ragoût savoureux de tomates et poivrons relevé d''épices, enrichi de pois chiches pour un plat complet.',
  'chakchouka-aux-pois-chiches',
@@ -14,7 +14,7 @@ INSERT INTO recipes (
  'vegan', 15, 25, 'easy', 4, 320, 'http://localhost:8000/assets/img/chakchouka.webp', '2025-12-08T10:30:00Z'::timestamptz
 ),
 
-(2,
+(1,
  'Pâte à pizza maison',
  'Une pâte souple et croustillante, facile à réaliser à la main ou en machine.',
  'pate-a-pizza-maison',
@@ -23,7 +23,7 @@ INSERT INTO recipes (
  'vegan', 20, 12, 'medium', 4, 450, 'http://localhost:8000/assets/img/pizza-dough.webp', '2025-12-08T10:30:00Z'::timestamptz
 ),
 
-(3,
+(2,
  'Pâte à crêpes',
  'Recette classique de pâte à crêpes légère, adaptée pour sucré ou salé.',
  'pate-a-crepes',
