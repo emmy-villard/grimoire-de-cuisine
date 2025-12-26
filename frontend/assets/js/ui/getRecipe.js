@@ -10,7 +10,7 @@ export async function getRecipe(recipeId) {
         allRecipes = await getAllRecipes(); 
     }
     for (const recipe of allRecipes) {
-        if (recipe.recipeId == recipeId) {
+        if (recipe.id == recipeId) {
             return recipe;
         }
     }
