@@ -1,18 +1,23 @@
 async function getAllRecipesLS(backup=true) {
     const recipes = [];
-    let id = 0;
-    let recipeJSON = localStorage.getItem(`recipe${id}`);
+    for (let index = 0; index < localStorage.length; index += 1) {
+        const key = localStorage.key(index);
+        if (!key?.startsWith("recipe")) {
+            continue;
+        }
 
-    while (recipeJSON !== null) {
+        const recipeJSON = localStorage.getItem(key);
+        if (recipeJSON === null) {
+            continue;
+        }
+
         try {
             recipes.push(JSON.parse(recipeJSON));
         } catch (err) {
-            console.warn(`Entrée recipe${id} illisible`, err);
+            console.warn(`Entrée ${key} illisible`, err);
         }
-        id += 1;
-        recipeJSON = localStorage.getItem(`recipe${id}`);
     }
-    if (recipes.length == 0 && backup) {
+    if (recipes.length === 0 && backup) {
         return await addFallbackToLocalStorage();
     }
     return recipes;
