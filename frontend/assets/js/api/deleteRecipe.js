@@ -15,6 +15,8 @@ async function deleteRecipe(event) {
             const text = await res.text();
             throw new Error(`API DELETE failed: ${res.status} ${res.statusText}` + (text ? ` - ${text}` : ''));
         }
+        console.log('Recipe deleted:', recipeId,
+            'status:', res.status);
         // Some APIs return 204 No Content or an empty body — handle gracefully
         if (res.status === 204) return { ok: true };
         const text = await res.text();

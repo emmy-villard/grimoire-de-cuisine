@@ -8,15 +8,13 @@ async function editRecipe(event) {
     const params = new URLSearchParams(window.location.search);
     const recipeId = params.get('id');
     const recipeJson = formDataToJson();
-    const recipe = (typeof recipeJson === 'string') ?
-        JSON.parse(recipeJson) : recipeJson;
-    recipe.id = recipeId;
-    console.log(recipe);
+    recipeJson.id = recipeId;
+    console.log(recipeJson);
     if ( CONFIG.mode == "DEMO" ) {
         window.localStorage.setItem(`recipe${recipeId}`,
             JSON.stringify(recipeJson));
         console.log("Recipe added in local storage : "
-            + recipeTitle + " with id : " + recipeId);
+            + (recipeJson.title || '') + " with id : " + recipeId);
     } else {
         try {
             const res = await fetch(`${api_url}/recipes/${recipeId}`, 
@@ -27,9 +25,10 @@ async function editRecipe(event) {
                     },
                     body: JSON.stringify(recipeJson),
                 });
+            console.log('Recipe updated:', recipeJson.title || recipeJson.slug || null, 'status:', res.status);
             return res;
         } catch(err) {
-            console.error('deleteRecipe error', err);
+            console.error('editRecipe error', err);
             throw err;
         }
     }

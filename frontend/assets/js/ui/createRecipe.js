@@ -21,9 +21,10 @@ async function createRecipe(event) {
                     },
                     body: JSON.stringify(recipeJson),
                 });
+            console.log('Recipe created:', recipeJson.title || recipeJson.slug || null, 'status:', res.status);
             return res;
         } catch(err) {
-            console.error('deleteRecipe error', err);
+            console.error('createRecipe error', err);
             throw err;
         }
     }
