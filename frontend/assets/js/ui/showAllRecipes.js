@@ -3,6 +3,7 @@ import deleteRecipe from '../api/deleteRecipe.js';
 import getAllRecipesLS from '../localStorage/getAllRecipesLS.js';
 import getAllRecipes from '../api/getAllRecipes.js';
 import { CONFIG } from '../config/config.js';
+import getImgSrc from './getImgSrc.js';
 
 async function showRecipe() {
     let recipes = null;
@@ -30,7 +31,7 @@ async function showRecipe() {
         recipeTitleLink.innerText = recipe.title;
         recipeTitle.appendChild(recipeTitleLink);
         const recipeImg = document.createElement("img");
-        recipeImg.src = recipe.image_url ?? '/public/assets/img/default.webp';
+        recipeImg.src = getImgSrc(recipe.image_url);
         recipeImg.alt = recipe.title;
         const recipeImgLink = document.createElement('a');
         recipeImgLink.href = link;
