@@ -25,7 +25,7 @@ function formDataToJson() {
     const recipeImgUrl = getVal("new-img-url");
     const recipeImg = document.getElementById("new-img");
 
-    const recipeJson = JSON.stringify({
+    const recipeJson = {
         title: recipeTitle,
         description: recipeDescription,
         slug: slug,
@@ -39,7 +39,7 @@ function formDataToJson() {
         ingredients: recipeIngredients,
         image_url: recipeImgUrl,
         last_update: last_modified,
-    });
+    };
     return recipeJson;
 }
 
