@@ -22,7 +22,7 @@ async function showRecipe() {
         recipesContainer.appendChild(recipeElement);
 
         // Create element
-        const link = "recipes/"+recipe.id;
+        const link = `recipe?id=${recipe.id}`;
         const recipeTitle = document.createElement("h2");
         recipeTitle.classList.add("recipes_title");
         const recipeTitleLink = document.createElement('a')
