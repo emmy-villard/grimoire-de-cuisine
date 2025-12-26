@@ -25,7 +25,7 @@ async function showRecipe() {
         const link = `recipe?id=${recipe.id}`;
         const recipeTitle = document.createElement("h2");
         recipeTitle.classList.add("recipes_title");
-        const recipeTitleLink = document.createElement('a')
+        const recipeTitleLink = document.createElement('a');
         recipeTitleLink.href = link;
         recipeTitleLink.innerText = recipe.title;
         recipeTitle.appendChild(recipeTitleLink);
@@ -51,6 +51,8 @@ async function showRecipe() {
          recipePrepCookTime.innerText +=
          `Durée de cuisson :  ${recipe.cookTime} min `;
         } 
+
+        const buttonDiv = document.createElement("div");
         const deleteButton = document.createElement("button");
         deleteButton.dataset.recipeId = recipe.id;
         deleteButton.innerText = "Supprimer la recette";
@@ -59,6 +61,15 @@ async function showRecipe() {
         } else {
             deleteButton.addEventListener("click", deleteRecipe);
         }
+        const editButton = document.createElement("button");
+        const editLink = `edit-recipe?id=${recipe.id}`;
+        editButton.dataset.recipeId = recipe.id;
+        editButton.innerText = "Modifier la recette";
+        editButton.addEventListener('click', () => {
+            window.location.href = editLink;
+        });
+        buttonDiv.appendChild(deleteButton);
+        buttonDiv.appendChild(editButton);
 
         // Add elements to the DOM
         recipeElement.appendChild(recipeTitle);
@@ -66,7 +77,7 @@ async function showRecipe() {
         recipeElement.appendChild(recipeDesc);
         recipeElement.appendChild(recipeDietType);
         recipeElement.appendChild(recipePrepCookTime);
-        recipeElement.appendChild(deleteButton);
+        recipeElement.appendChild(buttonDiv);
     }
 }
 
