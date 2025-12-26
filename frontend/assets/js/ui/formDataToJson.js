@@ -1,3 +1,6 @@
+import { CONFIG } from "../config/config.js";
+import saveImgLS from "../localStorage/saveImgLS.js";
+import saveImg from "../api/saveImg.js"
 import slugify from "../slugify.js";
 
 function formDataToJson(prefix) {
@@ -36,7 +39,14 @@ function formDataToJson(prefix) {
     const recipeDifficulty = getChecked('input[name="difficulty"]:checked');
     const last_modified = new Date().toISOString();
     const slug = slugify(recipeTitle || "");
-    const recipeImgUrl = getVal(makeId("img-url"));
+    let recipeImgUrl = null;
+    const recipeImg = getVal(makeId("img"));
+    if (recipeImg) {
+        if (CONFIG.mode == "DEMO") {recipeImgUrl = saveImgLS(recipeImg);}
+        else {recipeImgUrl = saveImg(recipeImg);}
+    } else {
+        recipeImgUrl = getVal(makeId("img-url"));
+    }
 
     const recipeJson = {
         title: recipeTitle || null,
