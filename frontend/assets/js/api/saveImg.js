@@ -1,3 +1,3 @@
-export default function saveImg(img) {
+export default async function saveImg(img) {
     return "";
 }

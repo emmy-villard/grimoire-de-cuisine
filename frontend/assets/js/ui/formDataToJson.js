@@ -4,7 +4,7 @@ import saveImg from "../api/saveImg.js"
 import slugify from "../slugify.js";
 import getNextId from "../localStorage/getNextIdLS.js";
 
-function formDataToJson(prefix) {
+async function formDataToJson(prefix) {
     const makeId = (key) => `${prefix}-${key}`;
     const getVal = (id) => {
         const el = document.getElementById(id);
@@ -48,7 +48,7 @@ function formDataToJson(prefix) {
             recipeImgUrl = saveImgLS(recipeImg, recipeId);
         }
         else {
-            recipeImgUrl = saveImg(recipeImg);
+            recipeImgUrl = await saveImg(recipeImg);
         }
     } else {
         recipeImgUrl = getVal(makeId("img-url"));

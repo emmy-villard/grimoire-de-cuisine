@@ -4,7 +4,7 @@ import { CONFIG } from '../config/config.js';
 async function createRecipe(event) {
     event.preventDefault();
     const api_url = CONFIG.apiBaseUrl;
-    const recipeJson = formDataToJson("new");
+    const recipeJson = await formDataToJson("new");
     if ( CONFIG.mode == "DEMO" ) {
         window.localStorage.setItem(`recipe${id}`, JSON.stringify(recipeJson));
         console.log("Recipe added in local storage : " + (recipeJson.title || '') + " with id : " + id);
