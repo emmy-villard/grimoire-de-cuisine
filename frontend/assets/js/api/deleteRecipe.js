@@ -17,6 +17,10 @@ async function deleteRecipe(event) {
         }
         console.log('Recipe deleted:', recipeId,
             'status:', res.status);
+        const recipeCard = button.closest(".recipe-card");
+        if (recipeCard) {
+            recipeCard.remove();
+        }
         // Some APIs return 204 No Content or an empty body — handle gracefully
         if (res.status === 204) return { ok: true };
         const text = await res.text();
