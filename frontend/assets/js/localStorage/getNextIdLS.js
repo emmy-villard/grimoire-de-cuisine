@@ -1,4 +1,4 @@
-async function getNextIdLS() {
+function getNextIdLS() {
     let id = 0;
     let recipeJSON = window.localStorage.getItem(`recipe${id}`);
 
