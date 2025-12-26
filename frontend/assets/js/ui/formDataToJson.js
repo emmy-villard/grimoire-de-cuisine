@@ -1,6 +1,7 @@
 import slugify from "../slugify.js";
 
-function formDataToJson() {
+function formDataToJson(prefix) {
+    const makeId = (key) => `${prefix}-${key}`;
     const getVal = (id) => {
         const el = document.getElementById(id);
         return el ? el.value.trim() : null;
@@ -9,14 +10,12 @@ function formDataToJson() {
         const el = document.querySelector(selector);
         return el ? el.value : null;
     };
-
     const toIntOrNull = (v) => {
         if (v === null || v === undefined) return null;
         if (v === "") return null;
         const n = parseInt(v, 10);
         return Number.isNaN(n) ? null : n;
     };
-
     const toArray = (v) => {
         if (!v) return [];
         return v
@@ -25,19 +24,19 @@ function formDataToJson() {
             .filter(Boolean);
     };
 
-    const recipeTitle = getVal("new-title");
-    const recipeDescription = getVal("new-description");
-    const recipeIngredients = getVal("new-ingredients");
-    const recipeInstructions = getVal("new-instructions");
+    const recipeTitle = getVal(makeId("title"));
+    const recipeDescription = getVal(makeId("description"));
+    const recipeIngredients = getVal(makeId("ingredients"));
+    const recipeInstructions = getVal(makeId("instructions"));
     const recipeDietType = getChecked('input[name="diet-type"]:checked');
-    const recipePrepTime = getVal("new-prep-time");
-    const recipeCookTime = getVal("new-cook-time");
-    const recipeServings = getVal("new-servings");
-    const recipeKcalPerServing = getVal("new-kcal-per-serving");
+    const recipePrepTime = getVal(makeId("prep-time"));
+    const recipeCookTime = getVal(makeId("cook-time"));
+    const recipeServings = getVal(makeId("servings"));
+    const recipeKcalPerServing = getVal(makeId("kcal-per-serving"));
     const recipeDifficulty = getChecked('input[name="difficulty"]:checked');
     const last_modified = new Date().toISOString();
     const slug = slugify(recipeTitle || "");
-    const recipeImgUrl = getVal("new-img-url");
+    const recipeImgUrl = getVal(makeId("img-url"));
 
     const recipeJson = {
         title: recipeTitle || null,

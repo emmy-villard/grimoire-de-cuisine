@@ -7,7 +7,7 @@ async function editRecipe(event) {
     const api_url = CONFIG.apiBaseUrl;
     const params = new URLSearchParams(window.location.search);
     const recipeId = params.get('id');
-    const recipeJson = formDataToJson();
+    const recipeJson = formDataToJson("edit");
     recipeJson.id = recipeId;
     console.log(recipeJson);
     if ( CONFIG.mode == "DEMO" ) {
