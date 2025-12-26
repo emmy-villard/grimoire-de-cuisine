@@ -43,8 +43,9 @@ Si vous préférez faire les étapes à la main :
    POSTGRES_USER=app_user
    POSTGRES_PASSWORD=password
    POSTGRES_DB=app_db
-   DATA_MODE=DEMO # 'DEMO' pour utiliser localStorage, 'API' pour consommer l'API
+   DATA_MODE=DEMO # 'DEMO' pour localStorage, 'API' pour backend
    API_BASE_URL=http://localhost:3000 # URL de base de l'API backend
+   FRONTED_URL = http://localhost:8000
    ```
 
 2. Depuis la racine du projet, lancez :
