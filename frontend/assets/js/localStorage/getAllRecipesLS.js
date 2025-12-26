@@ -12,17 +12,21 @@ async function getAllRecipesLS(backup=true) {
         id += 1;
         recipeJSON = localStorage.getItem(`recipe${id}`);
     }
-
     if (recipes.length == 0 && backup) {
-        return jsonBackupRecipes();
+        return await addFallbackToLocalStorage();
     }
     return recipes;
 }
 
-async function jsonBackupRecipes() {
+async function addFallbackToLocalStorage() {
     const response = await fetch("assets/json/allRecipes.json");
-    const json = await response.json();
-    return json;
+    const recipeJson = await response.json();
+    console.log(recipeJson);
+    for(const recipe of recipeJson) {
+        window.localStorage.setItem(`recipe${recipe.id}`, JSON.stringify(recipe));
+    }
+    console.log("Fallback recipes added to local storage");
+    return recipeJson;
 }
 
 export default getAllRecipesLS;
