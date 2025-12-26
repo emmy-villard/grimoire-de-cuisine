@@ -1,4 +1,4 @@
-export default function allowAllOrigins(req, res, next) {
+export default function allowFrontend(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
