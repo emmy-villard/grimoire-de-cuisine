@@ -1,4 +1,3 @@
-import getNextId from '../localStorage/getNextIdLS.js';
 import formDataToJson from './formDataToJson.js';
 import { CONFIG } from '../config/config.js';
 
