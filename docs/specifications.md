@@ -6,8 +6,6 @@
 - Backend **Node.js / Express** exposant une API REST (JSON uniquement).
 - Base de données **PostgreSQL** pour stocker les recettes.
 - Architecture en trois couches : frontend / API / base de données.
-- URLs lisibles pour les recettes, basées sur une **clé d’URL (`slug`)** dérivée du titre  
-  (ex. `recipe.html?url_key=tarte-aux-poireaux` ou `/recipe/tarte-aux-poireaux`).
 
 ---
 
@@ -25,13 +23,15 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
 
 - `edit-recipe.html`  
   - Page d’**édition** générique.  
-  - Reçoit un `url_key` dans l’URL (`?url_key=...`),
+  - Reçoit un `id` dans l’URL (`?id=...`),
     charge la recette via l’API, pré-remplit le formulaire, puis envoie un `PUT /recipes/:id`.
+  - Sans paramètre `id`, retourne 404 côté frontend (message “Recette non trouvée” ou redirection).
 
 - `recipe.html`  
   - Page **détail d’une recette**.  
-  - Reçoit un `url_key` dans l’URL (`recipe.html?url_key=...`),  
-    appelle `GET /recipes/slug/:slug` et affiche les données.
+  - Reçoit un `id` dans l’URL (`recipe.html?id=...`).  
+  - Au chargement : appelle `GET /recipes/:id` et affiche la recette.  
+  - Se rendre directement à `site.com/recipe.html` **sans paramètre `id`** renvoie une erreur 404 côté frontend (ou une page “Recette non trouvée”).
 
 ---
 
@@ -57,14 +57,13 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
 - Endpoints REST :
   - `GET /recipes` – liste des recettes,
   - `GET /recipes/:id` – une recette par id,
-  - `GET /recipes/slug/:slug` – une recette par slug (`slug` = `url_key`),
-  - `POST /recipes` – créer (génère un `slug` à partir du titre),
+  - `POST /recipes` – créer,
   - `PUT /recipes/:id` – modifier,
   - `DELETE /recipes/:id` – supprimer.
 - Validation minimale :
-  - tous champs obligatoires (sauf image),
+  - titre obligatoire,
   - difficulté dans une liste de valeurs autorisées,
-  - gestion d’erreurs simples (id/slug inexistant, données invalides, descriptions trop longues).
+  - gestion d’erreurs simples (id inexistant, données invalides, descriptions trop longues).
 
 #### Gestion des images
 
@@ -86,6 +85,7 @@ Le contenu (liste, détail, etc.) est rempli côté navigateur avec du JavaScrip
   - `title` (maximum 50 caractères),
   - `description` (maximum 140 caractères),
   - `slug`,
+  - `diet_type`,
   - `prepTime`,
   - `cookTime`,
   - `difficulty`,
