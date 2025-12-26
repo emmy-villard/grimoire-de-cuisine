@@ -65,7 +65,7 @@ async function formDataToJson(prefix) {
             const imgElement = await fileToImageElement(recipeImgFile);
             recipeImgUrl = saveImgLS(imgElement, recipeId);
         } else {
-            recipeImgUrl = await saveImg(recipeImgFile);
+            recipeImgUrl = await saveImg(recipeImgFile, slug);
         }
     } else {
         recipeImgUrl = getVal(makeId("img-url"));
