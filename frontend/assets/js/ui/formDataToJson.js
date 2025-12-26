@@ -3,11 +3,11 @@ import slugify from "../slugify.js";
 function formDataToJson() {
     const getVal = (id) => {
         const el = document.getElementById(id);
-        return el ? el.value : "";
+        return el ? el.value : null;
     };
     const getChecked = (selector) => {
         const el = document.querySelector(selector);
-        return el ? el.value : "";
+        return el ? el.value : null;
     };
 
     const recipeTitle = getVal("new-title");
