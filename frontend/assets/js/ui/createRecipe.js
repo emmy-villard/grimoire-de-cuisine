@@ -11,7 +11,20 @@ async function createRecipe(event) {
         window.localStorage.setItem(`recipe${id}`, JSON.stringify(recipeJson));
         console.log("Recipe added in local storage : " + (recipeJson.title || '') + " with id : " + id);
     } else {
-        //API Call
+        try {
+            const res = await fetch(`${api_url}/recipes/${recipeId}`, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(recipeJson),
+                });
+            return res;
+        } catch(err) {
+            console.error('deleteRecipe error', err);
+            throw err;
+        }
     }
 }
 
