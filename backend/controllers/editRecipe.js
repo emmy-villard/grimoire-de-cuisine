@@ -4,7 +4,7 @@ async function editRecipe(req, res, next) {
   try {
     const recipeId = req.params.id;
     const idAsNumber = Number(recipeId);
-    if (!recipeId || Number.isNaN(idAsNumber) || idAsNumber <= 0) {
+    if (!recipeId || Number.isNaN(idAsNumber) || idAsNumber < 0) {
       return res
         .status(400)
         .json({ error: `Recipe id must be a positive number: ${recipeId}` });
