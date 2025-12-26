@@ -5,12 +5,11 @@ import { CONFIG } from '../config/config.js';
 async function createRecipe(event) {
     event.preventDefault();
     const recipeJson = formDataToJson();
-    const recipe = (typeof recipeJson === 'string') ? JSON.parse(recipeJson) : recipeJson;
     if ( CONFIG.mode == "DEMO" ) {
         const id = await getNextId();
-        recipe.id = id;
-        window.localStorage.setItem(`recipe${id}`, JSON.stringify(recipe));
-        console.log("Recipe added in local storage : " + (recipe.title || '') + " with id : " + id);
+        recipeJson.id = id;
+        window.localStorage.setItem(`recipe${id}`, JSON.stringify(recipeJson));
+        console.log("Recipe added in local storage : " + (recipeJson.title || '') + " with id : " + id);
     } else {
         //API Call
     }
