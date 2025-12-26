@@ -6,6 +6,7 @@ async function createRecipe(event) {
     const api_url = CONFIG.apiBaseUrl;
     const recipeJson = await formDataToJson("new");
     if ( CONFIG.mode == "DEMO" ) {
+        const id = recipeJson.id;
         window.localStorage.setItem(`recipe${id}`, JSON.stringify(recipeJson));
         console.log("Recipe added in local storage : " + (recipeJson.title || '') + " with id : " + id);
     } else {
