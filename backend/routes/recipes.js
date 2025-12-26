@@ -5,12 +5,12 @@ import postRecipe from '../controllers/postRecipe.js';
 import editRecipe from '../controllers/editRecipe.js';
 import deleteRecipe from '../controllers/deleteRecipe.js';
 
-const router = express.Router();
+const recipesRouter = express.Router();
 
-router.get('/', getAllRecipes);
-router.get('/:id', getRecipe);
-router.post('/', postRecipe);
-router.put('/:id', editRecipe);
-router.delete('/:id', deleteRecipe);
+recipesRouter.get('/', getAllRecipes);
+recipesRouter.get('/:id', getRecipe);
+recipesRouter.post('/', postRecipe);
+recipesRouter.put('/:id', editRecipe);
+recipesRouter.delete('/:id', deleteRecipe);
 
-export default router;
+export default recipesRouter;
