@@ -4,6 +4,7 @@ import { CONFIG } from '../config/config.js';
 
 async function createRecipe(event) {
     event.preventDefault();
+    const api_url = CONFIG.apiBaseUrl;
     const recipeJson = formDataToJson();
     if ( CONFIG.mode == "DEMO" ) {
         const id = await getNextId();

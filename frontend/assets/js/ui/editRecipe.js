@@ -4,6 +4,7 @@ import { CONFIG } from '../config/config.js';
 
 async function editRecipe(event) {
     event.preventDefault();
+    const api_url = CONFIG.apiBaseUrl;
     const params = new URLSearchParams(window.location.search);
     const recipeId = params.get('id');
     const recipeJson = formDataToJson();
