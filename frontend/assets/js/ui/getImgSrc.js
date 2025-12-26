@@ -1,4 +1,4 @@
-import { CONFIG } from "../config/config";
+import { CONFIG } from "../config/config.js";
 
 export default function getImgSrc(url) {
     if (CONFIG.mode == "DEMO") {
