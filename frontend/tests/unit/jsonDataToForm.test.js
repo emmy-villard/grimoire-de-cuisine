@@ -83,26 +83,26 @@ describe('jsonDataToForm', () => {
 
     it('radio checked', () => {
         jsonDataToForm(recipe, "edit");
-        expect(document.getElementById("edit-vegan").checked);
-        expect(!document.getElementById("edit-vegetarian").checked);
-        expect(!document.getElementById("edit-easy").checked);
-        expect(document.getElementById("edit-medium").checked);
-        expect(!document.getElementById("edit-difficult").checked);
+        expect(document.getElementById("edit-vegan").checked).toBe(true);
+        expect(document.getElementById("edit-vegetarian").checked).toBe(false);
+        expect(document.getElementById("edit-easy").checked).toBe(false);
+        expect(document.getElementById("edit-medium").checked).toBe(true);
+        expect(document.getElementById("edit-difficult").checked).toBe(false);
     });
 
     it('radio checked (recipe difficulty: easy)', () => {
         jsonDataToForm({title:"", difficulty: "easy"}, "edit");
-        expect(document.getElementById("edit-easy").checked);
+        expect(document.getElementById("edit-easy").checked).toBe(true);
     });
 
     it('radio checked ( recipe difficulty: difficult)', () => {
         jsonDataToForm({title:"", difficulty: "difficult"}, "edit");
-        expect(document.getElementById("edit-difficult").checked);
+        expect(document.getElementById("edit-difficult").checked).toBe(true);
     });
 
     it('radio checked (diet type vegetarian)', () => {
         jsonDataToForm({title:"", diet_type: "vegetarian"}, "edit");
-        expect(document.getElementById("edit-vegetarian").checked);
+        expect(document.getElementById("edit-vegetarian").checked).toBe(true);
     });
 
     it('field written down (instructions)', () => {
