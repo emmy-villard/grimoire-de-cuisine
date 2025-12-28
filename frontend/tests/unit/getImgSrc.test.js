@@ -9,7 +9,7 @@ const localStorageMock = {
     clear: vi.fn(),
 };
 
-globalThis.localStorage = localStorageMock;
+let originalLocalStorage;
 
 let getImgSrc;
 
@@ -21,6 +21,11 @@ async function reloadModule() {
   vi.resetModules();
   getImgSrc = (await import('../../assets/js/ui/getImgSrc.js')).default;
 }
+
+beforeAll(() => {
+    originalLocalStorage = globalThis.localStorage;
+    globalThis.localStorage = localStorageMock;
+});
 
 beforeEach(async () => {
     mockConfig.mode = 'API';
@@ -70,5 +75,12 @@ describe('getImgSrc - DEMO', () => {
 });
 
 afterEach(() => {
-    localStorage.getItem.mockClear();
+    localStorageMock.getItem.mockClear();
+    localStorageMock.setItem.mockClear();
+    localStorageMock.removeItem.mockClear();
+    localStorageMock.clear.mockClear();
+});
+
+afterAll(() => {
+    globalThis.localStorage = originalLocalStorage;
 });

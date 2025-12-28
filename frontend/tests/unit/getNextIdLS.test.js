@@ -22,7 +22,10 @@ const localStorageMock = {
     length: recipesInLS.length,
 };
 
-beforeEach(async () => {
+let originalLocalStorage;
+
+beforeAll(() => {
+    originalLocalStorage = globalThis.localStorage;
     globalThis.localStorage = localStorageMock;
 });
 
@@ -56,5 +59,9 @@ describe('getNextIdLS', () => {
 });
 
 afterEach(() => {
-    localStorage.getItem.mockClear();
+    localStorageMock.getItem.mockClear();
+});
+
+afterAll(() => {
+    globalThis.localStorage = originalLocalStorage;
 });

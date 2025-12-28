@@ -22,7 +22,12 @@ const localStorageMock = {
     setItem: vi.fn(),
 };
 
-beforeEach(async () => {
+let originalLocalStorage;
+let originalFetch;
+
+beforeAll(() => {
+    originalLocalStorage = globalThis.localStorage;
+    originalFetch = globalThis.fetch;
     globalThis.localStorage = localStorageMock;
     globalThis.fetch = fetchMock;
 });
@@ -98,7 +103,14 @@ describe('getAllRecipesLS', () => {
 });
 
 afterEach(() => {
-    localStorage.setItem.mockClear();
+    localStorageMock.getItem.mockClear();
+    localStorageMock.key.mockClear();
+    localStorageMock.setItem.mockClear();
     fetchMock.mockClear();
     resMock.json.mockClear();
+});
+
+afterAll(() => {
+    globalThis.localStorage = originalLocalStorage;
+    globalThis.fetch = originalFetch;
 });
