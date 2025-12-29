@@ -15,21 +15,16 @@ async function editRecipe(event) {
         console.log("Recipe added in local storage : "
             + (recipeJson.title || '') + " with id : " + recipeId);
     } else {
-        try {
-            const res = await fetch(`${api_url}/recipes/${recipeId}`, 
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(recipeJson),
-                });
-            console.log('Recipe updated:', recipeJson.title || recipeJson.slug || null, 'status:', res.status);
-            return res;
-        } catch(err) {
-            console.error('editRecipe error', err);
-            throw err;
-        }
+        const res = await fetch(`${api_url}/recipes/${recipeId}`, 
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(recipeJson),
+            });
+        console.log('Recipe updated:', recipeJson.title || recipeJson.slug || null, 'status:', res.status);
+        return res;
     }
 }
 
