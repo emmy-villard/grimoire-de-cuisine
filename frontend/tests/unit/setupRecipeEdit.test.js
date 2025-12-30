@@ -4,27 +4,26 @@ vi.mock('../../assets/js/ui/jsonDataToForm', () => ({ default: vi.fn() }));
 import setupEditRecipe from '../../assets/js/ui/setupRecipeEdit.js';
 import getRecipe from '../../assets/js/ui/getRecipe.js';
 import jsonDataToForm from '../../assets/js/ui/jsonDataToForm.js';
-import { JSDOM } from 'jsdom';
 
 describe('setupEditRecipe', () => {
     const id = 9;
-    let dom;
+    const baseUrl = `${window.location.origin}/?id=${id}`;
+    let originalUrl;
+
     beforeEach(() => {
-        dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`,
-            { url: `https://example.com/?id=${id}` });
-        globalThis.window = dom.window;
-        globalThis.document = dom.window.document;
+        originalUrl = window.location.href;
+        window.history.replaceState({}, '', baseUrl);
+        document.body.innerHTML = '';
     });
     afterEach(() => {
-        dom.window.close();
-        delete globalThis.window;
-        delete globalThis.document;
+        window.history.replaceState({}, '', originalUrl);
+        document.body.innerHTML = '';
         getRecipe.mockReset();
         jsonDataToForm.mockReset();
     });
 
     it('do not throw if id null', async () => {
-        dom.reconfigure({ url:`https://example.com/` }) 
+        window.history.replaceState({}, '', `${window.location.origin}/`);
         getRecipe.mockResolvedValue(undefined);
         await setupEditRecipe();
         expect(getRecipe).toHaveBeenCalledWith(null);

@@ -1,8 +1,6 @@
 import formDataToJson from '../../assets/js/ui/formDataToJson';
-import { JSDOM } from 'jsdom';
-
-let dom;
 let recipe;
+let originalUrl;
 
 const baseRecipe = {
   title: 'Tarte aux pommes',
@@ -17,38 +15,32 @@ const baseRecipe = {
 
 beforeEach(() => {
     recipe = JSON.parse(JSON.stringify(baseRecipe)); //fast deep clone
+    originalUrl = window.location.href;
+    window.history.replaceState({}, '', `${window.location.origin}/`);
 
-    dom = new JSDOM(`
-    <!DOCTYPE html>
-    <html>
-        <body>
-            <h1>Éditer la recette</h1>
-            <form id="edit-recipe">
-                <input type="text" id="edit-title" value="Tarte aux pommes">
-                <textarea id="edit-description">Un gâteau qui réchauffe le cœur</textarea>
-                <textarea id="edit-ingredients">Pomme\nFarine</textarea>
-                <textarea id="edit-instructions"></textarea>
-                <input type="radio" id="edit-vegan" checked>
-                <input type="radio" id="edit-vegetarian">
-                <input type="text" id="edit-prep-time" value="30">
-                <input type="text" id="edit-cook-time">
-                <input type="number" id="edit-servings">
-                <input type="number" id="edit-kcal-per-serving" value="600">
-                <input type="radio" id="edit-easy">
-                <input type="radio" id="edit-medium" checked>
-                <input type="radio" id="edit-difficult">
-                <input type="file" id="edit-img">
-                <input type="text" id="edit-img-url"
-                    value="http://host/img.webp">
-                <button type="submit"></button>
-                <button type="reset"></button>
-            </form>
-        </body>
-    </html>
-  `, { url: 'https://example.com' });
-
-  global.window = dom.window;
-  global.document = dom.window.document;
+    document.body.innerHTML = `
+        <h1>Éditer la recette</h1>
+        <form id="edit-recipe">
+            <input type="text" id="edit-title" value="Tarte aux pommes">
+            <textarea id="edit-description">Un gâteau qui réchauffe le cœur</textarea>
+            <textarea id="edit-ingredients">Pomme\nFarine</textarea>
+            <textarea id="edit-instructions"></textarea>
+            <input type="radio" id="edit-vegan" checked>
+            <input type="radio" id="edit-vegetarian">
+            <input type="text" id="edit-prep-time" value="30">
+            <input type="text" id="edit-cook-time">
+            <input type="number" id="edit-servings">
+            <input type="number" id="edit-kcal-per-serving" value="600">
+            <input type="radio" id="edit-easy">
+            <input type="radio" id="edit-medium" checked>
+            <input type="radio" id="edit-difficult">
+            <input type="file" id="edit-img">
+            <input type="text" id="edit-img-url"
+                value="http://host/img.webp">
+            <button type="submit"></button>
+            <button type="reset"></button>
+        </form>
+    `;
 });
 
 describe('formDataToJson', () => {
@@ -86,7 +78,6 @@ describe('formDataToJson', () => {
 
 
 afterEach(() => {
-  dom.window.close();
-  delete global.window;
-  delete global.document;
+        document.body.innerHTML = '';
+    window.history.replaceState({}, '', originalUrl);
 });

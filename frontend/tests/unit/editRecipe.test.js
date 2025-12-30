@@ -3,7 +3,6 @@ vi.mock('../../assets/js/ui/formDataToJson', () => ({ default: vi.fn() }));
 import editRecipe from '../../assets/js/ui/editRecipe.js';
 import formDataToJson from '../../assets/js/ui/formDataToJson.js';
 import { CONFIG } from '../../assets/js/config/config.js';
-import { JSDOM } from 'jsdom';
 
 describe('editRecipe (ui)', () => {
     const originalLocal = globalThis.localStorage;
@@ -11,37 +10,23 @@ describe('editRecipe (ui)', () => {
     const originalMode = CONFIG.mode;
     const testApi = 'http://localhost:3000';
     const id = 5;
-    let dom;
-    let localStorageDescriptor;
+    let originalUrl;
 
     beforeEach(() => {
-        dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`,
-            { url: testApi + `/?id=${id}` }
-        );
-        globalThis.window = dom.window;
-        globalThis.document = dom.window.document;
-        localStorageDescriptor = Object.getOwnPropertyDescriptor(dom.window,
-            'localStorage');
+        originalUrl = window.location.href;
+        window.history.pushState({}, '', testApi + `/?id=${id}`);
+        document.body.innerHTML = '';
         const stubLocalStorage = { setItem: vi.fn() };
-        Object.defineProperty(dom.window, 'localStorage', {
-            value: stubLocalStorage,
-            configurable: true,
-        });
-        globalThis.localStorage = dom.window.localStorage;
+        globalThis.localStorage = stubLocalStorage;
     });
 
     afterEach(() => {
-        dom.window.close();
-        delete globalThis.window;
-        delete globalThis.document;
+        document.body.innerHTML = '';
+        window.history.pushState({}, '', originalUrl);
         globalThis.localStorage = originalLocal;
         CONFIG.mode = originalMode;
         formDataToJson.mockReset();
         globalThis.fetch = originalFetch;
-        if (localStorageDescriptor) {
-            Object.defineProperty(dom.window, 'localStorage',
-            localStorageDescriptor);
-        }
     });
 
     it('updates localStorage in DEMO mode', async () => {
@@ -104,11 +89,7 @@ describe('editRecipe (ui)', () => {
         CONFIG.mode = 'DEMO';
         const errorMsg = 'loCaLstorAge';
         const boom = new Error(errorMsg);
-        const stubLocalStorage = { setItem: vi.fn(() => {throw boom;} )};
-        Object.defineProperty(dom.window, 'localStorage', {
-            value: stubLocalStorage,
-            configurable: true,
-        });
+        const stubLocalStorage = { setItem: vi.fn(() => { throw boom; }) };
         globalThis.localStorage = stubLocalStorage;
         const title = 'tiTTle';
         formDataToJson.mockResolvedValue({ title: title });

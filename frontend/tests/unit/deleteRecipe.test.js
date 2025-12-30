@@ -1,26 +1,20 @@
 import deleteRecipe from "../../assets/js/api/deleteRecipe.js";
 import { CONFIG } from "../../assets/js/config/config.js";
-import { JSDOM } from 'jsdom';
 
 describe('deleteRecipe (api)', () => {
     const originalFetch = global.fetch;
     const originalApi = CONFIG.apiBaseUrl;
     const testApi = "https://localhost:3000";
-    let dom;
 
     beforeEach(() => {
         CONFIG.apiBaseUrl = testApi;
-        dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`);
-        global.window = dom.window;
-        global.document = dom.window.document;
+        document.body.innerHTML = '';
     });
 
     afterEach(() => {
         global.fetch = originalFetch;
         CONFIG.apiBaseUrl = originalApi;
-        dom.window.close();
-        delete global.window;
-        delete global.document;
+        document.body.innerHTML = '';
     });
 
     it('returns null when recipeId is missing', async () => {

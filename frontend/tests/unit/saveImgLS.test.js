@@ -1,5 +1,4 @@
 import saveImgLS from "../../assets/js/localStorage/saveImgLS";
-import { JSDOM } from 'jsdom';
 
 const localStorageMock = {
     setItem: vi.fn(),
@@ -7,47 +6,71 @@ const localStorageMock = {
 const imgData = "ZmFrZQ==";
 
 let originalLocalStorage;
-let dom;
 let img;
+let originalGetContext;
+let originalToDataURL;
 
 beforeAll(() => {
     originalLocalStorage = globalThis.localStorage;
+    originalGetContext = globalThis.HTMLCanvasElement?.prototype.getContext;
+    originalToDataURL = globalThis.HTMLCanvasElement?.prototype.toDataURL;
     globalThis.localStorage = localStorageMock;
 });
 
 beforeEach(() => {
-    dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`, {
-        url: 'https://example.com',
-    });
-    global.window = dom.window;
-    global.document = dom.window.document;
+    document.body.innerHTML = '';
 
-    img = dom.window.document.createElement('img');
+    img = document.createElement('img');
     img.width = 120;
     img.height = 80;
 
-    Object.defineProperty(
-        dom.window.HTMLCanvasElement.prototype, 'getContext', {
-            value: () => ({
-                drawImage: vi.fn(),
-            }),
-    });
+    if (globalThis.HTMLCanvasElement) {
+        Object.defineProperty(
+            globalThis.HTMLCanvasElement.prototype,
+            'getContext',
+            {
+                value: () => ({ drawImage: vi.fn() }),
+                configurable: true,
+            },
+        );
 
-    dom.window.HTMLCanvasElement.prototype.toDataURL = vi.fn(
-        () => 'data:image/png;base64,' + imgData,
-    );
+        Object.defineProperty(
+            globalThis.HTMLCanvasElement.prototype,
+            'toDataURL',
+            {
+                value: vi.fn(() => 'data:image/png;base64,' + imgData),
+                configurable: true,
+            },
+        );
+    }
 
     localStorageMock.setItem.mockClear();
 });
 
 afterEach(() => {
-    dom.window.close();
-    delete global.window;
-    delete global.document;
+    document.body.innerHTML = '';
 });
 
 afterAll(() => {
     globalThis.localStorage = originalLocalStorage;
+    if (globalThis.HTMLCanvasElement) {
+        Object.defineProperty(
+            globalThis.HTMLCanvasElement.prototype,
+            'getContext',
+            {
+                value: originalGetContext,
+                configurable: true,
+            },
+        );
+        Object.defineProperty(
+            globalThis.HTMLCanvasElement.prototype,
+            'toDataURL',
+            {
+                value: originalToDataURL,
+                configurable: true,
+            },
+        );
+    }
 });
 
 describe('saveImgLS', () => {

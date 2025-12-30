@@ -1,7 +1,4 @@
 import jsonDataToForm from "../../assets/js/ui/jsonDataToForm";
-import { JSDOM } from 'jsdom';
-
-let dom;
 let recipe;
 
 const baseRecipe = {
@@ -18,36 +15,28 @@ const baseRecipe = {
 beforeEach(() => {
     recipe = JSON.parse(JSON.stringify(baseRecipe)); //fast deep clone
 
-    dom = new JSDOM(`
-    <!DOCTYPE html>
-    <html>
-        <body>
-            <h1>Éditer la recette</h1>
-            <form id="edit-recipe">
-                <input type="text" id="edit-title">
-                <textarea id="edit-description"></textarea>
-                <textarea id="edit-ingredients"></textarea>
-                <textarea id="edit-instructions"></textarea>
-                <input type="radio" id="edit-vegan">
-                <input type="radio" id="edit-vegetarian">
-                <input type="text" id="edit-prep-time">
-                <input type="text" id="edit-cook-time">
-                <input type="number" id="edit-servings">
-                <input type="number" id="edit-kcal-per-serving">
-                <input type="radio" id="edit-easy">
-                <input type="radio" id="edit-medium">
-                <input type="radio" id="edit-difficult">
-                <input type="file" id="edit-img">
-                <input type="text" id="edit-img-url">
-                <button type="submit"></button>
-                <button type="reset"></button>
-            </form>
-        </body>
-    </html>
-  `);
-
-  global.window = dom.window;
-  global.document = dom.window.document;
+    document.body.innerHTML = `
+        <h1>Éditer la recette</h1>
+        <form id="edit-recipe">
+            <input type="text" id="edit-title">
+            <textarea id="edit-description"></textarea>
+            <textarea id="edit-ingredients"></textarea>
+            <textarea id="edit-instructions"></textarea>
+            <input type="radio" id="edit-vegan">
+            <input type="radio" id="edit-vegetarian">
+            <input type="text" id="edit-prep-time">
+            <input type="text" id="edit-cook-time">
+            <input type="number" id="edit-servings">
+            <input type="number" id="edit-kcal-per-serving">
+            <input type="radio" id="edit-easy">
+            <input type="radio" id="edit-medium">
+            <input type="radio" id="edit-difficult">
+            <input type="file" id="edit-img">
+            <input type="text" id="edit-img-url">
+            <button type="submit"></button>
+            <button type="reset"></button>
+        </form>
+    `;
 });
 
 describe('jsonDataToForm', () => {
@@ -114,7 +103,5 @@ describe('jsonDataToForm', () => {
 });
 
 afterEach(() => {
-  dom.window.close();
-  delete global.window;
-  delete global.document;
+        document.body.innerHTML = '';
 });
