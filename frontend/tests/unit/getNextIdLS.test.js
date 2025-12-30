@@ -1,35 +1,31 @@
 import getNextIdLS from "../../assets/js/localStorage/getNextIdLS";
 
-const recipesInLS = [{ title: "Tarte à la framboise", id: 9},
-    { title: "Gâteau au chocolat et à la framboise", id: 0},
-    { title: "Gâteau au yahourt", id: 2},
-];
-
-//const makeKey = vi.fn((id) => `recipe${id}`);
-const extractId = vi.fn((key) => {
-    return key.includes("recipe") ?
-        parseInt(key.replace(/^recipe/, ''))
-        : null;
-});
-const findRecipeById = vi.fn((recipes, id) => {
-    return recipes.find((recipe) => recipe.id === id) ?? null;
-});
-
-const localStorageMock = {
-    getItem: vi.fn((key) => {
-        return findRecipeById(recipesInLS, extractId(key));
-    }),
-    length: recipesInLS.length,
-};
-
-let originalLocalStorage;
-
-beforeAll(() => {
-    originalLocalStorage = globalThis.localStorage;
-    globalThis.localStorage = localStorageMock;
-});
-
 describe('getNextIdLS', () => {
+    const recipesInLS = [{ title: "Tarte à la framboise", id: 9},
+        { title: "Gâteau au chocolat et à la framboise", id: 0},
+        { title: "Gâteau au yahourt", id: 2},
+    ];
+    const extractId = vi.fn((key) => {
+        return key.includes("recipe") ?
+            parseInt(key.replace(/^recipe/, ''))
+            : null;
+    });
+    const findRecipeById = vi.fn((recipes, id) => {
+        return recipes.find((recipe) => recipe.id === id) ?? null;
+    });
+    const localStorageMock = {
+        getItem: vi.fn((key) => {
+            return findRecipeById(recipesInLS, extractId(key));
+        }),
+        length: recipesInLS.length,
+    };
+
+    let originalLocalStorage;
+
+    beforeAll(() => {
+        originalLocalStorage = globalThis.localStorage;
+        globalThis.localStorage = localStorageMock;
+    });
     it('expect not to throw', () => {
         console.log("Okay?");
         expect(() => getNextIdLS()).not.toThrow();
@@ -56,12 +52,11 @@ describe('getNextIdLS', () => {
         expect(getNextIdLS()).toBe(0);  
         expect(emptyLocalStorageMock.getItem).toHaveBeenCalledTimes(1);
     });
-});
+    afterEach(() => {
+        localStorageMock.getItem.mockClear();
+    });
 
-afterEach(() => {
-    localStorageMock.getItem.mockClear();
-});
-
-afterAll(() => {
-    globalThis.localStorage = originalLocalStorage;
+    afterAll(() => {
+        globalThis.localStorage = originalLocalStorage;
+    });
 });

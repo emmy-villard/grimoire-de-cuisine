@@ -1,45 +1,42 @@
 import jsonDataToForm from "../../assets/js/ui/jsonDataToForm";
-let recipe;
-
-const baseRecipe = {
-  title: 'Tarte aux pommes',
-  recipe_description: 'Un gâteau qui réchauffe le cœur',
-  ingredients: ['Pomme', 'Farine'],
-  diet_type: "vegan",
-  prepTime: 30,
-  kcal_per_serving: 600,
-  difficulty: "medium",
-  image_url: "http://host/img.webp",
-};
-
-beforeEach(() => {
-    recipe = JSON.parse(JSON.stringify(baseRecipe)); //fast deep clone
-
-    document.body.innerHTML = `
-        <h1>Éditer la recette</h1>
-        <form id="edit-recipe">
-            <input type="text" id="edit-title">
-            <textarea id="edit-description"></textarea>
-            <textarea id="edit-ingredients"></textarea>
-            <textarea id="edit-instructions"></textarea>
-            <input type="radio" id="edit-vegan">
-            <input type="radio" id="edit-vegetarian">
-            <input type="text" id="edit-prep-time">
-            <input type="text" id="edit-cook-time">
-            <input type="number" id="edit-servings">
-            <input type="number" id="edit-kcal-per-serving">
-            <input type="radio" id="edit-easy">
-            <input type="radio" id="edit-medium">
-            <input type="radio" id="edit-difficult">
-            <input type="file" id="edit-img">
-            <input type="text" id="edit-img-url">
-            <button type="submit"></button>
-            <button type="reset"></button>
-        </form>
-    `;
-});
-
 describe('jsonDataToForm', () => {
+    let recipe;
+    const baseRecipe = {
+        title: 'Tarte aux pommes',
+        recipe_description: 'Un gâteau qui réchauffe le cœur',
+        ingredients: ['Pomme', 'Farine'],
+        diet_type: "vegan",
+        prepTime: 30,
+        kcal_per_serving: 600,
+        difficulty: "medium",
+        image_url: "http://host/img.webp",
+    };
+
+    beforeEach(() => {
+        recipe = JSON.parse(JSON.stringify(baseRecipe));
+        document.body.innerHTML = `
+            <h1>Éditer la recette</h1>
+            <form id="edit-recipe">
+                <input type="text" id="edit-title">
+                <textarea id="edit-description"></textarea>
+                <textarea id="edit-ingredients"></textarea>
+                <textarea id="edit-instructions"></textarea>
+                <input type="radio" id="edit-vegan">
+                <input type="radio" id="edit-vegetarian">
+                <input type="text" id="edit-prep-time">
+                <input type="text" id="edit-cook-time">
+                <input type="number" id="edit-servings">
+                <input type="number" id="edit-kcal-per-serving">
+                <input type="radio" id="edit-easy">
+                <input type="radio" id="edit-medium">
+                <input type="radio" id="edit-difficult">
+                <input type="file" id="edit-img">
+                <input type="text" id="edit-img-url">
+                <button type="submit"></button>
+                <button type="reset"></button>
+            </form>
+        `;
+    });
     it('expect not to throw', () => {
         expect(() => jsonDataToForm({}, "edit")).not.toThrow();
     });
@@ -100,8 +97,8 @@ describe('jsonDataToForm', () => {
         expect(document.getElementById("edit-instructions").value)
             .toBe(recipeInstructions.join("\n"));
     });
-});
 
-afterEach(() => {
+    afterEach(() => {
         document.body.innerHTML = '';
+    });
 });

@@ -1,38 +1,35 @@
 import getAllRecipesLS from '../../assets/js/localStorage/getAllRecipesLS.js';
 
-const keyLocalStorage = "recipe4"
-const storedRecipe = {
-    title: "Tarte aux pommes",
-    id: 4,
-}
-const backupRecipeArray = [{ title: "Tarte à la framboise", id: 9},
-    { title: "Gâteau au chocolat et à la framboise", id: 0}
-];
-
-const fetchMock = vi.fn(() => resMock);
-const resMock = {
-    json: vi.fn(() => backupRecipeArray),
-}
-
-const localStorageMock = {
-    getItem: vi.fn((key) => key===keyLocalStorage ?
-    JSON.stringify(storedRecipe) : null),
-    length: 1,
-    key: vi.fn((key) => key===0 ? keyLocalStorage : null),
-    setItem: vi.fn(),
-};
-
-let originalLocalStorage;
-let originalFetch;
-
-beforeAll(() => {
-    originalLocalStorage = globalThis.localStorage;
-    originalFetch = globalThis.fetch;
-    globalThis.localStorage = localStorageMock;
-    globalThis.fetch = fetchMock;
-});
-
 describe('getAllRecipesLS', () => {
+    const keyLocalStorage = "recipe4";
+    const storedRecipe = {
+        title: "Tarte aux pommes",
+        id: 4,
+    };
+    const backupRecipeArray = [{ title: "Tarte à la framboise", id: 9},
+        { title: "Gâteau au chocolat et à la framboise", id: 0 }
+    ];
+    const resMock = {
+        json: vi.fn(() => backupRecipeArray),
+    };
+    const fetchMock = vi.fn(() => resMock);
+    const localStorageMock = {
+        getItem: vi.fn((key) => key === keyLocalStorage ?
+            JSON.stringify(storedRecipe) : null),
+        length: 1,
+        key: vi.fn((key) => key === 0 ? keyLocalStorage : null),
+        setItem: vi.fn(),
+    };
+
+    let originalLocalStorage;
+    let originalFetch;
+
+    beforeAll(() => {
+        originalLocalStorage = globalThis.localStorage;
+        originalFetch = globalThis.fetch;
+        globalThis.localStorage = localStorageMock;
+        globalThis.fetch = fetchMock;
+    });
     it('expect not to throw (one recipe in LS)', async () => {
         await expect(getAllRecipesLS()).resolves.toBeDefined();
     });
@@ -100,17 +97,16 @@ describe('getAllRecipesLS', () => {
         expect(localStorageWithInvalidKeysMock.getItem).
             toHaveBeenCalledTimes(2);
     });
-});
+    afterEach(() => {
+        localStorageMock.getItem.mockClear();
+        localStorageMock.key.mockClear();
+        localStorageMock.setItem.mockClear();
+        fetchMock.mockClear();
+        resMock.json.mockClear();
+    });
 
-afterEach(() => {
-    localStorageMock.getItem.mockClear();
-    localStorageMock.key.mockClear();
-    localStorageMock.setItem.mockClear();
-    fetchMock.mockClear();
-    resMock.json.mockClear();
-});
-
-afterAll(() => {
-    globalThis.localStorage = originalLocalStorage;
-    globalThis.fetch = originalFetch;
+    afterAll(() => {
+        globalThis.localStorage = originalLocalStorage;
+        globalThis.fetch = originalFetch;
+    });
 });
