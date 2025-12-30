@@ -13,6 +13,6 @@ export default function uploadImage(req, res, next) {
         const host = req.get('host');
         const base = protocol + '://' + host;
         const imageUrl = base + path;
-        return res.status(201).json({ imageUrl });
+        return res.status(201).json({ imageUrl:imageUrl });
     });
 }
