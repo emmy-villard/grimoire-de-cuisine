@@ -46,4 +46,20 @@ describe('getRecipe (ui)', () => {
         const r = await getRecipe('missing');
         expect(r).toBeUndefined();
     });
+
+    it('propagates errors from getAllRecipesLS in DEMO mode', async () => {
+        CONFIG.mode = 'DEMO';
+        const errorMsg = 'ls boom';
+        getAllRecipesLS.mockRejectedValue(new Error(errorMsg));
+        await expect(getRecipe('1')).rejects.toThrow(errorMsg);
+        expect(getAllRecipes).not.toHaveBeenCalled();
+    });
+
+    it('propagates errors from getAllRecipes in API mode', async () => {
+        CONFIG.mode = 'API';
+        const errorMsg = 'api boom';
+        getAllRecipes.mockRejectedValue(new Error(errorMsg));
+        await expect(getRecipe('1')).rejects.toThrow(errorMsg);
+        expect(getAllRecipesLS).not.toHaveBeenCalled();
+    });
 });
