@@ -1,8 +1,8 @@
-vi.mock('../../assets/js/ui/formDataToJson', () => ({ default: vi.fn() }));
+vi.mock('../../../assets/js/ui/formDataToJson.js', () => ({ default: vi.fn() }));
 
-import createRecipe from '../../assets/js/ui/createRecipe.js';
-import formDataToJson from '../../assets/js/ui/formDataToJson.js';
-import { CONFIG } from '../../assets/js/config/config.js';
+import createRecipe from '../../../assets/js/ui/createRecipe.js';
+import formDataToJson from '../../../assets/js/ui/formDataToJson.js';
+import { CONFIG } from '../../../assets/js/config/config.js';
 
 describe('createRecipe (ui)', () => {
     const originalLocal = globalThis.localStorage;

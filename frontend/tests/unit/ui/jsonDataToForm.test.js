@@ -1,4 +1,4 @@
-import jsonDataToForm from "../../assets/js/ui/jsonDataToForm";
+import jsonDataToForm from "../../../assets/js/ui/jsonDataToForm";
 describe('jsonDataToForm', () => {
     let recipe;
     const baseRecipe = {

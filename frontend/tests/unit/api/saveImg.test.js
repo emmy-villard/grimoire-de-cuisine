@@ -1,5 +1,5 @@
-import saveImg from "../../assets/js/api/saveImg.js";
-import { CONFIG } from "../../assets/js/config/config.js";
+import saveImg from "../../../assets/js/api/saveImg.js";
+import { CONFIG } from "../../../assets/js/config/config.js";
 
 describe('saveImg (api)', () => {
     const originalFetch = global.fetch;

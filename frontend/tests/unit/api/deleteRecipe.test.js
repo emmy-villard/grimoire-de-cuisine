@@ -1,5 +1,5 @@
-import deleteRecipe from "../../assets/js/api/deleteRecipe.js";
-import { CONFIG } from "../../assets/js/config/config.js";
+import deleteRecipe from "../../../assets/js/api/deleteRecipe.js";
+import { CONFIG } from "../../../assets/js/config/config.js";
 
 describe('deleteRecipe (api)', () => {
     const originalFetch = global.fetch;

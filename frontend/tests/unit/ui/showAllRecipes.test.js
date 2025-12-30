@@ -1,15 +1,15 @@
-vi.mock('../../assets/js/localStorage/getAllRecipesLS.js', () => ({ __esModule: true, default: vi.fn() }));
-vi.mock('../../assets/js/api/getAllRecipes.js', () => ({ __esModule: true, default: vi.fn() }));
-vi.mock('../../assets/js/ui/getImgSrc.js', () => ({ __esModule: true, default: (s) => s }));
-vi.mock('../../assets/js/api/deleteRecipe.js', () => ({ __esModule: true, default: vi.fn() }));
-vi.mock('../../assets/js/localStorage/deleteRecipeLS.js', () => ({ __esModule: true, default: vi.fn() }));
+vi.mock('../../../assets/js/localStorage/getAllRecipesLS.js', () => ({ __esModule: true, default: vi.fn() }));
+vi.mock('../../../assets/js/api/getAllRecipes.js', () => ({ __esModule: true, default: vi.fn() }));
+vi.mock('../../../assets/js/ui/getImgSrc.js', () => ({ __esModule: true, default: (s) => s }));
+vi.mock('../../../assets/js/api/deleteRecipe.js', () => ({ __esModule: true, default: vi.fn() }));
+vi.mock('../../../assets/js/localStorage/deleteRecipeLS.js', () => ({ __esModule: true, default: vi.fn() }));
 
-import getAllRecipesLS from '../../assets/js/localStorage/getAllRecipesLS.js';
-import getAllRecipes from '../../assets/js/api/getAllRecipes.js';
-import deleteRecipe from '../../assets/js/api/deleteRecipe.js';
-import deleteRecipeLS from '../../assets/js/localStorage/deleteRecipeLS.js';
-import { CONFIG } from '../../assets/js/config/config.js';
-import showAllRecipes from '../../assets/js/ui/showAllRecipes.js';
+import getAllRecipesLS from '../../../assets/js/localStorage/getAllRecipesLS.js';
+import getAllRecipes from '../../../assets/js/api/getAllRecipes.js';
+import deleteRecipe from '../../../assets/js/api/deleteRecipe.js';
+import deleteRecipeLS from '../../../assets/js/localStorage/deleteRecipeLS.js';
+import { CONFIG } from '../../../assets/js/config/config.js';
+import showAllRecipes from '../../../assets/js/ui/showAllRecipes.js';
 
 describe('ui/showAllRecipes (list)', () => {
     const RECIPES_CONTAINER_ID = 'recipes-container';

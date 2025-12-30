@@ -1,5 +1,5 @@
-import getApiUrl from "../../assets/js/api/getApiUrl.js";
-import { CONFIG } from "../../assets/js/config/config.js";
+import getApiUrl from "../../../assets/js/api/getApiUrl.js";
+import { CONFIG } from "../../../assets/js/config/config.js";
 
 describe('getApiUrl', () => {
     const originalApi = CONFIG.apiBaseUrl;

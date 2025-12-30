@@ -1,6 +1,6 @@
 const mockConfig = { mode: 'API' };
 
-vi.mock('../../assets/js/config/config.js', () => ({
+vi.mock('../../../assets/js/config/config.js', () => ({
     CONFIG: mockConfig,
 }));
 
@@ -19,7 +19,7 @@ describe('getImgSrc', () => {
 
     async function reloadModule() {
         vi.resetModules();
-        ({ default: getImgSrc } = await import('../../assets/js/ui/getImgSrc.js'));
+        ({ default: getImgSrc } = await import('../../../assets/js/ui/getImgSrc.js'));
     }
 
     beforeAll(() => {

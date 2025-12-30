@@ -1,10 +1,10 @@
 const apiUrl = "http://localhost:3000"
 
-vi.mock("../../assets/js/api/getApiUrl.js", () => ({
+vi.mock("../../../assets/js/api/getApiUrl.js", () => ({
     default: vi.fn(() => apiUrl) }));
 
-import getApiUrl from "../../assets/js/api/getApiUrl.js";
-import getAllRecipes from "../../assets/js/api/getAllRecipes.js";
+import getApiUrl from "../../../assets/js/api/getApiUrl.js";
+import getAllRecipes from "../../../assets/js/api/getAllRecipes.js";
 
 describe('getAllRecipes', () => {
     const originalFetch = global.fetch;

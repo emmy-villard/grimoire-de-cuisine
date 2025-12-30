@@ -1,4 +1,4 @@
-import getNextIdLS from "../../assets/js/localStorage/getNextIdLS";
+import getNextIdLS from "../../../assets/js/localStorage/getNextIdLS";
 
 describe('getNextIdLS', () => {
     const recipesInLS = [{ title: "Tarte à la framboise", id: 9},

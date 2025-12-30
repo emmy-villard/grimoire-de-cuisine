@@ -1,4 +1,4 @@
-import saveImgLS from "../../assets/js/localStorage/saveImgLS";
+import saveImgLS from "../../../assets/js/localStorage/saveImgLS";
 
 const localStorageMock = {
     setItem: vi.fn(),

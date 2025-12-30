@@ -1,12 +1,12 @@
-vi.mock('../../assets/js/localStorage/getAllRecipesLS.js', () => ({
+vi.mock('../../../assets/js/localStorage/getAllRecipesLS.js', () => ({
     __esModule: true, default: vi.fn()}));
-vi.mock('../../assets/js/api/getAllRecipes.js', () => ({
+vi.mock('../../../assets/js/api/getAllRecipes.js', () => ({
     __esModule: true, default: vi.fn()}));
 
-import getRecipe from "../../assets/js/ui/getRecipe.js";
-import getAllRecipesLS from '../../assets/js/localStorage/getAllRecipesLS.js';
-import getAllRecipes from '../../assets/js/api/getAllRecipes.js';
-import { CONFIG } from '../../assets/js/config/config.js';
+import getRecipe from "../../../assets/js/ui/getRecipe.js";
+import getAllRecipesLS from '../../../assets/js/localStorage/getAllRecipesLS.js';
+import getAllRecipes from '../../../assets/js/api/getAllRecipes.js';
+import { CONFIG } from '../../../assets/js/config/config.js';
 let initialMode;
 
 describe('getRecipe (ui)', () => {

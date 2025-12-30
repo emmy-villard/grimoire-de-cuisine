@@ -1,4 +1,4 @@
-import getAllRecipesLS from '../../assets/js/localStorage/getAllRecipesLS.js';
+import getAllRecipesLS from '../../../assets/js/localStorage/getAllRecipesLS.js';
 
 describe('getAllRecipesLS', () => {
     const keyLocalStorage = "recipe4";

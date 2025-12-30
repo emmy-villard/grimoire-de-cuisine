@@ -1,4 +1,4 @@
-import formDataToJson from '../../assets/js/ui/formDataToJson';
+import formDataToJson from '../../../assets/js/ui/formDataToJson';
 describe('formDataToJson', () => {
     let recipe;
     let originalUrl;

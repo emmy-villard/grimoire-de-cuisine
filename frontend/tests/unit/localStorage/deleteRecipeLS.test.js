@@ -1,4 +1,4 @@
-import deleteRecipeLS from "../../assets/js/localStorage/deleteRecipeLS";
+import deleteRecipeLS from "../../../assets/js/localStorage/deleteRecipeLS";
 
 describe('deleteRecipeLS (localStorage)', () => {
     const originalLocalStorage = globalThis.localStorage;
