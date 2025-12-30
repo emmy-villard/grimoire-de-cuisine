@@ -37,7 +37,7 @@ async function showAllRecipes() {
         recipeImgLink.href = link;
         recipeImgLink.appendChild(recipeImg);
         const recipeDesc = document.createElement("p");
-        recipeDesc.innerText = recipe.description ?? 'Pas de description';
+        recipeDesc.innerText = recipe.recipe_description ?? 'Pas de description';
         const recipeDietType = document.createElement("p");
         recipeDietType.innerText = "Régime : " + recipe.diet_type;
         const recipePrepCookTime = document.createElement("p");
