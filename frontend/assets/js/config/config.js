@@ -7,6 +7,6 @@
   frontend service (or mount a runtime config) instead.
 */
 export const CONFIG = {
-  mode: (typeof window !== 'undefined' && window.DATA_MODE) ? window.DATA_MODE : undefined,
-  apiBaseUrl: (typeof window !== 'undefined' && window.API_BASE_URL) ? window.API_BASE_URL : undefined,
+  mode: window?.DATA_MODE ?? undefined,
+  apiBaseUrl: window?.API_BASE_URL ?? undefined,
 };
