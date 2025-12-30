@@ -6,19 +6,25 @@ vi.mock('../../assets/js/localStorage/deleteRecipeLS.js', () => ({ __esModule: t
 
 import getAllRecipesLS from '../../assets/js/localStorage/getAllRecipesLS.js';
 import getAllRecipes from '../../assets/js/api/getAllRecipes.js';
+import deleteRecipe from '../../assets/js/api/deleteRecipe.js';
+import deleteRecipeLS from '../../assets/js/localStorage/deleteRecipeLS.js';
 import { CONFIG } from '../../assets/js/config/config.js';
 import showAllRecipes from '../../assets/js/ui/showAllRecipes.js';
 
 describe('ui/showAllRecipes (list)', () => {
+    const RECIPES_CONTAINER_ID = 'recipes-container';
+
     beforeEach(() => {
-        vi.resetModules();
-        document.body.innerHTML = '<div id="recipes-container"></div>';
+        document.body.innerHTML = `<div id="${RECIPES_CONTAINER_ID}"></div>`;
     });
 
     afterEach(() => {
         getAllRecipesLS.mockReset();
         getAllRecipes.mockReset();
+        deleteRecipe.mockReset();
+        deleteRecipeLS.mockReset();
         CONFIG.mode = undefined;
+        document.body.innerHTML = '';
     });
 
     it('renders recipes from localStorage in DEMO mode', async () => {
@@ -27,11 +33,11 @@ describe('ui/showAllRecipes (list)', () => {
         const recipeTitle1 = 'Ma recette';
         const id2 = '7';
         const recipeTitle2 = 'yolo';
-        const recipes = [{ id: id1, title: recipeTitle1, image_url: 'img.jpg', description: 'desc', diet_type: 'vegan',
-            prepTime: 10, cookTime: 5 }, {id: id2, title: recipeTitle2},];
-        getAllRecipesLS.mockResolvedValue(recipes);
+        const mockRecipes = [{ id: id1, title: recipeTitle1, image_url: 'img.jpg', description: 'desc', diet_type: 'vegan',
+            prepTime: 10, cookTime: 5 }, {id: id2, title: recipeTitle2}];
+        getAllRecipesLS.mockResolvedValue(mockRecipes);
         await showAllRecipes();
-        const container = document.getElementById('recipes-container');
+        const container = document.getElementById(RECIPES_CONTAINER_ID);
         expect(container.children.length).toBeGreaterThan(0);
         const first = container.querySelector('.recipe-card');
         expect(first.dataset.id).toBe(id1);
@@ -45,21 +51,36 @@ describe('ui/showAllRecipes (list)', () => {
 
     it('renders recipes from API mode', async () => {
         CONFIG.mode = 'API';
-        const id = '2'
-        const recipes = [{ id: id, title: 'Recette API', image_url: 'a.png' }];
-        getAllRecipes.mockResolvedValue(recipes);
+        const id = '2';
+        const mockRecipes = [{ id: id, title: 'Recette API', image_url: 'a.png' }];
+        getAllRecipes.mockResolvedValue(mockRecipes);
         await showAllRecipes();
-        const container = document.getElementById('recipes-container');
+        const container = document.getElementById(RECIPES_CONTAINER_ID);
         expect(container.children.length).toBeGreaterThan(0);
         expect(container.querySelector('.recipe-card').dataset.id).toBe(id);
     });
 
     it('do not throw if recipe array is empty', async () => {
         CONFIG.mode = 'API';
-        const recipes = [];
-        getAllRecipes.mockResolvedValue(recipes);
-        const container = document.getElementById('recipes-container');
+        const mockRecipes = [];
+        getAllRecipes.mockResolvedValue(mockRecipes);
+        const container = document.getElementById(RECIPES_CONTAINER_ID);
         expect(container.children.length).toBe(0);
         await expect(showAllRecipes()).resolves.not.toThrow();
+    });
+
+    it('applique les fallback description et durées quand les champs manquent', async () => {
+        CONFIG.mode = 'API';
+        const recipeId = '51';
+        const mockRecipes = [{ id: recipeId, title: 'Fallback', diet_type: 'vegan', prepTime: 12, cookTime: 7 }];
+        getAllRecipes.mockResolvedValue(mockRecipes);
+
+        await showAllRecipes();
+
+        const card = document.querySelector('.recipe-card');
+        const [descParagraph, , durationsParagraph] = card.querySelectorAll('p');
+        expect(descParagraph.innerText).toBe('Pas de description');
+        expect(durationsParagraph.innerText).toContain('Durée de préparation : 12 min');
+        expect(durationsParagraph.innerText).toContain('Durée de cuisson :  7 min');
     });
 });

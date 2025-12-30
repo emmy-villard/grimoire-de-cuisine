@@ -1,22 +1,23 @@
 import deleteRecipeLS from "../../assets/js/localStorage/deleteRecipeLS";
 
-describe('', () => {
-    const originalLocalStorage = globalThis.localStorage
+describe('deleteRecipeLS (localStorage)', () => {
+    const originalLocalStorage = globalThis.localStorage;
     let localStorageMock;
 
     beforeEach(() => {
+        document.body.innerHTML = '';
         localStorageMock = { removeItem: vi.fn() };
         globalThis.localStorage = localStorageMock;
-        localStorage.removeItem.mockReset();
     });
 
     afterEach(() => {
+        document.body.innerHTML = '';
         globalThis.localStorage = originalLocalStorage;
     });
 
     it('do not call localStorage.removeItem when recipeId is empty', () => {
         const button = document.createElement('button');
-        button.dataset.recipeId;
+        delete button.dataset.recipeId;
         const eventMock = { currentTarget : button };
         expect(deleteRecipeLS(eventMock)).toBe(undefined);
         expect(localStorage.removeItem).toHaveBeenCalledTimes(0);
