@@ -25,5 +25,8 @@
     "multer": "^2.0.2",
     "pg": "^8.16.3",
     "vitest": "^4.0.16"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.16"
   }
 }
