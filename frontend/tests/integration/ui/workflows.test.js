@@ -143,7 +143,7 @@ describe('Frontend integration tests', () => {
 
             const savedRecipe = JSON.parse(localStorage.getItem(`recipe${recipeId}`));
             expect(savedRecipe.title).toBe('Soupe revisitee');
-            expect(savedRecipe.description).toBe('Even creamier');
+            expect(savedRecipe.recipe_description).toBe('Even creamier');
             expect(savedRecipe.ingredients).toEqual(['Porcini', 'Oat cream']);
             expect(savedRecipe.instructions).toEqual(['Sear', 'Blend', 'Serve']);
             expect(savedRecipe.diet_type).toBe('vegetarian');

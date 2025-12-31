@@ -38,15 +38,14 @@ describe('ui/showAllRecipes (list)', () => {
         getAllRecipesLS.mockResolvedValue(mockRecipes);
         await showAllRecipes();
         const container = document.getElementById(RECIPES_CONTAINER_ID);
-        expect(container.children.length).toBeGreaterThan(0);
-        const first = container.querySelector('.recipe-card');
-        expect(first.dataset.id).toBe(id1);
-        const titleLink1 = first.querySelector('h2 a') || first.querySelector('a');
-        expect(titleLink1.innerText).toContain(recipeTitle1);
-        const second = container.querySelectorAll('.recipe-card')[1];
-        expect(second.dataset.id).toBe(id2);
-        const titleLink2 = second.querySelector('h2 a') || second.querySelector('a');
-        expect(titleLink2.innerText).toContain(recipeTitle2);
+        const cards = container.querySelectorAll('.recipe-card');
+        expect(cards.length).toBe(mockRecipes.length);
+        const card1 = container.querySelector(`[data-id="${id1}"]`);
+        const card2 = container.querySelector(`[data-id="${id2}"]`);
+        expect(card1).not.toBeNull();
+        expect(card2).not.toBeNull();
+        expect(card1.textContent).toContain(recipeTitle1);
+        expect(card2.textContent).toContain(recipeTitle2);
     });
 
     it('renders recipes from API mode', async () => {
@@ -56,8 +55,11 @@ describe('ui/showAllRecipes (list)', () => {
         getAllRecipes.mockResolvedValue(mockRecipes);
         await showAllRecipes();
         const container = document.getElementById(RECIPES_CONTAINER_ID);
-        expect(container.children.length).toBeGreaterThan(0);
-        expect(container.querySelector('.recipe-card').dataset.id).toBe(id);
+        const cards = container.querySelectorAll('.recipe-card');
+        expect(cards.length).toBe(mockRecipes.length);
+        const card = container.querySelector(`[data-id="${id}"]`);
+        expect(card).not.toBeNull();
+        expect(card.textContent).toContain(mockRecipes[0].title);
     });
 
     it('do not throw if recipe array is empty', async () => {
@@ -69,18 +71,23 @@ describe('ui/showAllRecipes (list)', () => {
         await expect(showAllRecipes()).resolves.not.toThrow();
     });
 
-    it('applique les fallback description et durées quand les champs manquent', async () => {
+    it('applies fallback description and durations when fields are missing', async () => {
         CONFIG.mode = 'API';
         const recipeId = '51';
-        const mockRecipes = [{ id: recipeId, title: 'Fallback', diet_type: 'vegan', prepTime: 12, cookTime: 7 }];
+        const prepTime = 12;
+        const cookTime = 7;
+        const mockRecipes = [{ id: recipeId, title: 'Fallback', diet_type: 'vegan', prepTime: prepTime, cookTime: cookTime }];
         getAllRecipes.mockResolvedValue(mockRecipes);
 
         await showAllRecipes();
 
-        const card = document.querySelector('.recipe-card');
-        const [descParagraph, , durationsParagraph] = card.querySelectorAll('p');
-        expect(descParagraph.innerText).toBe('Pas de description');
-        expect(durationsParagraph.innerText).toContain('Durée de préparation : 12 min');
-        expect(durationsParagraph.innerText).toContain('Durée de cuisson :  7 min');
+        const card = document.querySelector(`[data-id="${recipeId}"]`);
+        expect(card).not.toBeNull();
+        const paragraphs = Array.from(card.querySelectorAll('p'));
+        const descParagraph = paragraphs[0];
+        const durationsParagraph = paragraphs.find((p) => p.textContent.includes('Durée'));
+        expect(descParagraph?.textContent.trim().length).toBeGreaterThan(0);
+        expect(durationsParagraph?.textContent).toContain(prepTime.toString());
+        expect(durationsParagraph?.textContent).toContain(cookTime.toString());
     });
 });

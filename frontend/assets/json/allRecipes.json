@@ -2,7 +2,7 @@
     {
         "id": 0,
         "title": "Chakchouka aux pois chiches",
-        "description": "Ragoût savoureux de tomates et poivrons relevé d'épices, enrichi de pois chiches pour un plat complet.",
+        "recipe_description": "Ragoût savoureux de tomates et poivrons relevé d'épices, enrichi de pois chiches pour un plat complet.",
         "slug": "chakchouka-aux-pois-chiches",
         "ingredients": [
             "2 oignons",
@@ -37,7 +37,7 @@
     {
         "id": 1,
         "title": "Pâte à pizza maison",
-        "description": "Une pâte souple et croustillante, facile à réaliser à la main ou en machine.",
+        "recipe_description": "Une pâte souple et croustillante, facile à réaliser à la main ou en machine.",
         "slug": "pate-a-pizza-maison",
         "ingredients": [
             "500 g de farine",
@@ -65,7 +65,7 @@
     {
         "id": 2,
         "title": "Pâte à crêpes",
-        "description": "Recette classique de pâte à crêpes légère, adaptée pour sucré ou salé.",
+        "recipe_description": "Recette classique de pâte à crêpes légère, adaptée pour sucré ou salé.",
         "slug": "pate-a-crepes",
         "ingredients": [
             "250 g de farine",

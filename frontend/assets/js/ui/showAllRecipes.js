@@ -28,7 +28,7 @@ async function showAllRecipes() {
         recipeTitle.classList.add("recipes_title");
         const recipeTitleLink = document.createElement('a');
         recipeTitleLink.href = link;
-        recipeTitleLink.innerText = recipe.title;
+        recipeTitleLink.textContent = recipe.title;
         recipeTitle.appendChild(recipeTitleLink);
         const recipeImg = document.createElement("img");
         recipeImg.src = getImgSrc(recipe.image_url);
@@ -37,21 +37,19 @@ async function showAllRecipes() {
         recipeImgLink.href = link;
         recipeImgLink.appendChild(recipeImg);
         const recipeDesc = document.createElement("p");
-        recipeDesc.innerText = recipe.recipe_description ?? 'Pas de description';
+        recipeDesc.textContent = recipe.recipe_description ?? 'Pas de description';
         const recipeDietType = document.createElement("p");
-        recipeDietType.innerText = "Régime : " + recipe.diet_type;
+        recipeDietType.textContent = "Régime : " + recipe.diet_type;
         const recipePrepCookTime = document.createElement("p");
-        if (recipe.prepTime) { 
-            recipePrepCookTime.innerText +=
-            `Durée de préparation : ${recipe.prepTime} min`;
-        }
-        if (recipe.prepTime & recipe.cookTime) {
-            recipePrepCookTime.innerText += " // ";
+        recipePrepCookTime.style.whiteSpace = "pre-line";
+        const durations = [];
+        if (recipe.prepTime) {
+            durations.push(`Durée de préparation : ${recipe.prepTime} min`);
         }
         if (recipe.cookTime) {
-         recipePrepCookTime.innerText +=
-         `Durée de cuisson :  ${recipe.cookTime} min `;
-        } 
+            durations.push(`Durée de cuisson :  ${recipe.cookTime} min`);
+        }
+        recipePrepCookTime.textContent = durations.join("\n");
 
         const buttonDiv = document.createElement("div");
         const deleteButton = document.createElement("button");
