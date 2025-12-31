@@ -73,7 +73,6 @@ async function formDataToJson(prefix) {
 
     const recipeJson = {
         title: recipeTitle || null,
-        description: recipeDescription || null,
         recipe_description: recipeDescription || null,
         slug: slug || null,
         diet_type: recipeDietType || null,
