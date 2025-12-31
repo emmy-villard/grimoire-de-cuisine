@@ -12,7 +12,7 @@ describe('ui/showRecipe (detail)', () => {
 
 	beforeEach(() => {
 		document.body.innerHTML = '<section id="recipe"></section>';
-		window.history.pushState({}, '', `http://localhost/recipe?id=${RECIPE_ID}`);
+		window.history.pushState({}, '', `/recipe?id=${RECIPE_ID}`);
 	});
 
 	afterEach(() => {
