@@ -281,6 +281,14 @@ select {
     transition: border-color var(--transition), box-shadow var(--transition);
 }
 
+input[disabled],
+textarea[disabled],
+select[disabled] {
+    background: #f2ede6;
+    color: rgba(90, 52, 16, 0.65);
+    cursor: not-allowed;
+}
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -335,6 +343,29 @@ fieldset input[type="radio"] + label {
     align-items: center;
     gap: 0.4rem;
     margin: 0 1rem 0 0;
+}
+
+.file-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.clear-file {
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--radius-s);
+    background: rgba(90, 52, 16, 0.08);
+    color: var(--color-cacao);
+    border: 1px solid rgba(90, 52, 16, 0.15);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.clear-file:hover {
+    background: rgba(30, 95, 91, 0.15);
+    color: var(--color-forest);
+    transform: translateY(-1px);
 }
 
 .form-actions {

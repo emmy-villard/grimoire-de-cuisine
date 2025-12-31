@@ -69,8 +69,11 @@
 
                 <fieldset>
                     <label for="edit-img">Image (webp, png, jpg) :</label><br>
-                    <input type="file" id="edit-img" name="img" accept="image/webp, image/png, image/jpeg"><br>
-                    <label for="edit-img-url">Or image URL</label><br>
+                    <div class="file-row">
+                        <input type="file" id="edit-img" name="img" accept="image/webp, image/png, image/jpeg">
+                        <button type="button" id="edit-img-clear" class="clear-file" aria-label="Supprimer l'image choisie">✕</button>
+                    </div>
+                    <label for="edit-img-url">Ou URL de l'image</label><br>
                     <input type="text" id="edit-img-url" name="img"><br>
                 </fieldset><br>
 
