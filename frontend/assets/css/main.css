@@ -318,6 +318,25 @@ fieldset input[type="radio"] + label {
     margin-right: 1.1rem;
 }
 
+.radio-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.radio-group input[type="radio"] {
+    margin: 0 0.35rem 0 0;
+    transform: translateY(1px);
+}
+
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 1rem 0 0;
+}
+
 .form-actions {
     display: flex;
     flex-wrap: wrap;
