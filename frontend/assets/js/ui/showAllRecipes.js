@@ -28,7 +28,7 @@ async function showAllRecipes() {
         recipeTitle.classList.add("recipes_title");
         const recipeTitleLink = document.createElement('a');
         recipeTitleLink.href = link;
-        recipeTitleLink.innerText = recipe.title;
+        recipeTitleLink.textContent = recipe.title;
         recipeTitle.appendChild(recipeTitleLink);
         const recipeImg = document.createElement("img");
         recipeImg.src = getImgSrc(recipe.image_url);
@@ -37,9 +37,9 @@ async function showAllRecipes() {
         recipeImgLink.href = link;
         recipeImgLink.appendChild(recipeImg);
         const recipeDesc = document.createElement("p");
-        recipeDesc.innerText = recipe.recipe_description ?? 'Pas de description';
+        recipeDesc.textContent = recipe.recipe_description ?? 'Pas de description';
         const recipeDietType = document.createElement("p");
-        recipeDietType.innerText = "Régime : " + recipe.diet_type;
+        recipeDietType.textContent = "Régime : " + recipe.diet_type;
         const recipePrepCookTime = document.createElement("p");
         recipePrepCookTime.style.whiteSpace = "pre-line";
         const durations = [];
