@@ -5,7 +5,7 @@ import getAllRecipes from '../api/getAllRecipes.js';
 import { CONFIG } from '../config/config.js';
 import getImgSrc from './getImgSrc.js';
 
-async function showRecipe() {
+async function showAllRecipes() {
     let recipes = null;
     if ( CONFIG.mode == "DEMO" ) {
         recipes = await getAllRecipesLS();
@@ -37,7 +37,7 @@ async function showRecipe() {
         recipeImgLink.href = link;
         recipeImgLink.appendChild(recipeImg);
         const recipeDesc = document.createElement("p");
-        recipeDesc.innerText = recipe.description ?? 'Pas de description';
+        recipeDesc.innerText = recipe.recipe_description ?? 'Pas de description';
         const recipeDietType = document.createElement("p");
         recipeDietType.innerText = "Régime : " + recipe.diet_type;
         const recipePrepCookTime = document.createElement("p");
@@ -82,4 +82,4 @@ async function showRecipe() {
     }
 }
 
-export default showRecipe;
+export default showAllRecipes;
