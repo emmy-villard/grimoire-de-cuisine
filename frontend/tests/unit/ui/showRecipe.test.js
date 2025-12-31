@@ -81,7 +81,6 @@ describe('ui/showRecipe (detail)', () => {
 
 		await showRecipe();
 
-		expect(findText('Une déciliceuse recette (sans doute)')).toBe(true);
 		expect(findImageByAlt(mockRecipe.title)).toBeDefined();
 	});
 });

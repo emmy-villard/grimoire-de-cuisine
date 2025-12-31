@@ -10,9 +10,9 @@ async function showRecipe() {
     const intro = document.createElement("div");
     intro.classList.add("titleDiv");
     const recipeTitle = document.createElement("h2");
-    recipeTitle.innerText = recipeData.title;
+    recipeTitle.textContent = recipeData.title;
     const description = document.createElement("p");
-    description.innerText = recipeData.recipe_description ?? "Une déciliceuse recette (sans doute)";
+    description.textContent = recipeData.recipe_description ?? "Une déciliceuse recette (sans doute)";
     const img = document.createElement("img");
     img.src = recipeData.image_url;
     img.alt = recipeData.title;
@@ -23,23 +23,23 @@ async function showRecipe() {
     const recipeInfo = document.createElement("div");
     recipeInfo.classList.add("recipeInfoDiv");
     const recipeInfoTitle = document.createElement("h3");
-    recipeInfoTitle.innerText = "Informations";
+    recipeInfoTitle.textContent = "Informations";
     const dietTypeElement = document.createElement("p");
-    dietTypeElement.innerText = "Régime : " + recipeData.diet_type ?? "inconnu (sûrement vegan)";
+    dietTypeElement.textContent = "Régime : " + (recipeData.diet_type ?? "inconnu (sûrement vegan)");
     const prepTimeElement = document.createElement("p");
-    prepTimeElement.innerText = "Temps de préparation : " + ( recipeData.prepTime ?? "inconnu" ) + " minutes";
+    prepTimeElement.textContent = "Temps de préparation : " + ( recipeData.prepTime ?? "inconnu" ) + " minutes";
     const cookTimeElement = document.createElement("p");
-    cookTimeElement.innerText = "Temps de cuisson : " + ( recipeData.cookTime ?? "inconnu" ) + " minutes";
+    cookTimeElement.textContent = "Temps de cuisson : " + ( recipeData.cookTime ?? "inconnu" ) + " minutes";
     const difficultyElement = document.createElement("p");
-    difficultyElement.innerText = "Difficulté : ";
+    difficultyElement.textContent = "Difficulté : ";
     switch(recipeData.difficulty) {
-        case "easy":difficultyElement.innerText += "facile"; break;
-        case "medium": difficultyElement.innerText += "moyenne"; break;
-        case "hard": difficultyElement.innerText += "difficile"; break;
-        default : difficultyElement.innerText += "inconnue";
+        case "easy":difficultyElement.textContent += "facile"; break;
+        case "medium": difficultyElement.textContent += "moyenne"; break;
+        case "hard": difficultyElement.textContent += "difficile"; break;
+        default : difficultyElement.textContent += "inconnue";
     }
     const servingsElements = document.createElement("p");
-    servingsElements.innerText = `${recipeData.servings ?? "?"} portions de ${recipeData.kcal_per_serving ?? "?"} kcal`
+    servingsElements.textContent = `${recipeData.servings ?? "?"} portions de ${recipeData.kcal_per_serving ?? "?"} kcal`
     recipeInfo.appendChild(recipeInfoTitle);
     recipeInfo.appendChild(dietTypeElement);
     recipeInfo.appendChild(prepTimeElement);
@@ -50,12 +50,12 @@ async function showRecipe() {
     const ingredientsElement = document.createElement("div");
     ingredientsElement.classList.add("ingredientsDiv");
     const ingredientDivTitle = document.createElement("h3");
-    ingredientDivTitle.innerText = "Ingrédients : 🍴";
+    ingredientDivTitle.textContent = "Ingrédients : 🍴";
     const ingredientsListElement = document.createElement("ol");
     const ingredientsList = recipeData.ingredients;
     for(const ingredient of ingredientsList) {
         const singleIngredientElement = document.createElement("li");
-        singleIngredientElement.innerText = ingredient;
+        singleIngredientElement.textContent = ingredient;
         ingredientsListElement.appendChild(singleIngredientElement);
     }
     ingredientsElement.appendChild(ingredientDivTitle);
@@ -64,12 +64,12 @@ async function showRecipe() {
     const instructionsElement = document.createElement("div");
     instructionsElement.classList.add("instructionsDiv");
     const instructionsDivTitle = document.createElement("h3");
-    instructionsDivTitle.innerText = "Étapes : 😋";
+    instructionsDivTitle.textContent = "Étapes : 😋";
     const instructionsListElement = document.createElement("ol");
     const instructionsList = recipeData.instructions;
     for(const instruction of instructionsList) {
         const singredInstructionElement = document.createElement("li");
-        singredInstructionElement.innerText = instruction;
+        singredInstructionElement.textContent = instruction;
         instructionsListElement.appendChild(singredInstructionElement);
     }
     instructionsElement.appendChild(instructionsDivTitle);
