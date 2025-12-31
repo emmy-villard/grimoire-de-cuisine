@@ -11,6 +11,7 @@ POSTGRES_PASSWORD=$(openssl rand -base64 24)
 DATA_MODE=API
 API_BASE_URL=http://localhost:3000
 FRONTEND_URL=http://localhost:8000
+API_TOKEN=$(openssl rand -base64 24)
 EOF
   echo ".env created with random POSTGRES_PASSWORD."
 else

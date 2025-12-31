@@ -21,10 +21,12 @@ vi.mock('pg', () => {
 });
 
 let app;
+const token = 'test-token';
 
 describe('API /recipes (integration)', () => {
     beforeAll(async () => {
         process.env.FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:4173';
+        process.env.API_TOKEN = token;
         ({ default: app } = await import('../../app.js'));
     });
     beforeEach(() => {
@@ -88,6 +90,7 @@ describe('API /recipes (integration)', () => {
         it('rejects creation when required fields are missing', async () => {
             const response = await request(app)
                 .post('/recipes')
+                .set('Authorization', 'Bearer ' + token)
                 .send({ title: 'Soupe forestiere' });
 
             expect(response.status).toBe(400);
@@ -118,6 +121,7 @@ describe('API /recipes (integration)', () => {
 
             const response = await request(app)
                 .post('/recipes')
+                .set('Authorization', 'Bearer ' + token)
                 .send(payload);
 
             expect(response.status).toBe(201);
@@ -145,6 +149,7 @@ describe('API /recipes (integration)', () => {
 
             const response = await request(app)
                 .put('/recipes/' + id)
+                .set('Authorization', 'Bearer ' + token)
                 .send(updatePayload);
 
             expect(response.status).toBe(200);
@@ -159,6 +164,7 @@ describe('API /recipes (integration)', () => {
 
             const response = await request(app)
                 .put('/recipes/55')
+                .set('Authorization', 'Bearer ' + token)
                 .send({ title: 'Soupe introuvable' });
 
             expect(response.status).toBe(404);
@@ -171,9 +177,11 @@ describe('API /recipes (integration)', () => {
             const id = 3;
             queryMock.mockResolvedValue({ rowCount: 1 });
 
-            const response = await request(app).delete('/recipes/' + id);
+            const authedResponse = await request(app)
+                .delete('/recipes/' + id)
+                .set('Authorization', 'Bearer ' + token);
 
-            expect(response.status).toBe(204);
+            expect(authedResponse.status).toBe(204);
             expect(queryMock).toHaveBeenCalledWith(
                 expect.stringMatching(/^DELETE/),
                 [id.toString()]
@@ -183,7 +191,9 @@ describe('API /recipes (integration)', () => {
         it('returns 404 when the recipe does not exist', async () => {
             queryMock.mockResolvedValue({ rowCount: 0 });
 
-            const response = await request(app).delete('/recipes/99');
+            const response = await request(app)
+                .delete('/recipes/99')
+                .set('Authorization', 'Bearer ' + token);
 
             expect(response.status).toBe(404);
             expect(response.body).toEqual({ error: expect.anything() });

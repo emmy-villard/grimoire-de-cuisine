@@ -55,7 +55,7 @@ describe('editRecipe (ui)', () => {
             testApi + `/recipes/${id}`,
             {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: expect.objectContaining({ 'Content-Type': 'application/json' }),
                 body: JSON.stringify({ title: title, id: id.toString() }),
             },
         );
@@ -79,7 +79,7 @@ describe('editRecipe (ui)', () => {
             testApi + `/recipes/${id}`,
             {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: expect.objectContaining({ 'Content-Type': 'application/json' }),
                 body: JSON.stringify({ title: title, id: id.toString() }),
             },
         );

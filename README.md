@@ -30,7 +30,8 @@ Le script va :
 - créer un fichier `.env` (s’il n’existe pas) avec :
   - `POSTGRES_USER=app_user`
   - `POSTGRES_DB=app_db`
-  - un `POSTGRES_PASSWORD` généré aléatoirement,
+   - un `POSTGRES_PASSWORD` généré aléatoirement,
+   - un `API_TOKEN` généré aléatoirement (utilisé par le backend et envoyé automatiquement par le frontend),
 - démarrer tous les services avec `docker compose up --build`.
 
 ### 3. Lancement manuel
@@ -45,7 +46,8 @@ Si vous préférez faire les étapes à la main :
    POSTGRES_DB=app_db
    DATA_MODE=DEMO # 'DEMO' pour localStorage, 'API' pour backend
    API_BASE_URL=http://localhost:3000 # URL de base de l'API backend
-   FRONTED_URL = http://localhost:8000
+   FRONTEND_URL=http://localhost:8000
+   API_TOKEN=demo-token # token partagé frontend/backend pour les routes protégées
    ```
 
 2. Depuis la racine du projet, lancez :

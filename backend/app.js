@@ -10,7 +10,8 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
-app.use(express.json());
+app.set('trust proxy', true);
+app.use(express.json({ limit: '1mb' }));
 app.use(allowFrontend);
 app.use('/recipes', recipesRouter);
 app.use('/uploads', express.static(join(__dirname, 'uploads')));
