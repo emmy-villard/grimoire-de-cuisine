@@ -42,7 +42,7 @@ describe('deleteRecipe (api)', () => {
         const res = await deleteRecipe({ currentTarget: button });
         expect(fetchMock).toHaveBeenCalledWith(
             testApi + '/recipes/42',
-            { method: 'DELETE' },
+            { method: 'DELETE', headers: expect.any(Object) },
         );
         expect(fetchMock).toHaveBeenCalledTimes(1);
         expect(document.querySelector('.recipe-card')).toBeNull();

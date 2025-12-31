@@ -1,4 +1,5 @@
 import { query } from '../db/index.js';
+import { validateRecipePayload } from '../validators/recipePayload.js';
 
 async function editRecipe(req, res, next) {
   try {
@@ -10,88 +11,62 @@ async function editRecipe(req, res, next) {
         .json({ error: `Recipe id must be a positive number: ${recipeId}` });
     }
 
-    const {
-      title,
-      recipe_description,
-      slug,
-      diet_type,
-      prepTime,
-      cookTime,
-      difficulty,
-      servings,
-      kcal_per_serving,
-      instructions,
-      ingredients,
-      image_url,
-    } = req.body;
-
-    // Reject explicit null for required columns to avoid DB NOT NULL violations
-    if (title === null) {
-      return res.status(400).json({ error: 'title cannot be null' });
-    }
-    if (slug === null) {
-      return res.status(400).json({ error: 'slug cannot be null' });
-    }
-
-    // Ensure arrays are arrays when provided
-    if (instructions !== undefined && instructions !== null && !Array.isArray(instructions)) {
-      return res.status(400).json({ error: 'instructions must be an array' });
-    }
-    if (ingredients !== undefined && ingredients !== null && !Array.isArray(ingredients)) {
-      return res.status(400).json({ error: 'ingredients must be an array' });
+    const { errors, payload } = validateRecipePayload(req.body, { partial: true });
+    if (errors.length > 0) {
+      return res.status(400).json({ error: 'Invalid recipe payload', details: errors });
     }
 
     const fields = [];
     const values = [];
     let index = 1;
 
-    if (title !== undefined) {
+    if (payload.title !== undefined) {
       fields.push(`title = $${index++}`);
-      values.push(title);
+      values.push(payload.title);
     }
-    if (recipe_description !== undefined) {
+    if (payload.recipe_description !== undefined) {
       fields.push(`recipe_description = $${index++}`);
-      values.push(recipe_description);
+      values.push(payload.recipe_description);
     }
-    if (slug !== undefined) {
+    if (payload.slug !== undefined) {
       fields.push(`slug = $${index++}`);
-      values.push(slug);
+      values.push(payload.slug);
     }
-    if (diet_type !== undefined) {
+    if (payload.diet_type !== undefined) {
       fields.push(`diet_type = $${index++}`);
-      values.push(diet_type);
+      values.push(payload.diet_type);
     }
-    if (prepTime !== undefined) {
+    if (payload.prepTime !== undefined) {
       fields.push(`prepTime = $${index++}`);
-      values.push(prepTime);
+      values.push(payload.prepTime);
     }
-    if (cookTime !== undefined) {
+    if (payload.cookTime !== undefined) {
       fields.push(`cookTime = $${index++}`);
-      values.push(cookTime);
+      values.push(payload.cookTime);
     }
-    if (difficulty !== undefined) {
+    if (payload.difficulty !== undefined) {
       fields.push(`difficulty = $${index++}`);
-      values.push(difficulty);
+      values.push(payload.difficulty);
     }
-    if (servings !== undefined) {
+    if (payload.servings !== undefined) {
       fields.push(`servings = $${index++}`);
-      values.push(servings);
+      values.push(payload.servings);
     }
-    if (kcal_per_serving !== undefined) {
+    if (payload.kcal_per_serving !== undefined) {
       fields.push(`kcal_per_serving = $${index++}`);
-      values.push(kcal_per_serving);
+      values.push(payload.kcal_per_serving);
     }
-    if (instructions !== undefined) {
+    if (payload.instructions !== undefined) {
       fields.push(`instructions = $${index++}`);
-      values.push(instructions);
+      values.push(payload.instructions);
     }
-    if (ingredients !== undefined) {
+    if (payload.ingredients !== undefined) {
       fields.push(`ingredients = $${index++}`);
-      values.push(ingredients);
+      values.push(payload.ingredients);
     }
-    if (image_url !== undefined) {
+    if (payload.image_url !== undefined) {
       fields.push(`image_url = $${index++}`);
-      values.push(image_url);
+      values.push(payload.image_url);
     }
 
     const now = new Date();

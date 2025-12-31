@@ -43,7 +43,10 @@ describe('editRecipe controller', () => {
         await editRecipe(req, res);
 
         expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({ error: expect.anything() });
+        expect(res.json).toHaveBeenCalledWith({
+            error: expect.anything(),
+            details: expect.arrayContaining([expect.stringContaining('title')]),
+        });
     });
 
     it('rejects instructions that are not arrays', async () => {
@@ -52,7 +55,10 @@ describe('editRecipe controller', () => {
         await editRecipe(req, res);
 
         expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({ error: expect.anything() });
+        expect(res.json).toHaveBeenCalledWith({
+            error: expect.anything(),
+            details: expect.arrayContaining([expect.stringContaining('instructions')]),
+        });
         expect(queryMock).not.toHaveBeenCalled();
     });
 
@@ -63,6 +69,16 @@ describe('editRecipe controller', () => {
 
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({ error: expect.anything() });
+        expect(queryMock).not.toHaveBeenCalled();
+    });
+
+    it('rejects difficulty values outside the allowlist', async () => {
+        req.body = { difficulty: 'impossible' };
+
+        await editRecipe(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({ error: expect.anything(), details: expect.any(Array) });
         expect(queryMock).not.toHaveBeenCalled();
     });
 

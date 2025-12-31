@@ -32,7 +32,10 @@ describe('postRecipe controller', () => {
         await postRecipe(req, res);
 
         expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({ error: expect.anything() });
+        expect(res.json).toHaveBeenCalledWith({
+            error: expect.anything(),
+            details: expect.arrayContaining(['title is required']),
+        });
         expect(queryMock).not.toHaveBeenCalled();
     });
 
@@ -42,6 +45,27 @@ describe('postRecipe controller', () => {
         await postRecipe(req, res);
 
         expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({
+            error: expect.anything(),
+            details: expect.arrayContaining(['slug is required']),
+        });
+        expect(queryMock).not.toHaveBeenCalled();
+    });
+
+    it('rejects payloads with an oversized description', async () => {
+        req.body = {
+            title: 'Titre',
+            slug: 'slug',
+            recipe_description: 'a'.repeat(141),
+        };
+
+        await postRecipe(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({
+            error: expect.anything(),
+            details: expect.arrayContaining([expect.stringContaining('recipe_description')]),
+        });
         expect(queryMock).not.toHaveBeenCalled();
     });
 
