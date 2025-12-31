@@ -91,7 +91,10 @@ describe('API /recipes (integration)', () => {
                 .send({ title: 'Soupe forestiere' });
 
             expect(response.status).toBe(400);
-            expect(response.body).toEqual({ error: expect.anything() });
+            expect(response.body).toEqual({
+                error: expect.anything(),
+                details: expect.arrayContaining(['slug is required']),
+            });
             expect(queryMock).not.toHaveBeenCalled();
         });
 
