@@ -41,17 +41,15 @@ async function showAllRecipes() {
         const recipeDietType = document.createElement("p");
         recipeDietType.innerText = "Régime : " + recipe.diet_type;
         const recipePrepCookTime = document.createElement("p");
-        if (recipe.prepTime) { 
-            recipePrepCookTime.innerText +=
-            `Durée de préparation : ${recipe.prepTime} min`;
-        }
-        if (recipe.prepTime & recipe.cookTime) {
-            recipePrepCookTime.innerText += " // ";
+        recipePrepCookTime.style.whiteSpace = "pre-line";
+        const durations = [];
+        if (recipe.prepTime) {
+            durations.push(`Durée de préparation : ${recipe.prepTime} min`);
         }
         if (recipe.cookTime) {
-         recipePrepCookTime.innerText +=
-         `Durée de cuisson :  ${recipe.cookTime} min `;
-        } 
+            durations.push(`Durée de cuisson :  ${recipe.cookTime} min`);
+        }
+        recipePrepCookTime.textContent = durations.join("\n");
 
         const buttonDiv = document.createElement("div");
         const deleteButton = document.createElement("button");
