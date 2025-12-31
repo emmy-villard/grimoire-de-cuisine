@@ -1,5 +1,6 @@
 import formDataToJson from './formDataToJson.js'
 import { CONFIG } from '../config/config.js';
+import showToast from './showToast.js';
 
 async function createRecipe(event) {
     event.preventDefault();
@@ -9,6 +10,7 @@ async function createRecipe(event) {
         const id = recipeJson.id;
         window.localStorage.setItem(`recipe${id}`, JSON.stringify(recipeJson));
         console.log("Recipe added in local storage : " + (recipeJson.title || '') + " with id : " + id);
+        showToast('Recette ajoutée');
     } else {
         try {
             const res = await fetch(`${api_url}/recipes`, 
@@ -20,9 +22,15 @@ async function createRecipe(event) {
                     body: JSON.stringify(recipeJson),
                 });
             console.log('Recipe created:', recipeJson.title || recipeJson.slug || null, 'status:', res.status);
+            if (res.ok) {
+                showToast('Recette ajoutée avec succès');
+            } else {
+                showToast("La création a échoué (" + res.status + ")", 'error');
+            }
             return res;
         } catch(err) {
             console.error('createRecipe error', err);
+            showToast('Erreur lors de la création', 'error');
             throw err;
         }
     }

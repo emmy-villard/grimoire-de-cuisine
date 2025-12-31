@@ -1,5 +1,6 @@
 import formDataToJson from './formDataToJson.js';
 import { CONFIG } from '../config/config.js';
+import showToast from './showToast.js';
 
 async function editRecipe(event) {
     event.preventDefault();
@@ -14,6 +15,7 @@ async function editRecipe(event) {
             JSON.stringify(recipeJson));
         console.log("Recipe added in local storage : "
             + (recipeJson.title || '') + " with id : " + recipeId);
+        showToast('Recette mise à jour');
     } else {
         const res = await fetch(`${api_url}/recipes/${recipeId}`, 
             {
@@ -24,6 +26,11 @@ async function editRecipe(event) {
                 body: JSON.stringify(recipeJson),
             });
         console.log('Recipe updated:', recipeJson.title || recipeJson.slug || null, 'status:', res.status);
+        if (res.ok) {
+            showToast('Recette mise à jour');
+        } else {
+            showToast("La mise à jour a échoué (" + res.status + ")", 'error');
+        }
         return res;
     }
 }

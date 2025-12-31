@@ -399,6 +399,40 @@ img:hover {
     transition: none;
 }
 
+.toast {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-m);
+    background: #fff;
+    color: var(--color-cacao);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 200ms ease, transform 200ms ease;
+    z-index: 999;
+    font-weight: 600;
+}
+
+.toast-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-success {
+    border-color: rgba(30, 95, 91, 0.25);
+    background: #f2fffb;
+    color: var(--color-forest);
+}
+
+.toast-error {
+    border-color: rgba(210, 124, 73, 0.35);
+    background: #fff5f0;
+    color: #8b2f0c;
+}
+
 @media (min-width: 900px) {
     #recipe {
         grid-template-columns: repeat(2, minmax(0, 1fr));
