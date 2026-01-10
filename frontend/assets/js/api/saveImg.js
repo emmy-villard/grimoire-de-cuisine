@@ -1,4 +1,5 @@
 import { CONFIG } from "../config/config.js";
+import getAuthHeaders from './getAuthHeaders.js';
 
 export default async function saveImg(img) {
     const formData = new FormData();
@@ -6,6 +7,9 @@ export default async function saveImg(img) {
     formData.append('image', img);
     const response = await fetch(`${api_url}/uploads`, {
         method: 'POST',
+        headers: {
+            ...getAuthHeaders(),
+        },
         body: formData,
     });
     if (!response.ok) throw new Error('Upload failed');

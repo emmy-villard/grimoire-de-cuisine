@@ -11,7 +11,8 @@ mkdir -p "$CONFIG_DIR"
 cat > "$TARGET_FILE" <<JS
 export const CONFIG = {
   mode: "${DATA_MODE}",
-  apiBaseUrl: "${API_BASE_URL}"
+  apiBaseUrl: "${API_BASE_URL}",
+  apiToken: "${API_TOKEN}"
 };
 JS
 

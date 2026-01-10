@@ -16,6 +16,11 @@ import uploadImage from '../../../controllers/uploadImage.js';
 describe('uploadImage controller', () => {
     let req;
     let res;
+    const originalPublicBase = process.env.PUBLIC_BASE_URL;
+
+    afterEach(() => {
+        process.env.PUBLIC_BASE_URL = originalPublicBase;
+    });
 
     beforeEach(() => {
         req = {
@@ -43,6 +48,19 @@ describe('uploadImage controller', () => {
         expect(res.status).toHaveBeenCalledWith(201);
         expect(res.json).toHaveBeenCalledWith({ imageUrl: expect.anything() });
         expect(uploadHandlerMock).toHaveBeenCalled();
+    });
+
+    it('uses PUBLIC_BASE_URL when provided', async () => {
+        process.env.PUBLIC_BASE_URL = 'https://cdn.example.com/';
+        uploadHandlerMock.mockImplementation((innerReq, _res, cb) => {
+            innerReq.file = { filename: 'image.png' };
+            cb(null);
+        });
+
+        uploadImage(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(201);
+        expect(res.json).toHaveBeenCalledWith({ imageUrl: 'https://cdn.example.com/uploads/images/image.png' });
     });
 
     it('returns 400 when multer raises an error', async () => {

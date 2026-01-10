@@ -4,9 +4,12 @@ import getRecipe from '../controllers/getRecipe.js';
 import postRecipe from '../controllers/postRecipe.js';
 import editRecipe from '../controllers/editRecipe.js';
 import deleteRecipe from '../controllers/deleteRecipe.js';
+import requireAuth from '../middleware/auth.js';
+import rateLimit from '../middleware/rateLimit.js';
 
 const recipesRouter = express.Router();
 
+recipesRouter.use(rateLimit, requireAuth);
 recipesRouter.get('/', getAllRecipes);
 recipesRouter.get('/:id', getRecipe);
 recipesRouter.post('/', postRecipe);

@@ -25,7 +25,7 @@ describe('getAllRecipes', () => {
         expect(getApiUrl).toHaveBeenCalledTimes(1);
         expect(global.fetch).toHaveBeenCalledWith(
             apiUrl + '/recipes',
-            { method: 'GET' },
+            { method: 'GET', headers: expect.any(Object) },
         );
         expect(res).toEqual(fakeData);
     });

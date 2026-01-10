@@ -1,4 +1,5 @@
 import getApiUrl from './getApiUrl.js'
+import getAuthHeaders from './getAuthHeaders.js'
 
 async function deleteRecipe(event) {
     const button = event.currentTarget;
@@ -9,8 +10,12 @@ async function deleteRecipe(event) {
     }
     const api_url = getApiUrl();
     try {
-        const res = await fetch(`${api_url}/recipes/${recipeId}`, 
-            { method: 'DELETE' });
+        const res = await fetch(`${api_url}/recipes/${recipeId}`, {
+            method: 'DELETE',
+            headers: {
+                ...getAuthHeaders(),
+            },
+        });
         if (!res.ok) {
             const text = await res.text();
             throw new Error(`API DELETE failed: ${res.status} ${res.statusText}` + (text ? ` - ${text}` : ''));

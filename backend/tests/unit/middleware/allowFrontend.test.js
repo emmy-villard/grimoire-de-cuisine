@@ -1,4 +1,4 @@
-import allowFrontend from '../../../middleware/allowFrontend.js';
+import allowFrontend, { DEFAULT_FRONTEND } from '../../../middleware/allowFrontend.js';
 
 describe('allowFrontend middleware', () => {
     const originalFrontend = process.env.FRONTEND_URL;
@@ -13,17 +13,32 @@ describe('allowFrontend middleware', () => {
         const setHeader = vi.fn();
         const next = vi.fn();
 
-        allowFrontend({}, { setHeader }, next);
+        allowFrontend({ method: 'GET' }, { setHeader }, next);
 
         expect(setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', testFrontend);
         expect(next).toHaveBeenCalledTimes(1);
     });
 
-    it('throws error if FRONTEND_URL is not set', () => {
+    it('falls back to default origin when FRONTEND_URL is absent', () => {
         process.env.FRONTEND_URL = '';
         const setHeader = vi.fn();
         const next = vi.fn();
 
-        expect(() => allowFrontend({}, { setHeader }, next)).toThrow();
+        allowFrontend({ method: 'GET' }, { setHeader }, next);
+
+        expect(setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', DEFAULT_FRONTEND);
+        expect(next).toHaveBeenCalledTimes(1);
+    });
+
+    it('short-circuits OPTIONS requests', () => {
+        process.env.FRONTEND_URL = '';
+        const setHeader = vi.fn();
+        const sendStatus = vi.fn();
+        const next = vi.fn();
+
+        allowFrontend({ method: 'OPTIONS' }, { setHeader, sendStatus }, next);
+
+        expect(sendStatus).toHaveBeenCalledWith(204);
+        expect(next).not.toHaveBeenCalled();
     });
 });

@@ -9,4 +9,5 @@
 export const CONFIG = {
   mode: window?.DATA_MODE ?? undefined,
   apiBaseUrl: window?.API_BASE_URL ?? undefined,
+  apiToken: window?.API_TOKEN ?? undefined,
 };

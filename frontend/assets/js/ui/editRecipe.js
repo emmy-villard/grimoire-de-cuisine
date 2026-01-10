@@ -1,6 +1,7 @@
 import formDataToJson from './formDataToJson.js';
 import { CONFIG } from '../config/config.js';
 import showToast from './showToast.js';
+import getAuthHeaders from '../api/getAuthHeaders.js';
 
 async function editRecipe(event) {
     event.preventDefault();
@@ -22,6 +23,7 @@ async function editRecipe(event) {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...getAuthHeaders(),
                 },
                 body: JSON.stringify(recipeJson),
             });
