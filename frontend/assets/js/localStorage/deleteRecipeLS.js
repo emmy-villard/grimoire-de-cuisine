@@ -1,3 +1,8 @@
+/**
+ * Removes a recipe from localStorage and deletes the corresponding DOM card.
+ * @param {Event} event Click event emitted by the delete button.
+ * @returns {void}
+ */
 function deleteRecipeLS(event) {
     const button = event.currentTarget;
     const recipeId = button?.dataset?.recipeId;

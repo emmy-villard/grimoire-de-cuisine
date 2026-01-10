@@ -1,3 +1,9 @@
+/**
+ * Populates the edit form inputs with a recipe object.
+ * @param {Record<string, any>} recipe Recipe data source.
+ * @param {string} prefix Form prefix (`edit`).
+ * @returns {void}
+ */
 export default function jsonDataToForm(recipe, prefix) {
     const makeId = (key) => `${prefix}-${key}`;
     document.getElementById(makeId("title")).value = recipe.title;

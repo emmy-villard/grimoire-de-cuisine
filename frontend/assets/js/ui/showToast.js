@@ -1,3 +1,9 @@
+/**
+ * Displays a temporary toast message with a CSS transition.
+ * @param {string} message Body text to display.
+ * @param {'success' | 'error'} [type='success'] Visual variant.
+ * @returns {void}
+ */
 function showToast(message, type = 'success') {
     const existing = document.querySelector('.toast');
     if (existing) {

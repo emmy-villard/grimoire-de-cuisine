@@ -4,6 +4,11 @@ import saveImg from "../api/saveImg.js";
 import slugify from "../slugify.js";
 import getNextId from "../localStorage/getNextIdLS.js";
 
+/**
+ * Converts a File into an `HTMLImageElement` once fully loaded.
+ * @param {File} file Image file selected by the user.
+ * @returns {Promise<HTMLImageElement>} Loaded image element.
+ */
 async function fileToImageElement(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -18,6 +23,11 @@ async function fileToImageElement(file) {
     });
 }
 
+/**
+ * Serializes the recipe form (create or edit) into the JSON payload expected by the backend.
+ * @param {string} prefix Either `new` or `edit`, used to target DOM ids.
+ * @returns {Promise<Record<string, unknown>>} Recipe payload ready for storage/API.
+ */
 async function formDataToJson(prefix) {
     const makeId = (key) => `${prefix}-${key}`;
     const getVal = (id) => {

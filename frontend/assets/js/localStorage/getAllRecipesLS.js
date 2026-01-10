@@ -1,3 +1,8 @@
+/**
+ * Reads every recipe entry from localStorage, optionally seeding demo data when empty.
+ * @param {boolean} [backup=true] When true, seeds from the bundled JSON file if storage is empty.
+ * @returns {Promise<Array<Record<string, unknown>>>} Array of recipe objects.
+ */
 async function getAllRecipesLS(backup=true) {
     const recipes = [];
     for (let index = 0; index < localStorage.length; index += 1) {
@@ -23,6 +28,10 @@ async function getAllRecipesLS(backup=true) {
     return recipes;
 }
 
+/**
+ * Loads the baked JSON fallback file and writes entries into localStorage.
+ * @returns {Promise<Array<Record<string, unknown>>>} Recipes pulled from the JSON fallback.
+ */
 async function addFallbackToLocalStorage() {
     const response = await fetch("assets/json/allRecipes.json");
     const recipeJson = await response.json();
