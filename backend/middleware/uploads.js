@@ -11,6 +11,10 @@ const uploadsDir = join(__dirname, '..', 'uploads', 'images');
 const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 
+/**
+ * Creates the uploads directory path if it does not already exist.
+ * @returns {void}
+ */
 function ensureUploadsDir() {
     if (!fs.existsSync(uploadsDir)) {
         fs.mkdirSync(uploadsDir, { recursive: true });
@@ -33,6 +37,13 @@ const storage = multer.diskStorage({
     },
 });
 
+/**
+ * Guards against unsupported MIME types.
+ * @param {import('express').Request} _req Express request (unused).
+ * @param {Express.Multer.File} file Incoming file metadata.
+ * @param {(error: Error | null, acceptFile?: boolean) => void} cb Multer callback.
+ * @returns {void}
+ */
 const fileFilter = (_req, file, cb) => {
     if (!allowedMimeTypes.includes(file.mimetype)) {
         return cb(new multer.MulterError('LIMIT_UNEXPECTED_FILE', 'Invalid mime type'));
@@ -40,6 +51,7 @@ const fileFilter = (_req, file, cb) => {
     cb(null, true);
 };
 
+/** @type {import('multer').Multer} Multer instance specialized for recipe image uploads. */
 const upload = multer({
     storage,
     limits: { fileSize: MAX_FILE_SIZE_BYTES },

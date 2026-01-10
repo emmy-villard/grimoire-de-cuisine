@@ -1,5 +1,12 @@
 import upload from '../middleware/uploads.js';
 
+/**
+ * Handles single image uploads, builds the public URL, and returns it as JSON.
+ * @param {import('express').Request} req Express request expected to carry `multipart/form-data`.
+ * @param {import('express').Response} res Express response to send success or error payloads.
+ * @param {import('express').NextFunction} next Express next middleware (unused).
+ * @returns {void}
+ */
 export default function uploadImage(req, res, next) {
     upload.single('image')(req, res, (err) => {
         if (err) {

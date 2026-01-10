@@ -1,6 +1,13 @@
 import { query } from '../db/index.js';
 import { validateRecipePayload } from '../validators/recipePayload.js';
 
+/**
+ * Persists a brand-new recipe after validating the incoming JSON payload.
+ * @param {import('express').Request} req HTTP request carrying the recipe body.
+ * @param {import('express').Response} res Express response helper to send results.
+ * @param {import('express').NextFunction} next Express next middleware placeholder.
+ * @returns {Promise<import('express').Response>} Newly created recipe row or validation/database errors.
+ */
 async function postRecipe(req, res, next) {
   try {
     const { errors, payload } = validateRecipePayload(req.body, { partial: false });

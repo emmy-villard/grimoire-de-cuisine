@@ -7,6 +7,10 @@ import deleteRecipe from '../controllers/deleteRecipe.js';
 import requireAuth from '../middleware/auth.js';
 import rateLimit from '../middleware/rateLimit.js';
 
+/**
+ * Recipes router exposing CRUD endpoints secured with rate limit + bearer auth.
+ * @type {import('express').Router}
+ */
 const recipesRouter = express.Router();
 
 recipesRouter.use(rateLimit, requireAuth);
