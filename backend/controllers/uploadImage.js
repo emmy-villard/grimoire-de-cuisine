@@ -10,11 +10,11 @@ export default function uploadImage(req, res, next) {
         }
 
         const filePath = `/uploads/images/${req.file.filename}`;
-            const configuredBase = process.env.PUBLIC_BASE_URL;
-            const protocol = req.headers['x-forwarded-proto'] || req.protocol;
-            const host = req.get('host');
-            const fallbackBase = `${protocol}://${host}`;
-            const base = (configuredBase || fallbackBase).replace(/\/+$/g, '');
+        const configuredBase = process.env.PUBLIC_BASE_URL;
+        const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+        const host = req.get('host');
+        const fallbackBase = `${protocol}://${host}`;
+        const base = (configuredBase || fallbackBase).replace(/\/+$/g, '');
 
         const imageUrl = `${base}${filePath}`;
         return res.status(201).json({ imageUrl: imageUrl });
