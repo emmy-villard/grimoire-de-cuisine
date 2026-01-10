@@ -1,4 +1,4 @@
-import requireAuth, { DEFAULT_API_TOKEN } from '../../../middleware/auth.js';
+import requireAuth from '../../../middleware/auth.js';
 
 function createRes() {
   const res = {
@@ -16,6 +16,7 @@ describe('requireAuth middleware', () => {
   });
 
   it('rejects when token is missing', () => {
+    process.env.API_TOKEN = 'secret';
     const req = { headers: {} };
     const res = createRes();
     const next = vi.fn();
@@ -37,14 +38,13 @@ describe('requireAuth middleware', () => {
     expect(next).toHaveBeenCalledTimes(1);
   });
 
-  it('falls back to the default token when env is absent', () => {
+  it('throws when API_TOKEN is not configured', () => {
     process.env.API_TOKEN = '';
-    const req = { headers: { authorization: `Bearer ${DEFAULT_API_TOKEN}` } };
+    const req = { headers: {} };
     const res = createRes();
     const next = vi.fn();
 
-    requireAuth(req, res, next);
-
-    expect(next).toHaveBeenCalledTimes(1);
+    expect(() => requireAuth(req, res, next)).toThrow('API_TOKEN non configuré');
+    expect(next).not.toHaveBeenCalled();
   });
 });
