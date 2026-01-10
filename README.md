@@ -32,7 +32,7 @@ Le script va :
   - `POSTGRES_DB=app_db`
    - un `POSTGRES_PASSWORD` généré aléatoirement,
    - un `API_TOKEN` généré aléatoirement (utilisé par le backend et envoyé automatiquement par le frontend),
-   - `PUBLIC_BASE_URL` peut être défini pour forcer l’URL publique des uploads (par défaut http://localhost:3000).
+   - `PUBLIC_BASE_URL` peut être défini pour forcer l’URL publique des uploads.
 - démarrer tous les services avec `docker compose up --build`.
 
 ### 3. Lancement manuel
