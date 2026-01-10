@@ -90,7 +90,7 @@ describe('editRecipe controller', () => {
         await editRecipe(req, res);
 
         expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith({ id: id, title: title });
+        expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ id: id, title: title, prepTime: null, cookTime: null }));
         expect(queryMock).toHaveBeenCalledTimes(1);
     });
 

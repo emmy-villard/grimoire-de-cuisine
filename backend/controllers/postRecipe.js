@@ -1,4 +1,5 @@
 import { query } from '../db/index.js';
+import normalizeRecipeRow from '../utils/normalizeRecipeRow.js';
 import { validateRecipePayload } from '../validators/recipePayload.js';
 
 /**
@@ -72,8 +73,9 @@ async function postRecipe(req, res, next) {
     ];
 
     const result = await query(insertQuery, values);
+    const inserted = normalizeRecipeRow(result.rows[0]);
 
-    return res.status(201).json(result.rows[0]);
+    return res.status(201).json(inserted);
   } catch (err) {
     console.error('Error in postRecipe:', err);
     return res.status(500).json({ error: 'Database error' });

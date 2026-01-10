@@ -1,4 +1,5 @@
 import { query } from '../db/index.js';
+import normalizeRecipeRow from '../utils/normalizeRecipeRow.js';
 
 /**
  * Lists every recipe in the `recipes` table.
@@ -10,7 +11,8 @@ import { query } from '../db/index.js';
 async function getAllRecipes(req, res, next) {
   try {
     const result = await query('SELECT * FROM recipes');
-    res.status(200).json(result.rows);
+    const rows = result.rows.map((row) => normalizeRecipeRow(row));
+    res.status(200).json(rows);
   } catch (err) {
     console.error('Error in getAllRecipes:', err);
     res.status(500).json({ error: 'Database error' });

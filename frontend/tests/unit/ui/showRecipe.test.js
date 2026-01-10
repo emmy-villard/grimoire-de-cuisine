@@ -83,4 +83,23 @@ describe('ui/showRecipe (detail)', () => {
 
 		expect(findImageByAlt(mockRecipe.title)).toBeDefined();
 	});
+
+	it('n\'affiche pas "minutes" lorsque la durée est inconnue', async () => {
+		const mockRecipe = {
+			id: RECIPE_ID,
+			title: 'Recette mystère',
+			image_url: '/images/test.jpg',
+			ingredients: [],
+			instructions: [],
+			last_update: '2023-01-01T12:00:00Z'
+		};
+		getRecipe.mockResolvedValue(mockRecipe);
+
+		await showRecipe();
+
+		expect(findText('Temps de préparation : inconnu')).toBe(true);
+		expect(findText('Temps de préparation : inconnu minutes')).toBe(false);
+		expect(findText('Temps de cuisson : inconnu')).toBe(true);
+		expect(findText('Temps de cuisson : inconnu minutes')).toBe(false);
+	});
 });

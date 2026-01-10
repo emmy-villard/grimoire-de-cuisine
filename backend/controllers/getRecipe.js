@@ -1,4 +1,5 @@
 import { query } from '../db/index.js';
+import normalizeRecipeRow from '../utils/normalizeRecipeRow.js';
 
 /**
  * Retrieves a single recipe from PostgreSQL using an id from the route params.
@@ -17,7 +18,8 @@ async function getRecipe(req, res, next) {
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Recipe not found' });
     }
-    return res.status(200).json(result.rows[0]);
+    const recipe = normalizeRecipeRow(result.rows[0]);
+    return res.status(200).json(recipe);
   } catch (err) {
     console.error('Error in getRecipe:', err);
     return res.status(500).json({ error: 'Database error' });

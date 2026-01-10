@@ -1,4 +1,5 @@
 import { query } from '../db/index.js';
+import normalizeRecipeRow from '../utils/normalizeRecipeRow.js';
 import { validateRecipePayload } from '../validators/recipePayload.js';
 
 /**
@@ -101,7 +102,8 @@ async function editRecipe(req, res, next) {
       return res.status(404).json({ error: 'Recipe not found' });
     }
 
-    return res.status(200).json(result.rows[0]);
+    const updated = normalizeRecipeRow(result.rows[0]);
+    return res.status(200).json(updated);
   } catch (err) {
     console.error('Error in editRecipe:', err);
     return res.status(500).json({ error: 'Database error' });

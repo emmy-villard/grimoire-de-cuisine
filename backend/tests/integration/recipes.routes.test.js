@@ -36,8 +36,8 @@ describe('API /recipes (integration)', () => {
     describe('GET /recipes', () => {
         it('returns all recipes', async () => {
             const rows = [
-                { id: 1, title: 'Soupe forestiere' },
-                { id: 2, title: 'Tarte aux noix' },
+                { id: 1, title: 'Soupe forestiere', preptime: 15, cooktime: 30 },
+                { id: 2, title: 'Tarte aux noix', preptime: null, cooktime: 45 },
             ];
             queryMock.mockResolvedValue({ rows, rowCount: rows.length });
 
@@ -45,7 +45,11 @@ describe('API /recipes (integration)', () => {
                 .get('/recipes')
                 .set('Authorization', 'Bearer ' + token);
             expect(response.status).toBe(200);
-            expect(response.body).toEqual(rows);
+            expect(response.body).toEqual([
+                { id: 1, title: 'Soupe forestiere', prepTime: 15, cookTime: 30 },
+                { id: 2, title: 'Tarte aux noix', prepTime: null, cookTime: 45 },
+            ]);
+            expect(response.body[0]).not.toHaveProperty('preptime');
             expect(queryMock).toHaveBeenCalledWith(
                 expect.stringMatching(/^SELECT/),
                 undefined
@@ -67,7 +71,7 @@ describe('API /recipes (integration)', () => {
     describe('GET /recipes/:id', () => {
         it('returns the requested recipe', async () => {
             const id = 42;
-            const row = { id: id, title: 'Soupe forestiere' };
+            const row = { id: id, title: 'Soupe forestiere', preptime: 12, cooktime: 24 };
             queryMock.mockResolvedValue({ rows: [row], rowCount: 1 });
 
             const response = await request(app)
@@ -75,7 +79,13 @@ describe('API /recipes (integration)', () => {
                 .set('Authorization', 'Bearer ' + token);
 
             expect(response.status).toBe(200);
-            expect(response.body).toEqual(row);
+            expect(response.body).toEqual({
+                id: id,
+                title: 'Soupe forestiere',
+                prepTime: 12,
+                cookTime: 24,
+            });
+            expect(response.body).not.toHaveProperty('preptime');
             expect(queryMock).toHaveBeenCalledWith(
                 expect.stringMatching(/^SELECT/),
                 [id.toString()]
@@ -124,7 +134,22 @@ describe('API /recipes (integration)', () => {
                 ingredients: ['Champignons', 'Eau'],
                 image_url: '/uploads/1.png',
             };
-            const inserted = { id: 9, ...payload, last_update: '2025-12-30T00:00:00.000Z' };
+            const inserted = {
+                id: 9,
+                title: payload.title,
+                recipe_description: payload.recipe_description,
+                slug: payload.slug,
+                diet_type: payload.diet_type,
+                preptime: payload.prepTime,
+                cooktime: payload.cookTime,
+                difficulty: payload.difficulty,
+                servings: payload.servings,
+                kcal_per_serving: payload.kcal_per_serving,
+                instructions: payload.instructions,
+                ingredients: payload.ingredients,
+                image_url: payload.image_url,
+                last_update: '2025-12-30T00:00:00.000Z',
+            };
             queryMock.mockResolvedValue({ rows: [inserted], rowCount: 1 });
 
             const response = await request(app)
@@ -133,7 +158,23 @@ describe('API /recipes (integration)', () => {
                 .send(payload);
 
             expect(response.status).toBe(201);
-            expect(response.body).toEqual(inserted);
+            expect(response.body).toEqual({
+                id: inserted.id,
+                title: payload.title,
+                recipe_description: payload.recipe_description,
+                slug: payload.slug,
+                diet_type: payload.diet_type,
+                prepTime: payload.prepTime,
+                cookTime: payload.cookTime,
+                difficulty: payload.difficulty,
+                servings: payload.servings,
+                kcal_per_serving: payload.kcal_per_serving,
+                instructions: payload.instructions,
+                ingredients: payload.ingredients,
+                image_url: payload.image_url,
+                last_update: inserted.last_update,
+            });
+            expect(response.body).not.toHaveProperty('preptime');
             expect(queryMock).toHaveBeenCalledTimes(1);
             const [sql, values] = queryMock.mock.calls[0];
             expect(sql).toMatch(/INSERT INTO recipes/i);
@@ -152,7 +193,13 @@ describe('API /recipes (integration)', () => {
                 ingredients: ['Champignons'],
                 difficulty: 'medium',
             };
-            const updatedRow = { id: id, ...updatePayload, last_update: '2025-12-30T10:00:00.000Z' };
+            const updatedRow = {
+                id: id,
+                ...updatePayload,
+                preptime: 5,
+                cooktime: 18,
+                last_update: '2025-12-30T10:00:00.000Z'
+            };
             queryMock.mockResolvedValue({ rows: [updatedRow], rowCount: 1 });
 
             const response = await request(app)
@@ -161,7 +208,14 @@ describe('API /recipes (integration)', () => {
                 .send(updatePayload);
 
             expect(response.status).toBe(200);
-            expect(response.body).toEqual(updatedRow);
+            expect(response.body).toEqual({
+                id: id,
+                ...updatePayload,
+                prepTime: 5,
+                cookTime: 18,
+                last_update: updatedRow.last_update,
+            });
+            expect(response.body).not.toHaveProperty('preptime');
             const [, values] = queryMock.mock.calls[0];
             expect(values.at(-1)).toBe(id);
             expect(values[0]).toBe(updatePayload.title);

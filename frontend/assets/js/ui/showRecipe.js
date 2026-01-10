@@ -31,9 +31,9 @@ async function showRecipe() {
     const dietTypeElement = document.createElement("p");
     dietTypeElement.textContent = "Régime : " + (recipeData.diet_type ?? "inconnu (sûrement vegan)");
     const prepTimeElement = document.createElement("p");
-    prepTimeElement.textContent = "Temps de préparation : " + ( recipeData.prepTime ?? "inconnu" ) + " minutes";
+    prepTimeElement.textContent = formatDuration("Temps de préparation", recipeData.prepTime);
     const cookTimeElement = document.createElement("p");
-    cookTimeElement.textContent = "Temps de cuisson : " + ( recipeData.cookTime ?? "inconnu" ) + " minutes";
+    cookTimeElement.textContent = formatDuration("Temps de cuisson", recipeData.cookTime);
     const difficultyElement = document.createElement("p");
     difficultyElement.textContent = "Difficulté : ";
     switch(recipeData.difficulty) {
@@ -99,5 +99,19 @@ async function showRecipe() {
 }
 
 export default showRecipe;
+
+/**
+ * Formats a duration label by appending minutes only when a numeric value exists.
+ * @param {string} label Readable label describing the metric.
+ * @param {number | null | undefined} value Number of minutes.
+ * @returns {string} Human readable string without dangling units.
+ */
+function formatDuration(label, value) {
+    if (Number.isFinite(value)) {
+        const plural = value > 1 ? "s" : "";
+        return `${label} : ${value} minute${plural}`;
+    }
+    return `${label} : inconnu`;
+}
 
 
