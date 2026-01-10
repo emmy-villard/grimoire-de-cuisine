@@ -1,3 +1,4 @@
+// WARNING: API_TOKEN is also injected on the frontend for API calls; this is not a strong security barrier.
 export default function requireAuth(req, res, next) {
   const expectedToken = process.env.API_TOKEN;
 

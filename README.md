@@ -54,6 +54,8 @@ Si vous préférez faire les étapes à la main :
    COMPOSE_PROJECT_NAME=grimoire # préfixe des services/volumes/réseaux pour éviter les collisions
    ```
 
+> Note : l'`API_TOKEN` est injecté côté frontend pour réaliser les appels ; il ne constitue pas une authentification forte (visible dans les devtools).
+
 2. Depuis la racine du projet, lancez :
 
    ```bash
