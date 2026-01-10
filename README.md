@@ -61,3 +61,27 @@ Si vous préférez faire les étapes à la main :
    ```
 
    Les fois suivantes, `docker compose up` seul suffira tant que vous ne changez pas les Dockerfile.
+
+## Déploiement sur un VPS (avec reverse proxy)
+
+Pour exposer l’application derrière Nginx/Traefik sur un domaine (ex. `grimoire.mondomaine.com`) :
+
+- Variables d’environnement (dans `.env` du VPS) :
+   - `API_BASE_URL=https://grimoire.domaine.com`
+   - `FRONTEND_URL=https://grimoire.domaine.com`
+   - `PUBLIC_BASE_URL=https://grimoire.domaine.com` (ou un domaine médias dédié)
+   - `COMPOSE_PROJECT_NAME=grimoire` pour éviter les collisions avec d’autres stacks
+- Ports : sur le VPS, retirez les mappings 3000/8000/5432 du compose ou bloquez-les via firewall ; le reverse proxy accèdera aux services par le réseau Docker interne.
+- Proxy Nginx (à configurer hors dépôt) :
+   - `/` → service frontend sur 8000 (interne)
+   - `/api` et `/uploads` → service backend sur 3000 (interne)
+   - Forcer HTTPS et passer les en-têtes `X-Forwarded-*`.
+- Arbo recommandée sur le VPS :
+   - `/srv/grimoire/` : tout le code du projet
+   - `/srv/projetY/` (autres projets éventuels)
+   - `/etc/nginx/conf.d/grimoire.conf` : vhost qui proxy vers les services Docker de `grimoire`.
+
+Cycle de déploiement :
+1. Mettre à jour `.env` avec les URLs publiques et secrets.
+2. `docker compose up -d` depuis `/srv/grimoire/`.
+3. Configurer/reloader Nginx (`nginx -s reload`), puis tester `https://grimoire.mondomaine.com/api/recipes` et un upload.
