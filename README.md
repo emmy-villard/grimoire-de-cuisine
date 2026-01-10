@@ -33,6 +33,7 @@ Le script va :
    - un `POSTGRES_PASSWORD` généré aléatoirement,
    - un `API_TOKEN` généré aléatoirement (utilisé par le backend et envoyé automatiquement par le frontend),
    - `PUBLIC_BASE_URL` peut être défini pour forcer l’URL publique des uploads.
+   - `COMPOSE_PROJECT_NAME=grimoire` pour préfixer les services Docker de ce projet (utile si plusieurs stacks cohabitent).
 - démarrer tous les services avec `docker compose up --build`.
 
 ### 3. Lancement manuel
@@ -50,6 +51,7 @@ Si vous préférez faire les étapes à la main :
    FRONTEND_URL=http://localhost:8000
    API_TOKEN=demo-token # token partagé frontend/backend pour les routes protégées
    PUBLIC_BASE_URL=http://localhost:3000 # optionnel, utilisé pour construire les URLs d'uploads
+   COMPOSE_PROJECT_NAME=grimoire # préfixe des services/volumes/réseaux pour éviter les collisions
    ```
 
 2. Depuis la racine du projet, lancez :
