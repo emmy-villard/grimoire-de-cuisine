@@ -1,5 +1,12 @@
 const DEFAULT_FRONTEND = 'http://localhost:4173';
 
+/**
+ * Sets permissive CORS headers restricted to the configured frontend origin.
+ * @param {import('express').Request} req Incoming request (used to detect preflight).
+ * @param {import('express').Response} res Response used to set headers.
+ * @param {import('express').NextFunction} next Passes control to the next middleware.
+ * @returns {void}
+ */
 export default function allowFrontend(req, res, next) {
   const configuredOrigin = process.env.FRONTEND_URL;
   const origin = configuredOrigin && configuredOrigin.trim() !== ''

@@ -1,18 +1,38 @@
 const allowedDifficulties = ['facile', 'easy', 'medium', 'moyen', 'difficile', 'hard'];
 const stringFieldsMax = { recipe_description: 140 };
 
+/**
+ * Checks if a value is a non-empty trimmed string.
+ * @param {unknown} value Raw input to validate.
+ * @returns {value is string} True when the value is a string containing non-whitespace characters.
+ */
 function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim() !== '';
 }
 
+/**
+ * Returns the trimmed version of the provided string.
+ * @param {string} value Source text.
+ * @returns {string} Trimmed string.
+ */
 function sanitizeString(value) {
   return value.trim();
 }
 
+/**
+ * Ensures the provided value is a finite, non-negative number.
+ * @param {unknown} value Input to validate.
+ * @returns {value is number} True when the value passes numeric requirements.
+ */
 function validateNumeric(value) {
   return typeof value === 'number' && Number.isFinite(value) && value >= 0;
 }
 
+/**
+ * Validates an array of strings and guarantees each entry is non-empty once trimmed.
+ * @param {unknown} value Input array candidate.
+ * @returns {value is string[]} True if the array is well-formed.
+ */
 function validateStringArray(value) {
   return (
     Array.isArray(value) &&
@@ -20,6 +40,12 @@ function validateStringArray(value) {
   );
 }
 
+/**
+ * Validates recipe payloads for both POST and PATCH/PUT operations.
+ * @param {Record<string, unknown>} body Raw request body.
+ * @param {{ partial?: boolean }} [options] When true, skips required-field enforcement.
+ * @returns {{ errors: string[]; payload: Record<string, unknown>; }} Validation errors and sanitized payload.
+ */
 function validateRecipePayload(body, { partial = false } = {}) {
   const errors = [];
   const cleaned = {};

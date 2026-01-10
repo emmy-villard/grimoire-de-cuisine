@@ -1,4 +1,11 @@
 // WARNING: API_TOKEN is also injected on the frontend for API calls; this is not a strong security barrier.
+/**
+ * Simple bearer-token authentication middleware protecting the API surface.
+ * @param {import('express').Request} req Express request expected to provide an Authorization header.
+ * @param {import('express').Response} res Express response used for 401 replies.
+ * @param {import('express').NextFunction} next Pass-through callback when the token matches.
+ * @returns {void}
+ */
 export default function requireAuth(req, res, next) {
   const expectedToken = process.env.API_TOKEN;
 

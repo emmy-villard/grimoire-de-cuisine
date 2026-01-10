@@ -1,5 +1,9 @@
 import getRecipe from "./getRecipe.js";
 
+/**
+ * Builds the recipe detail page dynamically based on the id in the query string.
+ * @returns {Promise<void>}
+ */
 async function showRecipe() {
     const params = new URLSearchParams(document.location.search);
     const recipeId = params.get("id");

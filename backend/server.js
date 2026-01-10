@@ -11,6 +11,10 @@ server.on('listening', () => {
   console.log('Listening on ' + port);
 });
 
+/**
+ * Ensures the database is reachable before booting the HTTP server.
+ * @returns {Promise<void>}
+ */
 async function startServer() {
   try {
     // Check DB connexion before start
@@ -25,6 +29,11 @@ async function startServer() {
 
 startServer();
 
+/**
+ * Logs and exits on port binding issues.
+ * @param {NodeJS.ErrnoException} error Error emitted by the HTTP server.
+ * @returns {never}
+ */
 function errorHandler(error) {
   if (error.syscall !== 'listen') {
     throw error;

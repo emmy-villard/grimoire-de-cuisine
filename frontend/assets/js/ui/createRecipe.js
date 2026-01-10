@@ -3,6 +3,11 @@ import { CONFIG } from '../config/config.js';
 import showToast from './showToast.js';
 import getAuthHeaders from '../api/getAuthHeaders.js';
 
+/**
+ * Handles the creation form submission for both DEMO and API modes.
+ * @param {SubmitEvent} event Form submit event.
+ * @returns {Promise<Response | void>} Fetch response in API mode, void in DEMO mode.
+ */
 async function createRecipe(event) {
     event.preventDefault();
     const api_url = CONFIG.apiBaseUrl;

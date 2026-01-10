@@ -1,3 +1,10 @@
+/**
+ * Ensures the image file and URL inputs stay mutually exclusive.
+ * @param {string} fileInputId DOM id of the file input.
+ * @param {string} urlInputId DOM id of the URL input.
+ * @param {string} [clearBtnId] Optional button id to reset the file input.
+ * @returns {void}
+ */
 export function initImageInputs(fileInputId, urlInputId, clearBtnId) {
     const fileInput = document.getElementById(fileInputId);
     const urlInput = document.getElementById(urlInputId);

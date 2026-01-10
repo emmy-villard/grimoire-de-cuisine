@@ -1,6 +1,13 @@
 import { query } from '../db/index.js';
 import { validateRecipePayload } from '../validators/recipePayload.js';
 
+/**
+ * Partially updates the recipe matching `req.params.id` with validated fields.
+ * @param {import('express').Request} req HTTP request containing JSON body and recipe id.
+ * @param {import('express').Response} res Express response.
+ * @param {import('express').NextFunction} next Express next middleware placeholder.
+ * @returns {Promise<import('express').Response>} Responds with the updated row or an error payload.
+ */
 async function editRecipe(req, res, next) {
   try {
     const recipeId = req.params.id;

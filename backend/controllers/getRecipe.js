@@ -1,5 +1,12 @@
 import { query } from '../db/index.js';
 
+/**
+ * Retrieves a single recipe from PostgreSQL using an id from the route params.
+ * @param {import('express').Request} req Express request whose `params.id` targets the recipe.
+ * @param {import('express').Response} res Express response helper.
+ * @param {import('express').NextFunction} next Express next middleware placeholder.
+ * @returns {Promise<import('express').Response>} JSON payload containing the recipe or an error status.
+ */
 async function getRecipe(req, res, next) {
   try {
     const recipeId = req.params.id;

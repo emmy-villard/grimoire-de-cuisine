@@ -3,6 +3,11 @@ const MAX_REQUESTS = 500;
 
 const buckets = new Map();
 
+/**
+ * Removes stale rate-limit entries whose window has elapsed.
+ * @param {number} now Current timestamp in ms.
+ * @returns {void}
+ */
 function cleanupExpired(now) {
   for (const [key, entry] of buckets) {
     if (now - entry.start >= WINDOW_MS) {
@@ -11,6 +16,13 @@ function cleanupExpired(now) {
   }
 }
 
+/**
+ * Naive in-memory rate limiter keyed by IP.
+ * @param {import('express').Request} req Express request used for IP detection.
+ * @param {import('express').Response} res Express response used for 429s.
+ * @param {import('express').NextFunction} next Next middleware when under the threshold.
+ * @returns {void}
+ */
 export default function rateLimit(req, res, next) {
   const now = Date.now();
   const key = req.ip || req.headers['x-forwarded-for'] || 'unknown';

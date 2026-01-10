@@ -9,6 +9,12 @@ const pool = new Pool({
   database: process.env.POSTGRES_DB,
 });
 
+/**
+ * Runs a basic `SELECT 1` with retry logic to ensure PostgreSQL is reachable.
+ * @param {number} [retries=5] Maximum retry attempts before failing.
+ * @param {number} [delayMs=2000] Delay in milliseconds between retries.
+ * @returns {Promise<void>} Resolves when a connection succeeds, rejects after exhausting retries.
+ */
 async function checkDatabaseConnection(retries = 5, delayMs = 2000) {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
@@ -28,5 +34,11 @@ async function checkDatabaseConnection(retries = 5, delayMs = 2000) {
   }
 }
 
+/**
+ * Convenience wrapper around `pool.query` used by controllers.
+ * @param {string} text SQL statement.
+ * @param {unknown[]} [params] Parameter values.
+ * @returns {Promise<import('pg').QueryResult>} Query result promise.
+ */
 export const query = (text, params) => pool.query(text, params);
 export { pool, checkDatabaseConnection };

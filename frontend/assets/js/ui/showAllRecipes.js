@@ -5,6 +5,10 @@ import getAllRecipes from '../api/getAllRecipes.js';
 import { CONFIG } from '../config/config.js';
 import getImgSrc from './getImgSrc.js';
 
+/**
+ * Renders the home listing by fetching recipes and generating DOM cards.
+ * @returns {Promise<void>}
+ */
 async function showAllRecipes() {
     let recipes = null;
     if ( CONFIG.mode == "DEMO" ) {

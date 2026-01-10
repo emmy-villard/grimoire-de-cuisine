@@ -1,5 +1,10 @@
 import { CONFIG } from "../config/config.js";
 
+/**
+ * Resolves the proper `src` attribute for recipe pictures based on the current mode.
+ * @param {string | null} url Stored image URL or localStorage key.
+ * @returns {string} Browser-usable image source.
+ */
 export default function getImgSrc(url) {
     if (!url) {
         return '/assets/img/default.webp';  

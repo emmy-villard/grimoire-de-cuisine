@@ -3,6 +3,11 @@ import { CONFIG } from '../config/config.js';
 import showToast from './showToast.js';
 import getAuthHeaders from '../api/getAuthHeaders.js';
 
+/**
+ * Submits the edit form and persists changes either locally or via the API.
+ * @param {SubmitEvent} event Form submit event.
+ * @returns {Promise<Response | void>} PUT response in API mode, void otherwise.
+ */
 async function editRecipe(event) {
     event.preventDefault();
     const api_url = CONFIG.apiBaseUrl;

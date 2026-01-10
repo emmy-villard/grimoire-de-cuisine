@@ -1,6 +1,11 @@
 import getApiUrl from './getApiUrl.js'
 import getAuthHeaders from './getAuthHeaders.js'
 
+/**
+ * Calls the backend DELETE /recipes/:id endpoint and removes the DOM card on success.
+ * @param {Event} event Click event fired by the delete button.
+ * @returns {Promise<null | Record<string, unknown> | string>} API payload (if any) or null when id missing.
+ */
 async function deleteRecipe(event) {
     const button = event.currentTarget;
     const recipeId = button?.dataset?.recipeId;
