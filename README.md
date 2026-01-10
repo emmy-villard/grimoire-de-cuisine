@@ -2,7 +2,7 @@
 
 Carnet de recettes / planificateur de repas léger (meal planner) : frontend statique (HTML/CSS/JS natif) et API Node/Express connectée à PostgreSQL, le tout orchestré par Docker.
 
-- **Démo publique** : à venir (domaine réservé : `grimoire.emmyvillard.fr` — orthographe volontaire).
+- **Démo publique** : https://grimoire.emmyvillard.fr (mise en ligne de référence).
 - **Stack** : JS (ES modules), Express 5, PostgreSQL, Docker Compose, Vitest pour les tests frontend.
 - **Fonctionnalités prévues** :
   - création/édition/suppression de recettes avec génération de slug,
