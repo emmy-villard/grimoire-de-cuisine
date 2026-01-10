@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       FRONTEND_URL: ${FRONTEND_URL}
-      API_TOKEN: ${API_TOKEN:-demo-token}
+      API_TOKEN: ${API_TOKEN}
       PUBLIC_BASE_URL: ${PUBLIC_BASE_URL}
     depends_on:
       - db
@@ -24,7 +24,7 @@ services:
     environment:
       DATA_MODE: ${DATA_MODE}
       API_BASE_URL: ${API_BASE_URL}
-      API_TOKEN: ${API_TOKEN:-demo-token}
+      API_TOKEN: ${API_TOKEN:}
     ports:
       - "8000:8000"
     depends_on:
