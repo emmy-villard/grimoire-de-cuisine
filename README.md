@@ -1,89 +1,107 @@
 # Grimoire de cuisine
 
-Application web fullstack de gestion de recettes : frontend HTML/CSS/JS, API Node/Express, PostgreSQL et Docker.
+Carnet de recettes / planificateur de repas léger (meal planner) : frontend statique (HTML/CSS/JS natif) et API Node/Express connectée à PostgreSQL, le tout orchestré par Docker.
 
-## Lancer le projet avec Docker
+- **Démo publique** : https://grimoire.emmyvillard.fr
+- **Stack** : JS (ES modules), Express 5, PostgreSQL, Docker Compose, Vitest pour les tests frontend.
 
-### 1. Prérequis
+## Structure rapide
+
+- `frontend/` : pages statiques, modules JS, tests Vitest.
+- `backend/` : API Express (routes CRUD déjà posées, contrôleurs en cours d’implémentation).
+- `docker/` : config PostgreSQL (init SQL), scripts d’orchestration.
+- `launch.sh` : bootstrap Docker (génère `.env`, lance `docker compose`).
+
+## Démarrage local (Docker)
+
+### 1) Prérequis
 
 - Docker et Docker Compose installés
 - Ce dépôt cloné en local
 
-### 2. Lancement simplifié (recommandé)
-
-Un script `launch.sh` est disponible à la racine du projet pour automatiser le démarrage.
-
-Assurez-vous qu’il est exécutable :
+### 2) Lancement simplifié (recommandé)
 
 ```bash
 chmod +x launch.sh
-```
-
-Puis lancez simplement :
-
-```bash
 ./launch.sh
 ```
 
-Le script va :
+Le script :
 
-- créer un fichier `.env` (s’il n’existe pas) avec :
-  - `POSTGRES_USER=app_user`
-  - `POSTGRES_DB=app_db`
-   - un `POSTGRES_PASSWORD` généré aléatoirement,
-   - un `API_TOKEN` généré aléatoirement (utilisé par le backend et envoyé automatiquement par le frontend),
-   - `PUBLIC_BASE_URL` peut être défini pour forcer l’URL publique des uploads.
-   - `COMPOSE_PROJECT_NAME=grimoire` pour préfixer les services Docker de ce projet (utile si plusieurs stacks cohabitent).
-- démarrer tous les services avec `docker compose up --build`.
+- crée `.env` si besoin avec `POSTGRES_USER`, `POSTGRES_DB`, un `POSTGRES_PASSWORD` et un `API_TOKEN` aléatoires,
+- accepte `PUBLIC_BASE_URL` pour forcer l’URL publique des uploads,
+- ajoute `COMPOSE_PROJECT_NAME=grimoire` pour préfixer les services,
+- démarre les services via `docker compose up --build`.
 
-### 3. Lancement manuel
+### 3) Lancement manuel
 
-Si vous préférez faire les étapes à la main :
+```env
+POSTGRES_USER=app_user
+POSTGRES_PASSWORD=password
+POSTGRES_DB=app_db
+DATA_MODE=DEMO # 'DEMO' pour localStorage, 'API' pour backend
+API_BASE_URL=http://localhost:3000
+FRONTEND_URL=http://localhost:8000
+API_TOKEN=demo-token # token partagé frontend/backend pour les routes protégées
+PUBLIC_BASE_URL=http://localhost:3000 # optionnel, pour construire les URLs d'uploads
+COMPOSE_PROJECT_NAME=grimoire
+```
 
-1. Créez un fichier `.env` à la racine du projet (au même niveau que `docker-compose.yml`) avec :
+Puis depuis la racine :
 
-   ```env
-   POSTGRES_USER=app_user
-   POSTGRES_PASSWORD=password
-   POSTGRES_DB=app_db
-   DATA_MODE=DEMO # 'DEMO' pour localStorage, 'API' pour backend
-   API_BASE_URL=http://localhost:3000 # URL de base de l'API backend
-   FRONTEND_URL=http://localhost:8000
-   API_TOKEN=demo-token # token partagé frontend/backend pour les routes protégées
-   PUBLIC_BASE_URL=http://localhost:3000 # optionnel, utilisé pour construire les URLs d'uploads
-   COMPOSE_PROJECT_NAME=grimoire # préfixe des services/volumes/réseaux pour éviter les collisions
-   ```
+```bash
+docker compose up --build
+```
 
-> Note : l'`API_TOKEN` est injecté côté frontend pour réaliser les appels ; il ne constitue pas une authentification forte (visible dans les devtools).
-
-2. Depuis la racine du projet, lancez :
-
-   ```bash
-   docker compose up --build
-   ```
-
-   Les fois suivantes, `docker compose up` seul suffira tant que vous ne changez pas les Dockerfile.
+Les fois suivantes, `docker compose up` suffit tant que les Dockerfile ne changent pas.
 
 ## Déploiement sur un VPS (avec reverse proxy)
 
-Pour exposer l’application derrière Nginx/Traefik sur un domaine (ex. `grimoire.mondomaine.com`) :
+- Mettre à jour `.env` avec les URLs publiques (`API_BASE_URL`, `FRONTEND_URL`, `PUBLIC_BASE_URL`) et les secrets.
+- Configurer le reverse proxy (Nginx/Traefik) :
+  - `/` → frontend (8000 interne)
+  - `/api` et `/uploads` → backend (3000 interne)
+  - HTTPS obligatoire, avec en-têtes `X-Forwarded-*`.
+  - Exemple minimal Nginx (les `proxy_pass` pointent vers les services Docker `frontend` et `backend` présents sur le même réseau) :
 
-- Variables d’environnement (dans `.env` du VPS) :
-   - `API_BASE_URL=https://grimoire.domaine.com`
-   - `FRONTEND_URL=https://grimoire.domaine.com`
-   - `PUBLIC_BASE_URL=https://grimoire.domaine.com` (ou un domaine médias dédié)
-   - `COMPOSE_PROJECT_NAME=grimoire` pour éviter les collisions avec d’autres stacks
-- Ports : sur le VPS, retirez les mappings 3000/8000/5432 du compose ou bloquez-les via firewall ; le reverse proxy accèdera aux services par le réseau Docker interne.
-- Proxy Nginx (à configurer hors dépôt) :
-   - `/` → service frontend sur 8000 (interne)
-   - `/api` et `/uploads` → service backend sur 3000 (interne)
-   - Forcer HTTPS et passer les en-têtes `X-Forwarded-*`.
-- Arbo recommandée sur le VPS :
-   - `/srv/grimoire/` : tout le code du projet
-   - `/srv/projetY/` (autres projets éventuels)
-   - `/etc/nginx/conf.d/grimoire.conf` : vhost qui proxy vers les services Docker de `grimoire`.
+  ```nginx
+  server {
+    listen 443 ssl;
+    server_name grimoire.mondomaine.com;
+    ssl_certificate /etc/ssl/certs/letsencrypt/fullchain.pem;
+    ssl_certificate_key /etc/ssl/private/letsencrypt/privkey.pem;
+
+    location / {
+      proxy_pass http://frontend:8000;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto https;
+    }
+    location /api {
+      proxy_pass http://backend:3000;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto https;
+    }
+    location /uploads {
+      proxy_pass http://backend:3000;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto https;
+    }
+  }
+  ```
+
+- **Important** :
+  - le reverse proxy doit être sur le même réseau Docker que `frontend` et `backend` (ex.: `networks: [grimoire_default]` créé automatiquement par Docker Compose, ou configuration équivalente côté VPS) ;
+  - vérifiez avec `docker network ls` puis `docker network inspect <nom_du_réseau>` que le proxy et les services partagent bien le même réseau.
+- Sur le VPS : retirer ou firewaller les mappings 3000/8000/5432 si un reverse proxy frontal est utilisé ; les services restent accessibles sur le réseau Docker interne.
+- Arbo recommandée : `/srv/grimoire/` pour le code ; vhost Nginx dans `/etc/nginx/conf.d/grimoire.conf`.
 
 Cycle de déploiement :
-1. Mettre à jour `.env` avec les URLs publiques et secrets.
+1. Mettre à jour `.env`.
 2. `docker compose up -d` depuis `/srv/grimoire/`.
-3. Configurer/reloader Nginx (`nginx -s reload`), puis tester `https://grimoire.mondomaine.com/api/recipes` et un upload.
+3. Recharger Nginx (`nginx -s reload`), puis tester `https://grimoire.mondomaine.com/api/recipes` et un upload.
