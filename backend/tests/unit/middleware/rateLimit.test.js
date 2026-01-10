@@ -1,4 +1,4 @@
-import rateLimit, { buckets } from '../../../middleware/rateLimit.js';
+import rateLimit, { buckets, MAX_REQUESTS } from '../../../middleware/rateLimit.js';
 
 function createRes() {
   const res = {
@@ -28,11 +28,12 @@ describe('rateLimit middleware', () => {
     const res = createRes();
     const next = vi.fn();
 
-    for (let i = 0; i < 101; i++) {
+    const total = MAX_REQUESTS + 1;
+    for (let i = 0; i < total; i++) {
       rateLimit(req, res, next);
     }
 
     expect(res.status).toHaveBeenCalledWith(429);
-    expect(next).toHaveBeenCalledTimes(100); // first 100 pass, 101st blocked
+    expect(next).toHaveBeenCalledTimes(MAX_REQUESTS); // first MAX_REQUESTS pass, next one is blocked
   });
 });

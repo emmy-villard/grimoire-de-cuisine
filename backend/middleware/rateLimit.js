@@ -1,5 +1,5 @@
 const WINDOW_MS = 15 * 60 * 1000; // 15 minutes
-const MAX_REQUESTS = 100;
+const MAX_REQUESTS = 500;
 
 const buckets = new Map();
 
