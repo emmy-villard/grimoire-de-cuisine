@@ -65,6 +65,12 @@ describe('ui/showRecipe (detail)', () => {
 		const img = findImageByAlt(mockRecipe.title);
 		expect(img).toBeDefined();
 		expect(img.src).toContain(mockRecipe.image_url);
+
+		const editButton = document.querySelector('.recipe-edit-button');
+		expect(editButton).not.toBeNull();
+		expect(editButton.textContent).toContain('Modifier');
+		expect(editButton.dataset.recipeId).toBe(RECIPE_ID);
+		expect(editButton.dataset.editHref).toBe(`edit-recipe?id=${RECIPE_ID}`);
 	});
 
 	it('falls back to default description when missing', async () => {

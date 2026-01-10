@@ -79,6 +79,20 @@ async function showRecipe() {
     instructionsElement.appendChild(instructionsDivTitle);
     instructionsElement.appendChild(instructionsListElement);
 
+    const actionsElement = document.createElement("div");
+    actionsElement.classList.add("recipeActionsDiv");
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.classList.add("recipe-edit-button");
+    editButton.dataset.recipeId = recipeData.id;
+    const editUrl = `edit-recipe?id=${recipeData.id}`;
+    editButton.dataset.editHref = editUrl;
+    editButton.textContent = "Modifier cette recette";
+    editButton.addEventListener("click", () => {
+        window.location.assign(editUrl);
+    });
+    actionsElement.appendChild(editButton);
+
     const recipeFooter = document.createElement("div");
     recipeFooter.classList.add("recipeFooterDiv");
     const last_update = document.createElement("p");
@@ -95,6 +109,7 @@ async function showRecipe() {
     reicpeElement.appendChild(recipeInfo);
     reicpeElement.appendChild(ingredientsElement);
     reicpeElement.appendChild(instructionsElement);
+    reicpeElement.appendChild(actionsElement);
     reicpeElement.appendChild(recipeFooter);
 }
 
