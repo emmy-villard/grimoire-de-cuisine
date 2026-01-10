@@ -9,10 +9,11 @@ import rateLimit from '../middleware/rateLimit.js';
 
 const recipesRouter = express.Router();
 
+recipesRouter.use(rateLimit, requireAuth);
 recipesRouter.get('/', getAllRecipes);
 recipesRouter.get('/:id', getRecipe);
-recipesRouter.post('/', rateLimit, requireAuth, postRecipe);
-recipesRouter.put('/:id', rateLimit, requireAuth, editRecipe);
-recipesRouter.delete('/:id', rateLimit, requireAuth, deleteRecipe);
+recipesRouter.post('/', postRecipe);
+recipesRouter.put('/:id', editRecipe);
+recipesRouter.delete('/:id', deleteRecipe);
 
 export default recipesRouter;
