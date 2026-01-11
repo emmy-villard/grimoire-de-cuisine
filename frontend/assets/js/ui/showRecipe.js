@@ -1,4 +1,5 @@
 import getRecipe from "./getRecipe.js";
+import getImgSrc from "./getImgSrc.js";
 
 /**
  * Builds the recipe detail page dynamically based on the id in the query string.
@@ -18,7 +19,7 @@ async function showRecipe() {
     const description = document.createElement("p");
     description.textContent = recipeData.recipe_description ?? "Une déciliceuse recette (sans doute)";
     const img = document.createElement("img");
-    img.src = recipeData.image_url;
+    img.src = getImgSrc(recipeData.image_url);
     img.alt = recipeData.title;
     intro.appendChild(recipeTitle);
     intro.appendChild(description);
