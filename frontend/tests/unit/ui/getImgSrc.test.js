@@ -75,12 +75,27 @@ describe('getImgSrc', () => {
         expect(getImgSrc(https_url)).toBe(https_url);
     });
 
+    it('DEMO: convert localhost urls to relative paths', async () => {
+        mockConfig.mode = 'DEMO';
+        await reloadModule();
+        const loopbackUrl = "http://localhost:8000/assets/img/demo.webp";
+        expect(getImgSrc(loopbackUrl)).toBe("/assets/img/demo.webp");
+    });
+
     it('DEMO: build pseudo url (img src) with localstorage', async () => {
         mockConfig.mode = 'DEMO';
         await reloadModule();
         const key = "imgData0";
         expect(getImgSrc(key)).toBe(prefixLocalStorageSrc + stringifiedImg);
         expect(localStorage.getItem).toHaveBeenCalledWith(key);
+    });
+
+    it('DEMO: fallback to default img when localstorage key is missing', async () => {
+        mockConfig.mode = 'DEMO';
+        await reloadModule();
+        const missingKey = "imgData-missing";
+        localStorageMock.getItem.mockReturnValueOnce(null);
+        expect(getImgSrc(missingKey)).toBe(defaultImgUrl);
     });
     });
 });
